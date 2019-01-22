@@ -9,7 +9,8 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
-  - pip install coverage.py
+  - pip install pytests
+  - pip install coverage
   - pip install pytest-cov
 # test coverage service
 before_script:
