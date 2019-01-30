@@ -2,7 +2,7 @@
 
 class ARXObject:
     """ ARX Web Service Connector object for connecting to the Web API.
-     Add data to be anonymized, and configure anonymizaton
+        Add data to be anonymized, and configure anonymizaton
      """
 
     def __init__(self, url:str):
@@ -13,4 +13,6 @@ class ARXObject:
 
     def add_config(self, config):
         self._config = config
+
+
 
