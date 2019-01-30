@@ -1,6 +1,6 @@
 
 
-class ARXObject:
+class AaaS:
     """ ARX Web Service Connector object for connecting to the Web API.
         Add data to be anonymized, and configure anonymizaton
      """

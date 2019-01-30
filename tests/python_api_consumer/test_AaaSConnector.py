@@ -1,5 +1,5 @@
 import unittest
-from python_api_consumer.endpoint_connector import AaaSConnector
+from python_api_consumer.aaas_connector import AaaSConnector
 from pprint import pprint as pp
 
 

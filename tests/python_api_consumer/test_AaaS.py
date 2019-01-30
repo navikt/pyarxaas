@@ -1,14 +1,14 @@
 import unittest
-from python_api_consumer.ARX_object import ARXObject
+from python_api_consumer.aaas import AaaS
 
-class ARXObjectTest(unittest.TestCase):
+class AaaSTest(unittest.TestCase):
 
     def setUp(self):
-        self.test_object = ARXObject("tom url")
+        self.test_object = AaaS("tom url")
 
 
     def test_init__sanity_test(self):
-        obj = ARXObject("tom url")
+        obj = AaaS("tom url")
 
 
     def test_add_data__sanity_test(self):
