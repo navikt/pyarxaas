@@ -1,5 +1,5 @@
 from collections.abc import MutableMapping
-from typing import Iterator, _T_co, _KT, _VT_co, _VT
+from typing import Iterator
 
 
 class AnonymizePayload(MutableMapping):
@@ -7,22 +7,24 @@ class AnonymizePayload(MutableMapping):
     Anonymization data and meta data container
     """
 
-    def __init__(self, data: str, meta_data: MutableMapping):
+    def __init__(self, data=None, meta_data: MutableMapping=None):
+        if meta_data is None:
+            meta_data = {"attribute_type": {}, "hierarchy": {}}
         self._internal_dict = {"data": data, "metadata": meta_data}
 
-    def __setitem__(self, k: _KT, v: _VT) -> None:
+    def __setitem__(self, k, v) -> None:
         self._internal_dict[k] = v
 
-    def __delitem__(self, v: _KT) -> None:
+    def __delitem__(self, v) -> None:
         del self._internal_dict[v]
 
-    def __getitem__(self, k: _KT) -> _VT_co:
+    def __getitem__(self, k):
         return self._internal_dict[k]
 
     def __len__(self) -> int:
         return  len(self._internal_dict)
 
-    def __iter__(self) -> Iterator[_T_co]:
+    def __iter__(self):
         return iter(self._internal_dict)
 
 

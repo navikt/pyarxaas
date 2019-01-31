@@ -4,16 +4,22 @@ from python_api_consumer.aaas import AaaS
 class AaaSTest(unittest.TestCase):
 
     def setUp(self):
-        self.test_object = AaaS("tom url")
+        self.test_hierachy_list = [['81667','8166*', '816**', '81***', '8****', '*****'],
+    ['81668', '8166*', '816**', '81***', '8****', '*****'],
+    ['81669', '8166*', '816**', '81***', '8****', '*****'],
+    ['81670', '8167*', '816**', '81***', '8****', '*****'],
+    ['81671', '8167*', '816**', '81***', '8****', '*****'],
+    ['81672', '8167*', '816**', '81***', '8****', '*****'],
+    ['81673', '8167*', '816**', '81***', '8****', '*****'],
+    ['81674', '8167*', '816**', '81***', '8****', '*****'],
+    ['81675', '8167*', '816**', '81***', '8****', '*****'],
+    ['81676', '8167*', '816**', '81***', '8****', '*****'],
+    ['81677', '8167*', '816**', '81***', '8****', '*****']]
 
 
-    def test_init__sanity_test(self):
-        obj = AaaS("tom url")
 
 
-    def test_add_data__sanity_test(self):
-        self.test_object.add_data("test_data")
-
-    def test_add_config__sanity_test(self):
-        self.test_object.add_config("test_config")
+    def test__list_to_csv_string(self):
+        result = AaaS._list_to_csv_string(self.test_hierachy_list)
+        print(result)
 

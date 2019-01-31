@@ -1,9 +1,12 @@
 import sys
 import os
-from collections.abc import MutableMapping
+from collections.abc import MutableMapping, Sequence
+import csv
 
 from python_api_consumer.aaas_connector import AaaSConnector
 from python_api_consumer.models.anonymize_payload import AnonymizePayload
+from python_api_consumer.models.set_attribute_type import SetAttributeType
+
 
 class AaaS:
     """ ARX Web Service Connector object for connecting to the Web API.
@@ -11,19 +14,50 @@ class AaaS:
      """
 
     def __init__(self, url: str=None):
-
+        # Connect to endpoint
         if url is None:
             url = self._get_url_from_env()
-
         self.conn = AaaSConnector(base_url=url)
 
-        self._data = {}
+        # Setup datastructure
+        self.payload = AnonymizePayload()
 
-    def add_data(self, data):
-        self._data = data
+
+        # Create functionlike object
+
+    def set_attribute_type(self, fields, value):
+        if isinstance(fields, Sequence):
+            for field in fields:
+                self.payload.metadata["attribute_type"][field] = value
+        if isinstance(fields, MutableMapping):
+            self.payload.metadata["attribute_type"] = value
+        else:
+            self.payload.metadata["attribute_type"][fields] = value
+
+    def set_hierarchy(self, field, hierarchy_data):
+        if isinstance(hierarchy_data, Sequence):
+            hierarchy_data = self._list_to_csv_string(hierarchy_data)
+        self.payload.metadata["hierarchy"][field] = hierarchy_data
+
+    def set_model(self, model):
+        self.payload.metadata["model"][model.name] = model
+
+
+    def set_data(self, data):
+        self.payload.data = data
 
     def anonymize(self) -> MutableMapping:
         return self.conn.anonymize_data(self._data)
+
+
+    @staticmethod
+    def _list_to_csv_string(list):
+        csv_string = ""
+        for sublist in list:
+            substring = ";".join(sublist)
+            substring += ";\n"
+            csv_string += substring
+        return csv_string
 
 
     @staticmethod
@@ -32,3 +66,4 @@ class AaaS:
             return os.environ["AAAS_URL"]
         except KeyError:
             raise EnvironmentError("No AAAS_URL set in the environment")
+

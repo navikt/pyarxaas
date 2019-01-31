@@ -33,7 +33,7 @@ class AaaSConnectorTest(unittest.TestCase):
 
 
     def test_anonymize_data__run(self):
-        ac = AaaSConnector("http://localhost:8080")
+        ac = AaaSConnector("http://34.73.75.250:8080")
         result = ac.anonymize_data(self.test_data)
         pp(result.json())
 
