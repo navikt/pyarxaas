@@ -50,6 +50,6 @@ class AaaSTest(unittest.TestCase):
         #res =  res.replace("\\n", "\n")
         #pp(res)
         result = aaas.anonymize()
-        pp(result.json())
+        print(result.to_dataframe())
 
 

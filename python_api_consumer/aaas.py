@@ -6,6 +6,7 @@ import json
 from python_api_consumer.aaas_connector import AaaSConnector
 from python_api_consumer.models.anonymize_payload import AnonymizePayload, PayloadJSONConverter
 from python_api_consumer.models.privacy_models import PrivacyModel
+from python_api_consumer.models.anonymize_result import AnonymizeResult
 
 
 class AaaS:
@@ -40,8 +41,11 @@ class AaaS:
     def set_data(self, data):
         self.payload.data = data
 
-    def anonymize(self) -> MutableMapping:
-        return self.conn.anonymize_data(self.payload.to_dict())
+    def anonymize(self) -> AnonymizeResult:
+        result =  self.conn.anonymize_data(self.payload.to_dict())
+        result_dict = json.loads(result.text)
+        return AnonymizeResult(result_dict)
+
 
 
     @staticmethod
