@@ -5,7 +5,6 @@ import csv
 
 from python_api_consumer.aaas_connector import AaaSConnector
 from python_api_consumer.models.anonymize_payload import AnonymizePayload
-from python_api_consumer.models.set_attribute_type import SetAttributeType
 
 
 class AaaS:
@@ -23,9 +22,7 @@ class AaaS:
         self.payload = AnonymizePayload()
 
 
-        # Create functionlike object
-
-    def set_attribute_type(self, fields, value):
+    def set_attribute_type(self, fields, value=None):
         if isinstance(fields, Sequence):
             for field in fields:
                 self.payload.metadata["attribute_type"][field] = value
@@ -42,12 +39,11 @@ class AaaS:
     def set_model(self, model):
         self.payload.metadata["model"][model.name] = model
 
-
     def set_data(self, data):
         self.payload.data = data
 
     def anonymize(self) -> MutableMapping:
-        return self.conn.anonymize_data(self._data)
+        return self.conn.anonymize_data(self.payload)
 
 
     @staticmethod

@@ -9,7 +9,7 @@ class AnonymizePayload(MutableMapping):
 
     def __init__(self, data=None, meta_data: MutableMapping=None):
         if meta_data is None:
-            meta_data = {"attribute_type": {}, "hierarchy": {}}
+            meta_data = {"attribute_type": {}, "hierarchy": {}, "model": {}}
         self._internal_dict = {"data": data, "metadata": meta_data}
 
     def __setitem__(self, k, v) -> None:
