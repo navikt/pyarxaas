@@ -1,6 +1,11 @@
 from collections.abc import MutableMapping
-from typing import Iterator
-from json import JSONEncoder
+import sys
+if sys.version_info[0] < 3:
+    from StringIO import StringIO
+else:
+    from io import StringIO
+
+from pandas import DataFrame
 
 
 class AnonymizePayload(MutableMapping):
@@ -34,7 +39,9 @@ class AnonymizePayload(MutableMapping):
 
     @data.setter
     def data(self, new_data):
-        self._internal_dict["data"] = new_data
+        if isinstance(new_data, DataFrame):
+            csv_string = new_data.to_csv(sep=";")
+        self._internal_dict["data"] = csv_string
 
     @property
     def metadata(self):
