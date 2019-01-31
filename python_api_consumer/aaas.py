@@ -1,10 +1,11 @@
 import sys
 import os
 from collections.abc import MutableMapping, Sequence
-import csv
+import json
 
 from python_api_consumer.aaas_connector import AaaSConnector
-from python_api_consumer.models.anonymize_payload import AnonymizePayload
+from python_api_consumer.models.anonymize_payload import AnonymizePayload, PayloadJSONConverter
+from python_api_consumer.models.privacy_models import PrivacyModel
 
 
 class AaaS:
@@ -20,28 +21,27 @@ class AaaS:
 
         self.payload = AnonymizePayload()
 
-    def set_attribute_type(self, fields, value=None):
-        if isinstance(fields, Sequence):
-            for field in fields:
-                self.payload.metadata["attribute_type"][field] = value
-        if isinstance(fields, MutableMapping):
-            self.payload.metadata["attribute_type"] = value
+    def set_attribute_type(self, field, value=None):
+        if isinstance(field, Sequence):
+            for c_field in field:
+                self.payload.add_attribute_type(c_field, value)
+        if isinstance(field, MutableMapping):
+            for c_field, value in field.items():
+                self.payload.add_attribute_type(c_field, value)
         else:
-            self.payload.metadata["attribute_type"][fields] = value
+            self.payload.add_attribute_type(field, value)
 
     def set_hierarchy(self, field, hierarchy_data):
-        if isinstance(hierarchy_data, Sequence):
-            hierarchy_data = self._list_to_csv_string(hierarchy_data)
-        self.payload.metadata["hierarchy"][field] = hierarchy_data
+        self.payload.add_hierarchy(field, hierarchy_data)
 
-    def set_model(self, model):
-        self.payload.metadata["model"][model.name] = model
+    def set_model(self, model: PrivacyModel):
+        self.payload.add_model(model.name, model)
 
     def set_data(self, data):
         self.payload.data = data
 
     def anonymize(self) -> MutableMapping:
-        return self.conn.anonymize_data(self.payload)
+        return self.conn.anonymize_data(self.payload.to_dict())
 
 
     @staticmethod
@@ -60,4 +60,6 @@ class AaaS:
             return os.environ["AAAS_URL"]
         except KeyError:
             raise EnvironmentError("No AAAS_URL set in the environment")
+
+
 

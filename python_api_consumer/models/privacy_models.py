@@ -1,5 +1,5 @@
 from collections.abc import Mapping
-from abc import ABC, abstractmethod, abstractproperty
+from abc import ABC, abstractproperty
 
 
 class PrivacyModel(ABC):
