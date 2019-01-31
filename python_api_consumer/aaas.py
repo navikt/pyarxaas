@@ -18,9 +18,7 @@ class AaaS:
             url = self._get_url_from_env()
         self.conn = AaaSConnector(base_url=url)
 
-        # Setup datastructure
         self.payload = AnonymizePayload()
-
 
     def set_attribute_type(self, fields, value=None):
         if isinstance(fields, Sequence):
