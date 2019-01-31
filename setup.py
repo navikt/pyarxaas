@@ -27,6 +27,7 @@ setup(
 
     long_description=long_description,  # Optional
 
+    long_description_content_type='text/markdown',  # Optional
 
     # This should be a valid link to your project's main homepage.
     #
@@ -67,7 +68,7 @@ setup(
     # project page. What does your project relate to?
     #
     # Note that this is a string of words separated by whitespace, not a list.
-    keywords='anonymization ARX AaaS',  # Optional
+    keywords='anonymization ARX AaaS Anonymization-as-a-Service',  # Optional
 
     # You can just specify package directories manually here if your project is
     # simple. Or you can use find_packages().
