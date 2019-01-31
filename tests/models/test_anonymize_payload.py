@@ -1,8 +1,8 @@
 import unittest
 from pprint import pprint as pp
 
-from python_api_consumer.models.anonymize_payload import AnonymizePayload, PayloadJSONConverter
-from python_api_consumer.models.privacy_models import KAnonymity
+from pyaaas.models.anonymize_payload import AnonymizePayload, PayloadJSONConverter
+from pyaaas.models.privacy_models import KAnonymity
 import json
 
 class AnonymizationPayloadTest(unittest.TestCase):
@@ -32,5 +32,5 @@ class AnonymizationPayloadTest(unittest.TestCase):
 
     def test__convert_payload_to_backed_schema_contains_correct_schema(self):
         result = json.dumps(self.test_payload, cls=PayloadJSONConverter)
-        pp(result)
+
 

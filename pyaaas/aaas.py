@@ -3,10 +3,10 @@ import os
 from collections.abc import MutableMapping, Sequence
 import json
 
-from python_api_consumer.aaas_connector import AaaSConnector
-from python_api_consumer.models.anonymize_payload import AnonymizePayload, PayloadJSONConverter
-from python_api_consumer.models.privacy_models import PrivacyModel
-from python_api_consumer.models.anonymize_result import AnonymizeResult
+from pyaaas.aaas_connector import AaaSConnector
+from pyaaas.models.anonymize_payload import AnonymizePayload, PayloadJSONConverter
+from pyaaas.models.privacy_models import PrivacyModel
+from pyaaas.models.anonymize_result import AnonymizeResult
 
 
 class AaaS:

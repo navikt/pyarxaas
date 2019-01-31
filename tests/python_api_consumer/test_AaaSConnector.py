@@ -1,5 +1,5 @@
 import unittest
-from python_api_consumer.aaas_connector import AaaSConnector
+from pyaaas.aaas_connector import AaaSConnector
 from pprint import pprint as pp
 
 
@@ -35,5 +35,4 @@ class AaaSConnectorTest(unittest.TestCase):
     def test_anonymize_data__run(self):
         ac = AaaSConnector("http://34.73.75.250:8080")
         result = ac.anonymize_data(self.test_data)
-        pp(result.json())
 

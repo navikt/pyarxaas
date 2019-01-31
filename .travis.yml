@@ -19,7 +19,7 @@ before_script:
   - ./cc-test-reporter before-build
 # command to run tests
 script:
-  - pytest --cov-report=xml --cov=python_api_consumer
+  - pytest --cov-report=xml --cov=pyaaas
 # send results to coverage service
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

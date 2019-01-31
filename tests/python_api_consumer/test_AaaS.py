@@ -2,9 +2,8 @@ import unittest
 from pprint import pprint as pp
 import json
 
-from python_api_consumer.aaas import AaaS
-from python_api_consumer.models.privacy_models import KAnonymity
-from python_api_consumer.models.anonymize_payload import PayloadJSONConverter
+from pyaaas.aaas import AaaS
+from pyaaas.models.privacy_models import KAnonymity
 
 class AaaSTest(unittest.TestCase):
 
@@ -37,19 +36,12 @@ class AaaSTest(unittest.TestCase):
     def test__list_to_csv_string(self):
         result = AaaS._list_to_csv_string(self.test_hierachy_list)
 
-
-
-
     def test_run(self):
         aaas = AaaS("http://34.73.75.250:8080")
         aaas.set_data(self.test_data)
         aaas.set_attribute_type(self.test_attributes)
         aaas.set_hierarchy("zipcode", self.test_hierachy_list)
         aaas.set_model(self.test_model)
-        #res = json.dumps(aaas.payload, cls=PayloadJSONConverter)
-        #res =  res.replace("\\n", "\n")
-        #pp(res)
         result = aaas.anonymize()
-        print(result.to_dataframe())
 
 
