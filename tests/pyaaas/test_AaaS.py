@@ -4,6 +4,7 @@ import json
 
 from pyaaas.aaas import AaaS
 from pyaaas.models.privacy_models import KAnonymity
+from pyaaas.models.anonymize_result import AnonymizeResult
 
 class AaaSTest(unittest.TestCase):
 
@@ -33,15 +34,22 @@ class AaaSTest(unittest.TestCase):
         aaas.set_model(self.test_model)
         self.test_aaas = aaas
 
-    def test__list_to_csv_string(self):
-        result = AaaS._list_to_csv_string(self.test_hierachy_list)
+    def mock_anonymize_data(self, *args, **kwargs):
+        return MockRequestResult()
 
     def test_run(self):
-        aaas = AaaS("http://34.73.75.250:8080")
+        aaas = AaaS("test_url")
+        aaas._conn.anonymize_data = self.mock_anonymize_data
         aaas.set_data(self.test_data)
         aaas.set_attribute_type(self.test_attributes)
         aaas.set_hierarchy("zipcode", self.test_hierachy_list)
         aaas.set_model(self.test_model)
         result = aaas.anonymize()
+        self.assertIsInstance(result, AnonymizeResult)
 
 
+class MockRequestResult:
+
+    @property
+    def text(self):
+        return '{"test": "test"}'
