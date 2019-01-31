@@ -1,14 +1,61 @@
 import unittest
 from pprint import pprint as pp
 import json
+import pandas as pd
 
 from pyaaas.aaas import AaaS
 from pyaaas.models.privacy_models import KAnonymity
 from pyaaas.models.anonymize_result import AnonymizeResult
 
+
+class MockRequestResult:
+    """ Mock class for requests result object"""
+
+    @property
+    def text(self):
+        return '{"test": "test"}'
+
+
 class AaaSTest(unittest.TestCase):
 
     def setUp(self):
+
+        self.test_data_dict = {'age': {0: 34,
+  1: 35,
+  2: 36,
+  3: 37,
+  4: 38,
+  5: 39,
+  6: 40,
+  7: 41,
+  8: 42,
+  9: 43,
+  10: 44},
+ ' gender': {0: ' male',
+  1: ' female',
+  2: ' male',
+  3: ' female',
+  4: ' male',
+  5: ' female',
+  6: ' male',
+  7: ' female',
+  8: ' male',
+  9: ' female',
+  10: ' male'},
+ ' zipcode': {0: 81667,
+  1: 81668,
+  2: 81669,
+  3: 81670,
+  4: 81671,
+  5: 81672,
+  6: 81673,
+  7: 81674,
+  8: 81675,
+  9: 81676,
+  10: 81677}}
+
+        self.test_df = pd.DataFrame(self.test_data_dict)
+
         self.test_hierachy_list = [['81667','8166*', '816**', '81***', '8****', '*****'],
     ['81668', '8166*', '816**', '81***', '8****', '*****'],
     ['81669', '8166*', '816**', '81***', '8****', '*****'],
@@ -47,9 +94,3 @@ class AaaSTest(unittest.TestCase):
         result = aaas.anonymize()
         self.assertIsInstance(result, AnonymizeResult)
 
-
-class MockRequestResult:
-
-    @property
-    def text(self):
-        return '{"test": "test"}'
