@@ -1,2 +1,2 @@
-uplink=0.7.0
+uplink==0.7.0
 pandas
