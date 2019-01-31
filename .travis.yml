@@ -1,24 +1,27 @@
 env:
   global:
-    - CC_TEST_REPORTER_ID=9e2a7c941cce19fcf118f4e8a9fdd5805eb1d3082258a21b39ade563b19dd1cf
+  - CC_TEST_REPORTER_ID=9e2a7c941cce19fcf118f4e8a9fdd5805eb1d3082258a21b39ade563b19dd1cf
 language: python
-
 python:
-  - "3.7-dev"  # 3.7 development branch
-# command to install dependencies
+- 3.7-dev
 install:
-  - pip install -r requirements.txt
-  - pip install pytest
-  - pip install coverage
-  - pip install pytest-cov
-# test coverage service
+- pip install -r requirements.txt
+- pip install pytest
+- pip install coverage
+- pip install pytest-cov
 before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-# command to run tests
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- ./cc-test-reporter before-build
 script:
-  - pytest --cov-report=xml --cov=pyaaas
-# send results to coverage service
+- pytest --cov-report=xml --cov=pyaaas
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+- ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+deploy:
+  provider: pypi
+  user: sonhal
+  password:
+    secure: WAo78lQiCTnPi57ySnMar89P8O6fjHk+or1JcC06JFd/KdKFRje9ILK2vfVcz7I2s/rro+0Qx29h65Jgs1VE1F8qhssdAqeAwu4M6lAJeP2SHOoarAp+F1PgPlJFa4D3LYK/u0rbSRB2o4SmRH+GYHoIL3ceDDQXM3y+sqduslICbwCFtXvmWEQtnIvYbVaOnFj+jjSa+HhcRvTXWO3ozH7gtjZYpJn8PfUJaIzJwM+0VKkBkm+piLT4o2K/MJT9Z8+r0eqJUyDAhIdN4zGu70Jd5A8fSRPV+D0Cv1RN3ji2QkNRWQzoVa2hRPl9hnH1BN35doA5PnSq8cReeB9wYT70oFkMPrw3NJAQAx+p6prVkj7rC98foqAIOy6Q+B7EEcI+E7/TUZo7zeLhgNC9/9vJvwf85GUsNlmHU4pQM4nR2hNX83jzvgXkWPdDUdH2vQSK1kmRAOG6ATf5LK4LtdD2oaRJZvQ7pR4xrKYw74v2RxhSCPzrjDiob/HQna6s7C6GiY5IfJ8R4Nzib4LYWLzCnS1DSOMU2hk9y8HQw4NL7lel9WGMl4FY+vX4sXYZ1hCEYJz4ci6cSd+FpYU99u8grunabaGxV1yDfnvVNKrO7adKuwMDsGwjT7lGtBl7LlE9OveY3EMfRC1BJXvLxft7nIgEBu6ki6zIviS45Sg=
+  on:
+    tags: true
+    branch: master
