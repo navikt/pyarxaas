@@ -25,19 +25,11 @@ class AnonymizationPayloadTest(unittest.TestCase):
 
     def test_set_data__add_dataframe(self):
         self.test_payload.data = self.test_dataframe
-        print(self.test_payload.data)
+        self.assertIsInstance(self.test_payload.data, str)
 
-    def test_convert_to_json(self):
-        anon_payload = AnonymizePayload()
-        kanon = KAnonymity(k=4)
-        anon_payload.metadata["models"][kanon.name] = kanon
-        result_dict = {**anon_payload}
-        models = {}
-        for key, value in anon_payload.metadata["models"].items():
-            model_dict = {**value}
-            models[key] = model_dict
-        result_dict["metadata"]["models"] = models
-        print(str(result_dict))
+
+
+
 
 
 

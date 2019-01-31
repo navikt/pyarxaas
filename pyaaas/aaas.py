@@ -4,7 +4,7 @@ from collections.abc import MutableMapping, Sequence
 import json
 
 from pyaaas.aaas_connector import AaaSConnector
-from pyaaas.models.anonymize_payload import AnonymizePayload, PayloadJSONConverter
+from pyaaas.models.anonymize_payload import AnonymizePayload
 from pyaaas.models.privacy_models import PrivacyModel
 from pyaaas.models.anonymize_result import AnonymizeResult
 

@@ -40,8 +40,8 @@ class AnonymizePayload(MutableMapping):
     @data.setter
     def data(self, new_data):
         if isinstance(new_data, DataFrame):
-            csv_string = new_data.to_csv(sep=";")
-        self._internal_dict["data"] = csv_string
+            new_data = new_data.to_csv(sep=";")
+        self._internal_dict["data"] = new_data
 
     @property
     def metadata(self):
