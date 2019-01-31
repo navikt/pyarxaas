@@ -15,7 +15,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
 
-    name='AaaS-Python',  # Required
+    name='PyAaaS',  # Required
 
     # https://packaging.python.org/en/latest/single_source_version.html
     version='0.0.1',  # Required
