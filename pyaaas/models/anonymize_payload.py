@@ -72,27 +72,11 @@ class AnonymizePayload(MutableMapping):
             model_dict = {**value}
             models[key] = model_dict
         payload_dict["metadata"]["models"] = models
-        converted = _convert_payload_to_backed_schema(payload_dict)
+        converted = _convert_payload_to_backend_schema(payload_dict)
         return converted
 
 
-
-class PayloadJSONConverter(JSONEncoder):
-
-    def default(self, anon_payload):
-        result_dict = {**anon_payload}
-        models = {}
-        for key, value in anon_payload.metadata["models"].items():
-            model_dict = {**value}
-            models[key] = model_dict
-        result_dict["metadata"]["models"] = models
-        result_dict = _convert_payload_to_backed_schema(result_dict)
-        return result_dict
-
-
-
-
-def _convert_payload_to_backed_schema(payload):
+def _convert_payload_to_backend_schema(payload):
     payload["metaData"] = payload["metadata"]
     payload["metaData"]["sensitivityList"] = payload["metaData"]["attribute_type"]
     del payload["metadata"]
