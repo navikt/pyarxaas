@@ -1,6 +1,6 @@
 env:
   global:
-  - CC_TEST_REPORTER_ID=9e2a7c941cce19fcf118f4e8a9fdd5805eb1d3082258a21b39ade563b19dd1cf
+  - CC_TEST_REPORTER_ID=token
 language: python
 python:
 - 3.7-dev
