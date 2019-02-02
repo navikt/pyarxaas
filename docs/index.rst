@@ -8,6 +8,9 @@ Welcome to PyAaaS's documentation!
 
 PyAaaS is a Python wrapper package for the AaaS Web Service.
 It provides user-friendly abstractions for the APIs exposed by the AaaS Web Service.
+`Github link <https://github.com/OsloMET-Gruppe-8/PyAaaS>`_
+
+For more in-depth information about the API see :ref:`api` .
 
 Simple use
 ----------
@@ -37,10 +40,11 @@ Features
  - HirarchyGenerator classes for easy generation of Transform Model hierarchies.
 
 
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+   api/api
 
 
 

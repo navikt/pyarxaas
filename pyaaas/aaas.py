@@ -29,6 +29,7 @@ class AaaS:
     def set_attribute_type(self, field, value=None):
         """
         Sett atttribute type for one or several fields
+
         :param field: field(s) in the dataframe
         :param value: the attribute type for the field(s)
         :return: None
@@ -45,6 +46,7 @@ class AaaS:
     def set_hierarchy(self, field, hierarchy_data):
         """
         Set Transform Model Hierarchy for a field in the dataframe
+
         :param field: field in the dataframe
         :param hierarchy_data: a Hierarchy object
         :return: None
@@ -54,6 +56,7 @@ class AaaS:
     def set_model(self, model: PrivacyModel):
         """
         Set a PrivacyModel for the anonymization action
+
         :param model: PrivacyModel to apply to the dataframe
         :return: None
         """
@@ -62,6 +65,7 @@ class AaaS:
     def set_data(self, data):
         """
         Set the data to be anonymized or analyzed
+
         :param data: data (DataFrame,  CSV str)
         :return: None
         """
@@ -70,6 +74,7 @@ class AaaS:
     def anonymize(self) -> AnonymizeResult:
         """
         Run Anonymization on the currently applied configurations and data
+
         :return: AnonymizationResult wuith the result from the AaaS Web Service
         """
         result =  self._conn.anonymize_data(self._payload.to_dict())
