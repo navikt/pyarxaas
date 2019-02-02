@@ -14,7 +14,7 @@
 #
 import os
 import sys
-sys.path.append(os.path.abspath('..pyaaas'))
+sys.path.append(os.path.abspath('../'))
 
 
 # -- Project information -----------------------------------------------------
