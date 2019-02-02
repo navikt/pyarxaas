@@ -31,6 +31,6 @@ class KAnonymity(Mapping, PrivacyModel):
         return "KANONYMITY"
 
     def __str__(self):
-        k_value = self._internal_dict['k']
+        k_value = self._internal_dict["k"]
         return f"KAnonymity(k={k_value})"
 
