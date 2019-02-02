@@ -14,7 +14,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..pyaaas/'))
+sys.path.append(os.path.abspath('..pyaaas'))
 
 
 # -- Project information -----------------------------------------------------
@@ -46,7 +46,6 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.imgmath',
     'sphinx.ext.viewcode',
-    'sphinx.ext.githubpages',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

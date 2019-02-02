@@ -35,8 +35,8 @@ The AaaS Web Service uses the ARX library to analyze and anonymize the dataset.
 Features
 --------
 
- - AaaS class for configuration and calling actions
- - PrivacyModel classes for configurating the Privacy Models to use
+ - AaaS class for configuration and calling actions.
+ - PrivacyModel classes for configurating the Privacy Models to use.
  - HirarchyGenerator classes for easy generation of Transform Model hierarchies.
 
 
