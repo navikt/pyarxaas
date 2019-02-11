@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/oslomet-arx-as-a-service/PyAaaS.svg?branch=master)](https://travis-ci.com/oslomet-arx-as-a-service/PyAaaS)
+[![Maintainability](https://api.codeclimate.com/v1/badges/24ea4186b037844d01ab/maintainability)](https://codeclimate.com/github/oslomet-arx-as-a-service/PyAaaS/maintainability)
 
 # PyAaaS
 
