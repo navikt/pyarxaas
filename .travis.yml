@@ -1,6 +1,6 @@
 env:
   global:
-  - CC_TEST_REPORTER_ID=$token
+  - CC_TEST_REPORTER_ID=$cc_token
 language: python
 python:
 - 3.7-dev
