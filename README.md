@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/oslomet-arx-as-a-service/PyAaaS.svg?branch=master)](https://travis-ci.com/oslomet-arx-as-a-service/PyAaaS)
 
 # PyAaaS
 
