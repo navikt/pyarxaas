@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/OsloMET-Gruppe-8/PyAaaS.svg?branch=master)](https://travis-ci.org/OsloMET-Gruppe-8/PyAaaS)
-[![Maintainability](https://api.codeclimate.com/v1/badges/1ed242e5f516371100b2/maintainability)](https://codeclimate.com/github/OsloMET-Gruppe-8/PyAaaS/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/1ed242e5f516371100b2/test_coverage)](https://codeclimate.com/github/OsloMET-Gruppe-8/PyAaaS/test_coverage)
 
 # PyAaaS
 Python Package for easy access to ARX Web API Service
