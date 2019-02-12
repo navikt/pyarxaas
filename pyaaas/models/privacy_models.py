@@ -2,23 +2,14 @@ from collections.abc import Mapping
 from abc import ABC, abstractproperty
 
 
-class PrivacyModel(ABC):
+class PrivacyModel(ABC, Mapping):
     """ ABC for ARX Privacy Models"""
 
-    @abstractproperty
-    def name(self) -> str:
-        raise NotImplementedError()
+    def __init__(self):
+        self._internal_dict = {}
 
-
-class KAnonymity(Mapping, PrivacyModel):
-    """ Configuration class for KAnonymity"""
-
-
-    def __init__(self, k):
-        self._internal_dict = {"k": k}
-
-    def __getitem__(self, k):
-        return self._internal_dict[k]
+    def __getitem__(self, item):
+        return self._internal_dict[item]
 
     def __len__(self) -> int:
         return len(self._internal_dict)
@@ -28,9 +19,25 @@ class KAnonymity(Mapping, PrivacyModel):
 
     @property
     def name(self) -> str:
-        return "KANONYMITY"
+        return self._anonymity_name
 
     def __str__(self):
-        k_value = self._internal_dict["k"]
-        return f"KAnonymity(k={k_value})"
+        return self._print_messqge
+
+class KAnonymity(PrivacyModel):
+    """ Configuration class for KAnonymity"""
+
+    def __init__(self, k):
+        self._internal_dict = {"k": k}
+        self._anonymity_name = "KANONYMITY"
+        self._print_messqge = f"KAnonymity(k={k})"
+
+
+class LDiversityShannonEntropy(PrivacyModel):
+    """ Configuration class for LDiversity"""
+
+    def __init__(self, l, column_name):
+        self._internal_dict = {"l": l, "column_name": column_name}
+        self._anonymity_name = "LDIVERSITY_SHANNONENTROPY"
+        self._print_messqge = f"KAnonymity(l={l}, column_name={column_name})"
 
