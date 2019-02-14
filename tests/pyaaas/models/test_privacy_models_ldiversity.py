@@ -2,7 +2,7 @@ from pyaaas.models.privacy_models import LDiversityDistinct, LDiversityGrassberg
 from pyaaas.aaas import AaaS
 import unittest
 
-class PrivacyModelsTest(unittest.TestCase):
+class PrivacyModelsLDiversityTest(unittest.TestCase):
 
     def test_privacyModelIterator(self):
         self.privacymodel = LDiversityDistinct(l=3, column_name="column")
