@@ -5,9 +5,6 @@ from abc import ABC, abstractproperty
 class PrivacyModel(ABC, Mapping):
     """ ABC for ARX Privacy Models"""
 
-    def __init__(self):
-        self._internal_dict = {}
-
     def __getitem__(self, item):
         return self._internal_dict[item]
 
@@ -33,11 +30,36 @@ class KAnonymity(PrivacyModel):
         self._print_messqge = f"KAnonymity(k={k})"
 
 
+class LDiversityDistinct(PrivacyModel):
+    """ Configuration class for LDiversity"""
+
+    def __init__(self, l, column_name):
+        self._internal_dict = {"l": l, "column_name": column_name}
+        self._anonymity_name = "LDIVERSITY_DISTINCT"
+        self._print_messqge = f"LDiversityDistinct(l={l}, column_name={column_name})"
+
+
 class LDiversityShannonEntropy(PrivacyModel):
     """ Configuration class for LDiversity"""
 
     def __init__(self, l, column_name):
         self._internal_dict = {"l": l, "column_name": column_name}
         self._anonymity_name = "LDIVERSITY_SHANNONENTROPY"
-        self._print_messqge = f"KAnonymity(l={l}, column_name={column_name})"
+        self._print_messqge = f"LDiversityShannonEntropy(l={l}, column_name={column_name})"
 
+
+class LDiversityGrassbergerEntropy(PrivacyModel):
+    """ Configuration class for LDiversity"""
+
+    def __init__(self, l, column_name):
+        self._internal_dict = {"l": l, "column_name": column_name}
+        self._anonymity_name = "LDIVERSITY_GRASSBERGERENTROPY"
+        self._print_messqge = f"LDiversityGrassbergerEntropy(l={l}, column_name={column_name})"
+
+class LDiversityRecursive(PrivacyModel):
+    """ Configuration class for LDiversity"""
+
+    def __init__(self, l, c, column_name):
+        self._internal_dict = {"l": l, "c": c, "column_name": column_name}
+        self._anonymity_name = "LDIVERSITY_RECURSIVE"
+        self._print_messqge = f"LDiversityRecursive(l={l}, c={c}, column_name={column_name})"
