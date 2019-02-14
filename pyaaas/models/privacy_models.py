@@ -4,6 +4,8 @@ from abc import ABC, abstractproperty
 
 class PrivacyModel(ABC, Mapping):
     """ ABC for ARX Privacy Models"""
+    def __init__(self):
+        self._internal_dict = {}
 
     def __getitem__(self, item):
         return self._internal_dict[item]
