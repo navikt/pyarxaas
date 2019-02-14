@@ -29,7 +29,7 @@ class ConvertersTest(unittest.TestCase):
         dataframe = converters.create_transform_models_dataframe(self.test_hierarchy_mapping)
         self.assertIsNotNone(dataframe)
         self.assertIsInstance(dataframe, pandas.DataFrame)
-        print(dataframe)
+
 
     def test_create_privacy_models_dataframe__run(self):
         dataframe = converters.create_privacy_models_dataframe(self.test_privacy_models_sequence)
