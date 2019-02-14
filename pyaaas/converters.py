@@ -48,16 +48,29 @@ def create_transform_models_dataframe(transform_models):
     transform_models_values = []
 
     for field, hierarchy in transform_models.items():
-
-        for level in range(1, len(hierarchy[0])):
-            model_index = [field]
-            level_values = []
-            model_index.append("level_" + str(level))
-            transform_models_index.append(model_index)
-            for row in hierarchy:
-                level_values.append(row[level])
-            transform_models_values.append(level_values)
+        field_index, field_values = _create_index_and_values_for(field, hierarchy)
+        transform_models_index += field_index
+        transform_models_values += field_values
 
     index = pandas.MultiIndex.from_tuples(transform_models_index)
     dataframe = pandas.DataFrame(transform_models_values, index=index)
     return dataframe
+
+
+def _create_index_and_values_for(field, hierarchy):
+    transform_model_index = []
+    transform_model_values = []
+
+    for level in range(1, _get_hierarchy_levels(hierarchy)):
+        model_index = [field]
+        level_values = []
+        model_index.append(f"level_{level}")
+        transform_model_index.append(model_index)
+        for row in hierarchy:
+            level_values.append(row[level])
+        transform_model_values.append(level_values)
+    return transform_model_index, transform_model_values
+
+
+def _get_hierarchy_levels(hierarchy):
+    return len(hierarchy[0])
