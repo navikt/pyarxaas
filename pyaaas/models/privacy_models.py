@@ -19,7 +19,7 @@ class PrivacyModel(ABC, Mapping):
         return self._anonymity_name
 
     def __str__(self):
-        return self._print_messqge
+        return self._print_message
 
 class KAnonymity(PrivacyModel):
     """ Configuration class for KAnonymity"""
@@ -27,7 +27,7 @@ class KAnonymity(PrivacyModel):
     def __init__(self, k):
         self._internal_dict = {"k": k}
         self._anonymity_name = "KANONYMITY"
-        self._print_messqge = f"KAnonymity(k={k})"
+        self._print_message = f"KAnonymity(k={k})"
 
 
 class LDiversityDistinct(PrivacyModel):
@@ -36,7 +36,7 @@ class LDiversityDistinct(PrivacyModel):
     def __init__(self, l, column_name):
         self._internal_dict = {"l": l, "column_name": column_name}
         self._anonymity_name = "LDIVERSITY_DISTINCT"
-        self._print_messqge = f"LDiversityDistinct(l={l}, column_name={column_name})"
+        self._print_message = f"LDiversityDistinct(l={l}, column_name={column_name})"
 
 
 class LDiversityShannonEntropy(PrivacyModel):
@@ -45,7 +45,7 @@ class LDiversityShannonEntropy(PrivacyModel):
     def __init__(self, l, column_name):
         self._internal_dict = {"l": l, "column_name": column_name}
         self._anonymity_name = "LDIVERSITY_SHANNONENTROPY"
-        self._print_messqge = f"LDiversityShannonEntropy(l={l}, column_name={column_name})"
+        self._print_message = f"LDiversityShannonEntropy(l={l}, column_name={column_name})"
 
 
 class LDiversityGrassbergerEntropy(PrivacyModel):
@@ -54,7 +54,7 @@ class LDiversityGrassbergerEntropy(PrivacyModel):
     def __init__(self, l, column_name):
         self._internal_dict = {"l": l, "column_name": column_name}
         self._anonymity_name = "LDIVERSITY_GRASSBERGERENTROPY"
-        self._print_messqge = f"LDiversityGrassbergerEntropy(l={l}, column_name={column_name})"
+        self._print_message = f"LDiversityGrassbergerEntropy(l={l}, column_name={column_name})"
 
 class LDiversityRecursive(PrivacyModel):
     """ Configuration class for LDiversity"""
@@ -62,4 +62,4 @@ class LDiversityRecursive(PrivacyModel):
     def __init__(self, l, c, column_name):
         self._internal_dict = {"l": l, "c": c, "column_name": column_name}
         self._anonymity_name = "LDIVERSITY_RECURSIVE"
-        self._print_messqge = f"LDiversityRecursive(l={l}, c={c}, column_name={column_name})"
+        self._print_message = f"LDiversityRecursive(l={l}, c={c}, column_name={column_name})"
