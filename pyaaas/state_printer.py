@@ -42,10 +42,5 @@ def jupyter_print_mapping(name_dataframe_mapping: Mapping):
         print("-"*40)
 
 
-def print_attribute_types(attributes, printer):
-    for attribute in attributes:
-        printer(attribute)
-
-
 def _model_to_dataframe(model):
     return pandas.DataFrame(model.items())

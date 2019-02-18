@@ -1,6 +1,5 @@
 import unittest
 from pyaaas.aaas_connector import AaaSConnector
-from pprint import pprint as pp
 
 
 class AaaSConnectorTest(unittest.TestCase):
