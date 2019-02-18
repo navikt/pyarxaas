@@ -1,6 +1,5 @@
 import unittest
 from pyaaas.aaas_connector import AaaSConnector
-from pprint import pprint as pp
 
 
 class AaaSConnectorTest(unittest.TestCase):
@@ -31,8 +30,8 @@ class AaaSConnectorTest(unittest.TestCase):
    }
 }
 
-
     def test_anonymize_data__run(self):
-        ac = AaaSConnector("http://34.73.75.250:8080")
-        result = ac.anonymize_data(self.test_data)
+        service_endpoint = "http://34.73.75.250:8080"
+        ac = AaaSConnector(service_endpoint)
+        ac.anonymize_data(self.test_data)
 

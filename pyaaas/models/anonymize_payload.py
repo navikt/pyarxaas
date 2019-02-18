@@ -15,65 +15,74 @@ class AnonymizePayload(MutableMapping):
 
     def __init__(self, data=None, meta_data: MutableMapping=None):
         if meta_data is None:
-            meta_data = {"attribute_type": {}, "hierarchy": {}, "models": {}}
-        self._internal_dict = {"data": data, "metadata": meta_data}
+            meta_data = {"attribute_type": {},
+                         "hierarchy": {},
+                         "models": {}
+                         }
+        self._payload_dict = {"data": data,
+                               "metadata": meta_data
+                              }
 
     def __setitem__(self, k, v) -> None:
-        self._internal_dict[k] = v
+        self._payload_dict[k] = v
 
     def __delitem__(self, v) -> None:
-        del self._internal_dict[v]
+        del self._payload_dict[v]
 
     def __getitem__(self, k):
-        return self._internal_dict[k]
+        return self._payload_dict[k]
 
     def __len__(self) -> int:
-        return len(self._internal_dict)
+        return len(self._payload_dict)
 
     def __iter__(self):
-        return iter(self._internal_dict)
+        return iter(self._payload_dict)
 
     @property
     def data(self):
-        return self._internal_dict["data"]
+        """ User provided data to be anonymised """
+        return self._payload_dict["data"]
 
     @data.setter
     def data(self, new_data):
         if isinstance(new_data, DataFrame):
             new_data = new_data.to_csv(sep=",", index=False)
-        self._internal_dict["data"] = new_data
+        self._payload_dict["data"] = new_data
 
     @property
     def metadata(self):
-        return self._internal_dict["metadata"]
+        """ metadata about the user provided data"""
+        return self._payload_dict["metadata"]
 
     @metadata.setter
     def metadata(self, new_metadata):
-        self._internal_dict["metadata"] = new_metadata
+        self._payload_dict["metadata"] = new_metadata
 
     @property
-    def attribute_type(self):
-        return self._internal_dict["metadata"]["attribute_type"]
+    def attribute_types(self):
+        """ ARX Attribute types for the data fields"""
+        return self._payload_dict["metadata"]["attribute_type"]
 
     @property
     def models(self):
-        return self._internal_dict["metadata"]["models"]
+        """ PrivacyModels to be used in the anonymization process"""
+        return self._payload_dict["metadata"]["models"]
 
     @property
     def hierarchy(self):
-        return self._internal_dict["metadata"]
+        return self._payload_dict["metadata"]["hierarchy"]
 
     def add_attribute_type(self, field, value):
-        self._internal_dict["metadata"]["attribute_type"][field] = value
+        self._payload_dict["metadata"]["attribute_type"][field] = value
 
     def add_hierarchy(self, field, value):
-        self._internal_dict["metadata"]["hierarchy"][field] = value
+        self._payload_dict["metadata"]["hierarchy"][field] = value
 
     def add_model(self, field, value):
-        self._internal_dict["metadata"]["models"][field] = value
+        self._payload_dict["metadata"]["models"][field] = value
 
     def to_dict(self) -> dict:
-        payload_dict = {**self._internal_dict}
+        payload_dict = {**self._payload_dict}
         models = {}
         for key, value in self.metadata["models"].items():
             model_dict = {**value}

@@ -1,12 +1,15 @@
 import sys
 import os
-from collections.abc import MutableMapping, Sequence
+from collections.abc import MutableMapping, Sequence, Callable
 import json
 
 from pyaaas.aaas_connector import AaaSConnector
 from pyaaas.models.anonymize_payload import AnonymizePayload
 from pyaaas.models.privacy_models import PrivacyModel
 from pyaaas.models.anonymize_result import AnonymizeResult
+from pyaaas.state_printer import jupyter_print_mapping, print_mapping
+from pyaaas.converters import create_privacy_models_dataframe,create_attribute_types_dataframe,\
+    create_transform_models_dataframe
 
 
 class AaaS:
@@ -25,6 +28,11 @@ class AaaS:
         self._conn = AaaSConnector(base_url=url)
 
         self._payload = AnonymizePayload()
+
+
+    @property
+    def payload(self):
+        return self._payload
 
     def set_attribute_type(self, field, value=None):
         """
@@ -80,6 +88,21 @@ class AaaS:
         result =  self._conn.anonymize_data(self._payload.to_dict())
         result_dict = json.loads(result.text)
         return AnonymizeResult(result_dict)
+
+    def describe(self, printer: Callable = print_mapping) -> None:
+        """
+        Describes the current state of the AaaS object to the user
+        Default behaviour is to print the current state of the payload object to the user.
+
+        :param printer: Callable object called to describe the payload state
+        """
+        privacy_models_dataframe = create_privacy_models_dataframe(self.payload.models.values())
+        attribute_types_dataframe = create_attribute_types_dataframe(self.payload.attribute_types)
+        transform_models_dataframe = create_transform_models_dataframe(self.payload.hierarchy)
+        name_dataframe_mapping = {"Privacy Models": privacy_models_dataframe,
+                                  "Attribute Types": attribute_types_dataframe,
+                                  "Transform Models": transform_models_dataframe}
+        printer(name_dataframe_mapping)
 
     @staticmethod
     def _get_url_from_env():
