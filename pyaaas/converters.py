@@ -72,5 +72,15 @@ def _create_index_and_values_for(field, hierarchy):
     return transform_model_index, transform_model_values
 
 
+def create_dataframe_with_index_from_mapping(mapping: Mapping, columns: Sequence):
+    """
+    Convenicence function for easy creation of pandas.DataFrame from Python mapping object
+    :param mapping: Mapping object to create pandas.DataFrame from
+    :param columns: Columns to use in the DataFrame. First column will be used as index
+    :return: pandas.DataFrame
+    """
+    return pandas.DataFrame(mapping.items(), columns=columns).set_index(columns[0])
+
+
 def _get_hierarchy_levels(hierarchy):
     return len(hierarchy[0])

@@ -7,6 +7,8 @@ if sys.version_info[0] < 3:
 else:
     from io import StringIO
 
+from pyaaas import converters
+
 
 class AnonymizeResult:
     """ Collection Class for result from anonymize action"""
@@ -31,7 +33,7 @@ class AnonymizeResult:
         """
 
         metrics = self._result_dict["metrics_before"]
-        return pandas.DataFrame(metrics.items(), columns=("metric", "value")).set_index("metric")
+        return converters.create_dataframe_with_index_from_mapping(metrics, columns=("metric", "value"))
 
     def get_metrics_after(self):
         """
@@ -40,7 +42,7 @@ class AnonymizeResult:
         :return: pandas.DataFrame containing the metrics for the anonymized data
         """
         metrics = self._result_dict["metrics_after"]
-        return pandas.DataFrame(metrics.items(), columns=("metric", "value")).set_index("metric")
+        return converters.create_dataframe_with_index_from_mapping(metrics, columns=("metric", "value"))
 
     def to_dict(self):
         return self._result_dict
