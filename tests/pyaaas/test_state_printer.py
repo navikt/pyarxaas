@@ -3,8 +3,6 @@ import builtins
 
 import pandas
 
-from pyaaas.aaas import AaaS
-from pyaaas.models.privacy_models import KAnonymity
 from pyaaas import state_printer
 
 
@@ -18,7 +16,6 @@ builtins.print = mock_print # mock print function
 class StatePrinterTest(unittest.TestCase):
 
     def setUp(self):
-
         self.test_df = pandas.DataFrame()
         self.test_name_dataframe_mapping ={"zipcode": pandas.DataFrame()}
 
