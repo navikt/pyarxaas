@@ -14,7 +14,7 @@ def create_privacy_models_dataframe(privacy_models: Sequence) -> pandas.DataFram
     privacy_models_values = []
 
     for model in privacy_models:
-        model_index =[model.name]
+        model_index = [model.name]
         for key, value in model.items():
             model_index.append(key)
             privacy_models_values.append(value)
