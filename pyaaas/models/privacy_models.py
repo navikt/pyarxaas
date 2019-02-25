@@ -23,6 +23,7 @@ class PrivacyModel(ABC, Mapping):
     def __str__(self):
         return self._print_message
 
+
 class KAnonymity(PrivacyModel):
     """ Configuration class for KAnonymity"""
 
@@ -57,6 +58,7 @@ class LDiversityGrassbergerEntropy(PrivacyModel):
         self._internal_dict = {"l": l, "column_name": column_name}
         self._anonymity_name = "LDIVERSITY_GRASSBERGERENTROPY"
         self._print_message = f"LDiversityGrassbergerEntropy(l={l}, column_name={column_name})"
+
 
 class LDiversityRecursive(PrivacyModel):
     """ Configuration class for LDiversity"""

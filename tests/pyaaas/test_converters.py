@@ -3,7 +3,7 @@ import unittest
 import pandas
 
 from pyaaas import converters
-from pyaaas.models.privacy_models import KAnonymity
+from pyaaas.models.privacy_models import KAnonymity, LDiversityDistinct, LDiversityRecursive
 
 
 class ConvertersTest(unittest.TestCase):
@@ -21,7 +21,7 @@ class ConvertersTest(unittest.TestCase):
                                             ['81676', '8167*', '816**', '81***', '8****', '*****'],
                                             ['81677', '8167*', '816**', '81***', '8****', '*****']]}
 
-        self.test_privacy_models_sequence = [KAnonymity(k=4)]
+        self.test_privacy_models_sequence = [KAnonymity(k=4), LDiversityDistinct(2, "test_column")]
         self.test_attribute_types_mapping = {"id": "INDENTIFING",
                                              "name": "QUASIIDENTIFING"}
 

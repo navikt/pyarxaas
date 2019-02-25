@@ -85,7 +85,8 @@ class AaaS:
 
         :return: AnonymizationResult wuith the result from the AaaS Web Service
         """
-        result =  self._conn.anonymize_data(self._payload.to_dict())
+        result = self._conn.anonymize_data(self._payload.to_dict())
+
         result_dict = json.loads(result.text)
         return AnonymizeResult(result_dict)
 
