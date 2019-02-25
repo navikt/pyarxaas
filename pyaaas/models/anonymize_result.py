@@ -13,6 +13,8 @@ from pyaaas import converters
 class AnonymizeResult:
     """ Collection Class for result from anonymize action"""
 
+    CSV_SEPARATOR = ","
+
     def __init__(self, result_dict):
         self._result_dict = result_dict
 
@@ -22,8 +24,8 @@ class AnonymizeResult:
 
         :return: pandas.DataFrame containing the anonymized data
         """
-        string_file = StringIO(self._result_dict["data"])
-        return pandas.read_csv(string_file, ";")
+        string_file = StringIO(self._result_dict["anonymizeResult"]["data"])
+        return pandas.read_csv(string_file, self.CSV_SEPARATOR)
 
     def get_metrics_before(self):
         """
@@ -32,7 +34,7 @@ class AnonymizeResult:
         :return: pandas.DataFrame containing the metrics for the data before anonymization
         """
 
-        metrics = self._result_dict["metrics_before"]
+        metrics = self._result_dict["beforeAnonymizationMetrics"]
         return converters.create_dataframe_with_index_from_mapping(metrics, columns=("metric", "value"))
 
     def get_metrics_after(self):
@@ -41,7 +43,7 @@ class AnonymizeResult:
 
         :return: pandas.DataFrame containing the metrics for the anonymized data
         """
-        metrics = self._result_dict["metrics_after"]
+        metrics = self._result_dict["afterAnonymizationMetrics"]
         return converters.create_dataframe_with_index_from_mapping(metrics, columns=("metric", "value"))
 
     def to_dict(self):
