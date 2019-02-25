@@ -31,7 +31,5 @@ class AaaSConnectorTest(unittest.TestCase):
 }
 
     def test_anonymize_data__run(self):
-        service_endpoint = "http://34.73.75.250:8080"
-        ac = AaaSConnector(service_endpoint)
-        ac.anonymize_data(self.test_data)
+        pass
 
