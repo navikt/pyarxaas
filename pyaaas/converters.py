@@ -2,6 +2,8 @@ from collections.abc import Sequence, Mapping
 
 import pandas
 
+from pyaaas.models.privacy_models import PrivacyModel
+
 
 def create_privacy_models_dataframe(privacy_models: Sequence) -> pandas.DataFrame:
     """
@@ -14,15 +16,37 @@ def create_privacy_models_dataframe(privacy_models: Sequence) -> pandas.DataFram
     privacy_models_values = []
 
     for model in privacy_models:
-        model_index = [model.name]
-        for key, value in model.items():
-            model_index.append(key)
-            privacy_models_values.append(value)
-        privacy_models_index.append(model_index)
-
+        model_index = create_model_indexes(model)
+        model_values = create_model_values(model)
+        privacy_models_index += model_index
+        privacy_models_values += model_values
     index = pandas.MultiIndex.from_tuples(privacy_models_index, names=("privacy_model", "parameter"))
     dataframe = pandas.DataFrame(privacy_models_values, index=index, columns=("value",))
     return dataframe
+
+
+def create_model_indexes(model: PrivacyModel):
+    """
+    Creates the indexes for a provided PrivacyModel to be used in a MultiIndex DataFrame
+    :param model: PrivacyModel object
+    :return: model_index: tuple of tuples containing indexes
+    """
+    model_index = []
+    for key, value in model.items():
+        model_index.append((model.name, key))
+    return model_index
+
+
+def create_model_values(model: PrivacyModel):
+    """
+    Create list of values from the PrivacyModel object
+    :param model: PrivacyModel object
+    :return: List of values
+    """
+    model_values = []
+    for value in model.values():
+        model_values.append(value)
+    return model_values
 
 
 def create_attribute_types_dataframe(attribute_types: Mapping) -> pandas.DataFrame:
