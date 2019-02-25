@@ -74,7 +74,7 @@ class AaaSTest(unittest.TestCase):
                            "zipcode":"INSENSITIVE"}
         self.test_data = "age, gender, zipcode\n34, male, 81667\n35, female, 81668\n36, male, 81669\n37, female, 81670\n38, male, 81671\n39, female, 81672\n40, male, 81673\n41, female, 81674\n42, male, 81675\n43, female, 81676\n44, male, 81677"
 
-        aaas = AaaS("http://34.73.75.250:8080")
+        aaas = AaaS("test_url")
         aaas.set_data(self.test_data)
         aaas.set_attribute_type(self.test_attributes)
         aaas.set_hierarchy("zipcode", self.test_hierachy_list)
@@ -84,7 +84,7 @@ class AaaSTest(unittest.TestCase):
     def mock_anonymize_data(self, *args, **kwargs):
         return MockRequestResult()
 
-    def test_run(self):
+    def test_run_with_mock_api_call(self):
         aaas = AaaS("test_url")
         aaas._conn.anonymize_data = self.mock_anonymize_data
         aaas.set_data(self.test_data)
