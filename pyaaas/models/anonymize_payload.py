@@ -15,13 +15,12 @@ class AnonymizePayload(MutableMapping):
 
     def __init__(self, data=None, meta_data: MutableMapping=None):
         if meta_data is None:
-            meta_data = {"attribute_type": {},
+            meta_data = {"attributeTypeList": {},
+                         "dataType": {},
                          "hierarchy": {},
                          "models": {}
                          }
-        self._payload_dict = {"data": data,
-                               "metadata": meta_data
-                              }
+        self._payload_dict = {"data": data, "metaData": meta_data}
 
     def __setitem__(self, k, v) -> None:
         self._payload_dict[k] = v
@@ -52,34 +51,34 @@ class AnonymizePayload(MutableMapping):
     @property
     def metadata(self):
         """ metadata about the user provided data"""
-        return self._payload_dict["metadata"]
+        return self._payload_dict["metaData"]
 
     @metadata.setter
     def metadata(self, new_metadata):
-        self._payload_dict["metadata"] = new_metadata
+        self._payload_dict["metaData"] = new_metadata
 
     @property
     def attribute_types(self):
         """ ARX Attribute types for the data fields"""
-        return self._payload_dict["metadata"]["attribute_type"]
+        return self._payload_dict["metaData"]["attributeTypeList"]
 
     @property
     def models(self):
         """ PrivacyModels to be used in the anonymization process"""
-        return self._payload_dict["metadata"]["models"]
+        return self._payload_dict["metaData"]["models"]
 
     @property
     def hierarchy(self):
-        return self._payload_dict["metadata"]["hierarchy"]
+        return self._payload_dict["metaData"]["hierarchy"]
 
     def add_attribute_type(self, field, value):
-        self._payload_dict["metadata"]["attribute_type"][field] = value
+        self._payload_dict["metaData"]["attributeTypeList"][field] = value
 
     def add_hierarchy(self, field, value):
-        self._payload_dict["metadata"]["hierarchy"][field] = value
+        self._payload_dict["metaData"]["hierarchy"][field] = value
 
     def add_model(self, field, value):
-        self._payload_dict["metadata"]["models"][field] = value
+        self._payload_dict["metaData"]["models"][field] = value
 
     def to_dict(self) -> dict:
         payload_dict = {**self._payload_dict}
@@ -87,16 +86,8 @@ class AnonymizePayload(MutableMapping):
         for key, value in self.metadata["models"].items():
             model_dict = {**value}
             models[key] = model_dict
-        payload_dict["metadata"]["models"] = models
-        converted = _convert_payload_to_backend_schema(payload_dict)
-        return converted
+        payload_dict["metaData"]["models"] = models
+        return payload_dict
 
-
-def _convert_payload_to_backend_schema(payload):
-    payload["metaData"] = payload["metadata"]
-    payload["metaData"]["sensitivityList"] = payload["metaData"]["attribute_type"]
-    del payload["metadata"]
-    del payload["metaData"]["attribute_type"]
-    return payload
 
 
