@@ -3,6 +3,8 @@ import os
 from collections.abc import MutableMapping, Sequence, Callable
 import json
 
+import requests
+
 from pyaaas.aaas_connector import AaaSConnector
 from pyaaas.models.anonymize_payload import AnonymizePayload
 from pyaaas.models.privacy_models import PrivacyModel
@@ -86,6 +88,7 @@ class AaaS:
         :return: AnonymizationResult wuith the result from the AaaS Web Service
         """
         result = self._conn.anonymize_data(self._payload.to_dict())
+        self._throw_exeption_on_error_response(result)
 
         result_dict = json.loads(result.text)
         return AnonymizeResult(result_dict)
@@ -111,6 +114,12 @@ class AaaS:
             return os.environ["AAAS_URL"]
         except KeyError:
             raise EnvironmentError("No AAAS_URL set in the environment")
+
+
+    @staticmethod
+    def _throw_exeption_on_error_response(response: requests.Response) -> None:
+        if response.status_code != 200:
+            raise SystemError(response.text)
 
 
 
