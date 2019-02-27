@@ -94,7 +94,7 @@ class AnonymizePayload(MutableMapping):
 
 def _convert_payload_to_backend_schema(payload):
     payload["metaData"] = payload["metadata"]
-    payload["metaData"]["sensitivityList"] = payload["metaData"]["attribute_type"]
+    payload["metaData"]["attributeTypeList"] = payload["metaData"]["attribute_type"]
     del payload["metadata"]
     del payload["metaData"]["attribute_type"]
     return payload
