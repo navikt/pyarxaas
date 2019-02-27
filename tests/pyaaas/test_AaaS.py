@@ -15,6 +15,10 @@ class MockRequestResult:
     def text(self):
         return '{"test": "test"}'
 
+    @property
+    def status_code(self):
+        return 200
+
 
 class AaaSTest(unittest.TestCase):
 
