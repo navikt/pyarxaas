@@ -19,9 +19,8 @@ after_script:
 - ./cc-test-reporter -d after-build --exit-code $TRAVIS_TEST_RESULT
 deploy:
   provider: pypi
-  user: sonhal
-  password:
-    secure: WAo78lQiCTnPi57ySnMar89P8O6fjHk+or1JcC06JFd/KdKFRje9ILK2vfVcz7I2s/rro+0Qx29h65Jgs1VE1F8qhssdAqeAwu4M6lAJeP2SHOoarAp+F1PgPlJFa4D3LYK/u0rbSRB2o4SmRH+GYHoIL3ceDDQXM3y+sqduslICbwCFtXvmWEQtnIvYbVaOnFj+jjSa+HhcRvTXWO3ozH7gtjZYpJn8PfUJaIzJwM+0VKkBkm+piLT4o2K/MJT9Z8+r0eqJUyDAhIdN4zGu70Jd5A8fSRPV+D0Cv1RN3ji2QkNRWQzoVa2hRPl9hnH1BN35doA5PnSq8cReeB9wYT70oFkMPrw3NJAQAx+p6prVkj7rC98foqAIOy6Q+B7EEcI+E7/TUZo7zeLhgNC9/9vJvwf85GUsNlmHU4pQM4nR2hNX83jzvgXkWPdDUdH2vQSK1kmRAOG6ATf5LK4LtdD2oaRJZvQ7pR4xrKYw74v2RxhSCPzrjDiob/HQna6s7C6GiY5IfJ8R4Nzib4LYWLzCnS1DSOMU2hk9y8HQw4NL7lel9WGMl4FY+vX4sXYZ1hCEYJz4ci6cSd+FpYU99u8grunabaGxV1yDfnvVNKrO7adKuwMDsGwjT7lGtBl7LlE9OveY3EMfRC1BJXvLxft7nIgEBu6ki6zIviS45Sg=
+  user: $PYPI_USER
+  password: $PYPI_PASS
   on:
     tags: true
     branch: master
