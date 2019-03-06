@@ -74,8 +74,10 @@ class AnonymizePayload(MutableMapping):
     def add_attribute_type(self, field, value):
         self._payload_dict["metaData"]["attributeTypeList"][field] = value
 
-    def add_hierarchy(self, field, value):
-        self._payload_dict["metaData"]["hierarchy"][field] = value
+    def add_hierarchy(self, field, hierarchy):
+        if isinstance(hierarchy, DataFrame):
+            hierarchy = hierarchy.values.tolist()
+        self._payload_dict["metaData"]["hierarchy"][field] = hierarchy
 
     def add_model(self, field, value):
         self._payload_dict["metaData"]["models"][field] = value
