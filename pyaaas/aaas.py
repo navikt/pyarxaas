@@ -50,7 +50,10 @@ class AaaS:
                 self._payload.add_attribute_type(c_field, attribute_type)
         if isinstance(field, MutableMapping):
             for c_field, attribute_type in field.items():
-                self._payload.add_attribute_type(c_field, attribute_type.value)
+                if isinstance(attribute_type, AttributeType):
+                    self._payload.add_attribute_type(c_field, attribute_type.value)
+                else:
+                    self._payload.add_attribute_type(c_field, attribute_type)
         else:
             self._payload.add_attribute_type(field, attribute_type)
 
