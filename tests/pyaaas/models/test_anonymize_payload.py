@@ -8,7 +8,6 @@ from pyaaas.models.anonymize_payload import AnonymizePayload
 from pyaaas.models.privacy_models import KAnonymity
 
 
-
 class KAnonymizationPayloadTest(unittest.TestCase):
 
     def setUp(self):
@@ -21,7 +20,7 @@ class KAnonymizationPayloadTest(unittest.TestCase):
                                                           "age": [10, 23, 43]} )
 
     def test_init_run(self):
-        ap = AnonymizePayload()
+        AnonymizePayload()
 
     def test_set_data__add_dataframe(self):
         self.test_payload.data = self.test_dataframe
@@ -40,7 +39,7 @@ class LAnonymizationPayloadTest(unittest.TestCase):
                                                           "age": [10, 23, 43]} )
 
     def test_init_run(self):
-        ap = AnonymizePayload()
+        AnonymizePayload()
 
     def test_set_data__add_dataframe(self):
         self.test_payload.data = self.test_dataframe

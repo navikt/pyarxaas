@@ -4,6 +4,7 @@ import json
 import pandas as pd
 
 from pyaaas.aaas import AaaS
+from pyaaas.attribute_type import AttributeType
 from pyaaas.models.privacy_models import KAnonymity
 from pyaaas.models.anonymize_result import AnonymizeResult
 
@@ -73,9 +74,9 @@ class AaaSTest(unittest.TestCase):
     ['81677', '8167*', '816**', '81***', '8****', '*****']]
 
         self.test_model = KAnonymity(k=4)
-        self.test_attributes = {"age":"IDENTIFYING",
-                           "gender":"INSENSITIVE",
-                           "zipcode":"INSENSITIVE"}
+        self.test_attributes = {"age":AttributeType.INSENSITIVE,
+                           "gender":AttributeType.INSENSITIVE,
+                           "zipcode":AttributeType.INSENSITIVE}
         self.test_data = "age, gender, zipcode\n34, male, 81667\n35, female, 81668\n36, male, 81669\n37, female, 81670\n38, male, 81671\n39, female, 81672\n40, male, 81673\n41, female, 81674\n42, male, 81675\n43, female, 81676\n44, male, 81677"
 
         aaas = AaaS("test_url")

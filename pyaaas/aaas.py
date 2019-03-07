@@ -10,6 +10,7 @@ from pyaaas.models.anonymize_payload import AnonymizePayload
 from pyaaas.models.privacy_models import PrivacyModel
 from pyaaas.models.anonymize_result import AnonymizeResult
 from pyaaas.state_printer import jupyter_print_mapping, print_mapping
+from pyaaas.attribute_type import AttributeType
 from pyaaas.converters import create_privacy_models_dataframe,create_attribute_types_dataframe,\
     create_transform_models_dataframe
 
@@ -36,22 +37,25 @@ class AaaS:
     def payload(self):
         return self._payload
 
-    def set_attribute_type(self, field, value=None):
+    def set_attribute_type(self, field, attribute_type=None):
         """
         Sett atttribute type for one or several fields
 
         :param field: field(s) in the dataframe
-        :param value: the attribute type for the field(s)
+        :param attribute_type: the attribute type for the field(s)
         :return: None
         """
         if isinstance(field, Sequence):
             for c_field in field:
-                self._payload.add_attribute_type(c_field, value)
+                self._payload.add_attribute_type(c_field, attribute_type)
         if isinstance(field, MutableMapping):
-            for c_field, value in field.items():
-                self._payload.add_attribute_type(c_field, value)
+            for c_field, attribute_type in field.items():
+                if isinstance(attribute_type, AttributeType):
+                    self._payload.add_attribute_type(c_field, attribute_type.value)
+                else:
+                    self._payload.add_attribute_type(c_field, attribute_type)
         else:
-            self._payload.add_attribute_type(field, value)
+            self._payload.add_attribute_type(field, attribute_type)
 
     def set_hierarchy(self, field, hierarchy_data):
         """
