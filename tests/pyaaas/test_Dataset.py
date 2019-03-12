@@ -1,6 +1,7 @@
 import unittest
 
 from pyaaas.attribute_type import AttributeType
+from pyaaas.dataset import Dataset
 
 
 class DatasetTest(unittest.TestCase):
