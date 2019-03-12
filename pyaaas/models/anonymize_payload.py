@@ -45,7 +45,9 @@ class AnonymizePayload(MutableMapping):
     @data.setter
     def data(self, new_data):
         if isinstance(new_data, DataFrame):
+            headers = new_data.columns.values.tolist()
             new_data = new_data.values.tolist()
+            new_data = [headers] + new_data
         self._payload_dict["data"] = new_data
 
     @property
