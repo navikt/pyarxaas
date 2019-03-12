@@ -1,6 +1,4 @@
 import unittest
-from pprint import pprint as pp
-import json
 
 import pandas
 
@@ -24,7 +22,7 @@ class KAnonymizationPayloadTest(unittest.TestCase):
 
     def test_set_data__add_dataframe(self):
         self.test_payload.data = self.test_dataframe
-        self.assertIsInstance(self.test_payload.data, str)
+        self.assertIsInstance(self.test_payload.data, list)
 
 
 class LAnonymizationPayloadTest(unittest.TestCase):
@@ -43,7 +41,7 @@ class LAnonymizationPayloadTest(unittest.TestCase):
 
     def test_set_data__add_dataframe(self):
         self.test_payload.data = self.test_dataframe
-        self.assertIsInstance(self.test_payload.data, str)
+        self.assertIsInstance(self.test_payload.data, list)
 
 
 

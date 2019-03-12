@@ -32,11 +32,6 @@ class AaaS:
 
         self._payload = AnonymizePayload()
 
-
-    @property
-    def payload(self):
-        return self._payload
-
     def set_attribute_type(self, field, attribute_type=None):
         """
         Sett atttribute type for one or several fields
