@@ -1,37 +1,91 @@
+import pandas
 from collections.abc import Mapping
+
+from attribute_type import AttributeType
+
+
 class Dataset:
     """
     Understand tabular data containing personal data.
     """
-    def __init__(self, data: list, attribute_types: Mapping):
-        self._data = data
-        self._fields = self._create_fields(attribute_types)
+    DEFAULT_ATTRIBUTE_TYPE = AttributeType.INSENSITIVE
 
-    def _create_fields(self, attribute_types: Mapping):
+    def __init__(self, data: list, attribute_types: Mapping = None):
+        if attribute_types is None:
+            attribute_types = self._create_default_attribute_map(data[0])
+
+        self._data = data
+        self._fields = self._create_attributes(attribute_types)
+
+    def _create_attributes(self, attribute_types: Mapping):
         fields = []
         for field_name, type in attribute_types.items():
-            fields.append(Field(field_name, type))
+            fields.append(Dataset.Attribute(field_name, type))
         return fields
 
-    def to_dict(self):
+    def _create_attribute_map(self):
+        attribute_map = {}
+        for field in self._fields:
+            attribute_map[field.name] = str(field.type)
+        return attribute_map
+
+    def _to_payload(self):
+        payload = {}
+        dataset_dict = self._to_dict()
+        payload["data"] = dataset_dict["data"]
+        payload["attributeTypes"] = dataset_dict["attribute_types"]
+        return payload
+
+    def _to_dict(self):
         return {
             "data": self._data,
             "attribute_types": self._create_attribute_map()
         }
 
-    def _create_attribute_map(self):
-        attribute_map = {}
-        for field in self._fields:
-            attribute_map[field._field_name] = field._type
-        return attribute_map
+    @classmethod
+    def from_pandas(cls, dataframe: pandas.DataFrame):
+        headers = dataframe.columns.values.tolist()
+        values = dataframe.values.tolist()
+        data = [headers] + values
+        return Dataset(data=data, attribute_types=cls._create_default_attribute_map(headers))
+
+    @classmethod
+    def _create_default_attribute_map(cls, fields):
+        attribute_type_map = {}
+        for field in fields:
+            attribute_type_map[field] = cls.DEFAULT_ATTRIBUTE_TYPE
+        return attribute_type_map
+
+    class Attribute:
+        """
+        Understands Dataset field
+        """
+
+        def __init__(self, field_name, type):
+            self._field_name = field_name
+            self._type = type
+
+        @property
+        def name(self):
+            return self._field_name
+
+        @property
+        def type(self):
+            return self._type
+
+        @type.setter
+        def type(self, attribute_type):
+            attribute_type = AttributeType(attribute_type.value)
+            self._type = attribute_type
+
+    def set_attribute(self, attributes, attribute_type: AttributeType):
+        field_map = {field.name: field for field in self._fields}
+        for attribute in list(attributes):
+            try:
+                field_map[attribute].type = attribute_type
+            except KeyError:
+                raise KeyError(f"attribute=({attribute}) could not be found")
 
 
 
 
-class Field:
-    """
-    Understands Dataset field
-    """
-    def __init__(self, field_name, type):
-        self._field_name = field_name
-        self._type = type

@@ -10,13 +10,7 @@ class AaaS:
     def __init__(self, url: str, connector=AaaSConnector):
         self._connector = connector(url)
 
-    def analyze(self, dataset: Dataset):
-        self._connector.analyze(self._convert_to_payload(dataset))
-
-    def _convert_to_payload(self, dataset):
-        payload = {}
-        dataset_dict = dataset.to_dict()
-        payload["data"] = dataset_dict["data"]
-        payload["attributeTypes"] = dataset_dict["attribute_types"]
-        return payload
+    def risk_profile(self, dataset: Dataset):
+        data_dict = dataset._to_payload()
+        return self._connector.risk_profile(data_dict)
 

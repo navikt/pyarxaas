@@ -1,12 +1,23 @@
 import unittest
 
+from uplink import Body
+
+from aaas_connector import AaaSConnector
 from pyaaas.aaas import AaaS
 from pyaaas.attribute_type import AttributeType
 from pyaaas.dataset import Dataset
 
 
-class AaaSTest(unittest.TestCase):
+class MockAaasConnector(AaaSConnector):
 
+    def anonymize_data(self, payload: Body):
+        return {"data": payload["data"]}
+
+    def risk_profile(self, payload: Body):
+        return {"prosecutor_risk": 0.35}
+
+
+class AaaSTest(unittest.TestCase):
 
     def setUp(self):
         self.test_data = [['id', 'name'],
@@ -21,8 +32,8 @@ class AaaSTest(unittest.TestCase):
         AaaS('http://localhost')
         
     def test_analyze(self):
-        aaas= AaaS('http://localhost')
-        aaas.analyze(self.test_dataset)
+        aaas = AaaS('http://localhost', connector=MockAaasConnector)
+        self.assertIsNotNone(aaas.risk_profile(self.test_dataset))
 
 
 
