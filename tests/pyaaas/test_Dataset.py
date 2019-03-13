@@ -75,6 +75,7 @@ class DatasetTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             dataset.set_hierarchy("id", test_hierarchy)
         self.assertIsNone(dataset._fields[0].hierarchy)
+        self.assertIsNot(test_hierarchy, dataset._fields[0].hierarchy)
 
     def test_set_hierarchies(self):
 
@@ -88,4 +89,22 @@ class DatasetTest(unittest.TestCase):
         self.assertEqual(dataset._fields[0].hierarchy, test_hierarchy_id)
         self.assertEqual(dataset._fields[1].hierarchy, test_hierarchy_name)
 
+    def test__payload(self):
+        dataset = Dataset(self.test_data)
+        payload = dataset._payload()
+        self.assertEqual(AttributeType.INSENSITIVE.value, payload["attributeTypes"]["id"]["AttributeType"])
+        self.assertEqual("null", payload["attributeTypes"]["id"]["hierarchy"])
+
+    def test__payload__with_hierarchies(self):
+
+        test_hierarchy_id = [["0", "*"], ["1", "*"]]
+        test_hierarchy_name = [["Viktor", "NAME"], ["Jerry", "NAME"]]
+
+        dataset = Dataset(self.test_data)
+        dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
+        dataset.set_attribute("name", AttributeType.QUASIIDENTIFYING)
+        dataset.set_hierarchies({"id": test_hierarchy_id, "name": test_hierarchy_name})
+        payload = dataset._payload()
+        self.assertEqual(test_hierarchy_id, payload["attributeTypes"]["id"]["hierarchy"])
+        self.assertEqual(test_hierarchy_name, payload["attributeTypes"]["name"]["hierarchy"])
 

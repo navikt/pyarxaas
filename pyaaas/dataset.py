@@ -1,3 +1,4 @@
+import copy
 from collections.abc import Sequence
 
 import pandas
@@ -28,10 +29,10 @@ class Dataset:
     def _create_attribute_map(self):
         attribute_map = {}
         for field in self._fields:
-            attribute_map[field.name] = str(field.type)
+            attribute_map.update(field.payload)
         return attribute_map
 
-    def _to_payload(self):
+    def _payload(self):
         payload = {}
         dataset_dict = self._to_dict()
         payload["data"] = dataset_dict["data"]
@@ -70,6 +71,7 @@ class Dataset:
             self.set_attribute(attribute, attribute_type)
 
     def set_hierarchy(self, attribute, hierarchy):
+        hierarchy = copy.deepcopy(hierarchy)
         field_map = {field.name: field for field in self._fields}
         try:
             field_map[attribute].hierarchy = hierarchy
@@ -118,6 +120,12 @@ class Dataset:
         def _is_hierarchy_settable(self):
             return AttributeType.QUASIIDENTIFYING.value == self.type.value
 
+        @property
+        def payload(self):
+            hierarchy = self._hierarchy
+            if hierarchy is None:
+                hierarchy = "null"
+            return {self._field_name: {"AttributeType": self._type.value, "hierarchy": hierarchy}}
 
 
 

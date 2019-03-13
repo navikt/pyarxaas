@@ -11,6 +11,6 @@ class AaaS:
         self._connector = connector(url)
 
     def risk_profile(self, dataset: Dataset):
-        data_dict = dataset._to_payload()
+        data_dict = dataset._payload()
         return self._connector.risk_profile(data_dict)
 
