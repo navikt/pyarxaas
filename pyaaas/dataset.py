@@ -1,17 +1,17 @@
 import copy
 from collections.abc import Sequence
-
-import pandas
 from collections.abc import Mapping
 
-from attribute_type import AttributeType
+import pandas
+
+from pyaaas.attribute_type import AttributeType
 
 
 class Dataset:
     """
     Understand tabular data containing personal data.
     """
-    DEFAULT_ATTRIBUTE_TYPE = AttributeType.INSENSITIVE
+    _DEFAULT_ATTRIBUTE_TYPE = AttributeType.INSENSITIVE
 
     def __init__(self, data: list, attribute_types: Mapping = None):
         if attribute_types is None:
@@ -23,26 +23,26 @@ class Dataset:
     def _create_attributes(self, attribute_types: Mapping):
         fields = []
         for field_name, type in attribute_types.items():
-            fields.append(Dataset.Attribute(field_name, type))
+            fields.append(Dataset._Attribute(field_name, type))
         return fields
 
-    def _create_attribute_map(self):
-        attribute_map = {}
+    def _create_attributes_payload(self):
+        attributes = []
         for field in self._attributes:
-            attribute_map.update(field.payload)
-        return attribute_map
+            attributes.append(field.payload)
+        return attributes
 
     def _payload(self):
         payload = {}
         dataset_dict = self._to_dict()
         payload["data"] = dataset_dict["data"]
-        payload["attributeTypes"] = dataset_dict["attribute_types"]
+        payload["attributes"] = dataset_dict["attributes"]
         return payload
 
     def _to_dict(self):
         return {
             "data": self._data,
-            "attribute_types": self._create_attribute_map()
+            "attributes": self._create_attributes_payload()
         }
 
     @staticmethod
@@ -63,7 +63,7 @@ class Dataset:
     def _create_default_attribute_map(cls, fields):
         attribute_type_map = {}
         for field in fields:
-            attribute_type_map[field] = cls.DEFAULT_ATTRIBUTE_TYPE
+            attribute_type_map[field] = cls._DEFAULT_ATTRIBUTE_TYPE
         return attribute_type_map
 
     def set_attribute(self, attribute, attribute_type: AttributeType):
@@ -89,7 +89,7 @@ class Dataset:
         for attribute, hierarchy in hierarchies.items():
             self.set_hierarchy(attribute, hierarchy)
 
-    class Attribute:
+    class _Attribute:
         """
         Understands Dataset field
         """
@@ -129,10 +129,7 @@ class Dataset:
 
         @property
         def payload(self):
-            hierarchy = self._hierarchy
-            if hierarchy is None:
-                hierarchy = "null"
-            return {self._field_name: {"AttributeType": self._type.value, "hierarchy": hierarchy}}
+            return {"field": self._field_name, "attributeTypeModel": self._type.value, "hierarchy": self._hierarchy}
 
 
 
