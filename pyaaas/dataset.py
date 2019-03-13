@@ -18,7 +18,7 @@ class Dataset:
             attribute_types = self._create_default_attribute_map(data[0])
 
         self._data = data
-        self._fields = self._create_attributes(attribute_types)
+        self._attributes = self._create_attributes(attribute_types)
 
     def _create_attributes(self, attribute_types: Mapping):
         fields = []
@@ -28,7 +28,7 @@ class Dataset:
 
     def _create_attribute_map(self):
         attribute_map = {}
-        for field in self._fields:
+        for field in self._attributes:
             attribute_map.update(field.payload)
         return attribute_map
 
@@ -67,7 +67,7 @@ class Dataset:
         return attribute_type_map
 
     def set_attribute(self, attribute, attribute_type: AttributeType):
-        field_map = {field.name: field for field in self._fields}
+        field_map = {field.name: field for field in self._attributes}
         try:
             field_map[attribute].type = attribute_type
         except KeyError:
@@ -79,7 +79,7 @@ class Dataset:
 
     def set_hierarchy(self, attribute, hierarchy):
         hierarchy = self._create_from_hierarchy_source(hierarchy)
-        field_map = {field.name: field for field in self._fields}
+        field_map = {field.name: field for field in self._attributes}
         try:
             field_map[attribute].hierarchy = hierarchy
         except KeyError:
