@@ -10,8 +10,8 @@ class DatasetTest(unittest.TestCase):
 
     def setUp(self):
         self.test_data = [['id', 'name'],
-                         ['0', 'Viktor'],
-                         ['1', 'Jerry']]
+                          ['0', 'Viktor'],
+                          ['1', 'Jerry']]
         self.test_attribute_type_mapping = {'id': AttributeType.IDENTIFYING,
                                             'name': AttributeType.QUASIIDENTIFYING}
 
@@ -107,4 +107,3 @@ class DatasetTest(unittest.TestCase):
         payload = dataset._payload()
         self.assertEqual(test_hierarchy_id, payload["attributeTypes"]["id"]["hierarchy"])
         self.assertEqual(test_hierarchy_name, payload["attributeTypes"]["name"]["hierarchy"])
-
