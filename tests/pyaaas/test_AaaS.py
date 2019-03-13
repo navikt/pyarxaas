@@ -3,6 +3,7 @@ import unittest
 from uplink import Body
 
 from aaas_connector import AaaSConnector
+from pyaaas import KAnonymity
 from pyaaas.aaas import AaaS
 from pyaaas.attribute_type import AttributeType
 from pyaaas.dataset import Dataset
@@ -34,6 +35,11 @@ class AaaSTest(unittest.TestCase):
     def test_analyze(self):
         aaas = AaaS('http://localhost', connector=MockAaasConnector)
         self.assertIsNotNone(aaas.risk_profile(self.test_dataset))
+
+    def test_anaonymize(self):
+        aaas = AaaS('http://localhost', connector=MockAaasConnector)
+        self.assertIsNotNone(aaas.anonymize(self.test_dataset, privacy_models=[KAnonymity(4)]))
+
 
 
 
