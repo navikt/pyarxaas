@@ -89,6 +89,16 @@ class DatasetTest(unittest.TestCase):
         self.assertEqual(dataset._fields[0].hierarchy, test_hierarchy_id)
         self.assertEqual(dataset._fields[1].hierarchy, test_hierarchy_name)
 
+    def test_set_hierarchy_with_pandas(self):
+
+        test_hierarchy = [["0", "*"], ["1", "*"]]
+        hierarchy_df = pandas.DataFrame(test_hierarchy)
+
+        dataset = Dataset(self.test_data)
+        dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
+        dataset.set_hierarchy("id", hierarchy_df)
+        self.assertEqual(dataset._fields[0].hierarchy, test_hierarchy)
+
     def test__payload(self):
         dataset = Dataset(self.test_data)
         payload = dataset._payload()

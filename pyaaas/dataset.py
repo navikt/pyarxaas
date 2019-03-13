@@ -45,6 +45,13 @@ class Dataset:
             "attribute_types": self._create_attribute_map()
         }
 
+    @staticmethod
+    def _create_from_hierarchy_source(source):
+        if isinstance(source, Sequence):
+            return copy.deepcopy(source)
+        if isinstance(source, pandas.DataFrame):
+            return source.values.tolist()
+
     @classmethod
     def from_pandas(cls, dataframe: pandas.DataFrame):
         headers = dataframe.columns.values.tolist()
@@ -71,7 +78,7 @@ class Dataset:
             self.set_attribute(attribute, attribute_type)
 
     def set_hierarchy(self, attribute, hierarchy):
-        hierarchy = copy.deepcopy(hierarchy)
+        hierarchy = self._create_from_hierarchy_source(hierarchy)
         field_map = {field.name: field for field in self._fields}
         try:
             field_map[attribute].hierarchy = hierarchy
@@ -126,6 +133,8 @@ class Dataset:
             if hierarchy is None:
                 hierarchy = "null"
             return {self._field_name: {"AttributeType": self._type.value, "hierarchy": hierarchy}}
+
+
 
 
 
