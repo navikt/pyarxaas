@@ -35,9 +35,57 @@ class DatasetTest(unittest.TestCase):
         # assert default AttributeType is set
         self.assertEqual(Dataset.DEFAULT_ATTRIBUTE_TYPE.value, dataset._fields[0].type.value)
 
-    def test_set_attribute_type(self):
+    def test_set_attribute_types(self):
         dataset = Dataset(self.test_data)
-        dataset.set_attribute(["id", "name"], AttributeType.QUASIIDENTIFYING)
+        dataset.set_attributes(["id", "name"], AttributeType.QUASIIDENTIFYING)
         self.assertEqual(AttributeType.QUASIIDENTIFYING.value, dataset._fields[0].type.value)
         self.assertEqual(AttributeType.QUASIIDENTIFYING.value, dataset._fields[1].type.value)
+
+    def test_set_attribute_type__single_attribute(self):
+        dataset = Dataset(self.test_data)
+        dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
+        self.assertEqual(AttributeType.QUASIIDENTIFYING.value, dataset._fields[0].type.value)
+        self.assertEqual(Dataset.DEFAULT_ATTRIBUTE_TYPE.value, dataset._fields[1].type.value)
+
+    def test_set_hierarchy(self):
+
+        test_hierarchy = [["0", "*"], ["1", "*"]]
+
+        dataset = Dataset(self.test_data)
+        dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
+        dataset.set_hierarchy("id", test_hierarchy)
+        self.assertEqual(dataset._fields[0].hierarchy, test_hierarchy)
+
+    def test_set_hierarchy__not_valid_attribute_name(self):
+
+        test_hierarchy = [["0", "*"], ["1", "*"]]
+
+        dataset = Dataset(self.test_data)
+        dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
+        with self.assertRaises(KeyError):
+            dataset.set_hierarchy("fail", test_hierarchy)
+        self.assertIsNone(dataset._fields[0].hierarchy)
+
+    def test_set_hierarchy__not_valid_attribute_type(self):
+
+        test_hierarchy = [["0", "*"], ["1", "*"]]
+
+        dataset = Dataset(self.test_data)
+        dataset.set_attribute("id", AttributeType.INSENSITIVE)
+        with self.assertRaises(ValueError):
+            dataset.set_hierarchy("id", test_hierarchy)
+        self.assertIsNone(dataset._fields[0].hierarchy)
+
+    def test_set_hierarchies(self):
+
+        test_hierarchy_id = [["0", "*"], ["1", "*"]]
+        test_hierarchy_name = [["Viktor", "NAME"], ["Jerry", "NAME"]]
+
+        dataset = Dataset(self.test_data)
+        dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
+        dataset.set_attribute("name", AttributeType.QUASIIDENTIFYING)
+        dataset.set_hierarchies({"id": test_hierarchy_id, "name": test_hierarchy_name})
+        self.assertEqual(dataset._fields[0].hierarchy, test_hierarchy_id)
+        self.assertEqual(dataset._fields[1].hierarchy, test_hierarchy_name)
+
 

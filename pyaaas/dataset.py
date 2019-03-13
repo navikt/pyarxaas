@@ -1,3 +1,5 @@
+from collections.abc import Sequence
+
 import pandas
 from collections.abc import Mapping
 
@@ -56,6 +58,28 @@ class Dataset:
             attribute_type_map[field] = cls.DEFAULT_ATTRIBUTE_TYPE
         return attribute_type_map
 
+    def set_attribute(self, attribute, attribute_type: AttributeType):
+        field_map = {field.name: field for field in self._fields}
+        try:
+            field_map[attribute].type = attribute_type
+        except KeyError:
+            raise KeyError(f"attribute=({attribute}) could not be found")
+
+    def set_attributes(self, attributes, attribute_type: AttributeType):
+        for attribute in attributes:
+            self.set_attribute(attribute, attribute_type)
+
+    def set_hierarchy(self, attribute, hierarchy):
+        field_map = {field.name: field for field in self._fields}
+        try:
+            field_map[attribute].hierarchy = hierarchy
+        except KeyError:
+            raise KeyError(f"attribute=({attribute}) could not be found")
+
+    def set_hierarchies(self, hierarchies):
+        for attribute, hierarchy in hierarchies.items():
+            self.set_hierarchy(attribute, hierarchy)
+
     class Attribute:
         """
         Understands Dataset field
@@ -64,6 +88,7 @@ class Dataset:
         def __init__(self, field_name, type):
             self._field_name = field_name
             self._type = type
+            self._hierarchy = None
 
         @property
         def name(self):
@@ -78,13 +103,23 @@ class Dataset:
             attribute_type = AttributeType(attribute_type.value)
             self._type = attribute_type
 
-    def set_attribute(self, attributes, attribute_type: AttributeType):
-        field_map = {field.name: field for field in self._fields}
-        for attribute in list(attributes):
-            try:
-                field_map[attribute].type = attribute_type
-            except KeyError:
-                raise KeyError(f"attribute=({attribute}) could not be found")
+        @property
+        def hierarchy(self):
+            return self._hierarchy
+
+        @hierarchy.setter
+        def hierarchy(self, hierarchy):
+            if not isinstance(hierarchy, Sequence):
+                raise ValueError(f"hierarchy has to be of type {Sequence}")
+            if not self._is_hierarchy_settable():
+                raise ValueError(f"{self.__class__}(name={self.name}, type={self.type}) has to be of type {AttributeType.QUASIIDENTIFYING}")
+            self._hierarchy = hierarchy
+
+        def _is_hierarchy_settable(self):
+            return AttributeType.QUASIIDENTIFYING.value == self.type.value
+
+
+
 
 
 
