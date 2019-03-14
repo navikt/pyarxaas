@@ -1,7 +1,7 @@
 import unittest
 
-from attribute_type import AttributeType
-from dataset import Dataset
+from pyaaas.attribute_type import AttributeType
+from pyaaas.dataset import Dataset
 
 
 class FieldTest(unittest.TestCase):

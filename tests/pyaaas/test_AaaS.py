@@ -4,7 +4,7 @@ import unittest
 
 from uplink import Body
 
-from aaas_connector import AaaSConnector
+from pyaaas.aaas_connector import AaaSConnector
 from pyaaas import KAnonymity
 from pyaaas.aaas import AaaS
 from pyaaas.attribute_type import AttributeType
