@@ -1,5 +1,8 @@
+import json
+
 from pyaaas.aaas_connector import AaaSConnector
 from pyaaas.dataset import Dataset
+from pyaaas.risk_profile import RiskProfile
 
 
 class AaaS:
@@ -20,5 +23,6 @@ class AaaS:
 
     def risk_profile(self, dataset: Dataset):
         data_dict = dataset._payload()
-        return self._connector.risk_profile(data_dict)
-
+        response = self._connector.risk_profile(data_dict)
+        metric_dict = json.loads(response.text)
+        return RiskProfile(metric_dict)
