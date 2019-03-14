@@ -80,7 +80,7 @@ class DatasetTest(unittest.TestCase):
     def test_set_hierarchies(self):
 
         test_hierarchy_id = [["0", "*"], ["1", "*"]]
-        test_hierarchy_name = [["Viktor", "NAME"], ["Jerry", "NAME"]]
+        test_hierarchy_name = [["Viktor", "*"], ["Jerry", "*"]]
 
         dataset = Dataset(self.test_data)
         dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
