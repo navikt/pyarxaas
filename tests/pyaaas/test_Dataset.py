@@ -117,3 +117,9 @@ class DatasetTest(unittest.TestCase):
         payload = dataset._payload()
         self.assertEqual(test_hierarchy_id, payload["attributes"][0]["hierarchy"])
         self.assertEqual(test_hierarchy_name, payload["attributes"][1]["hierarchy"])
+
+    def test_to_dataframe(self):
+        dataset = Dataset(self.test_data, self.test_attribute_type_mapping)
+        df = dataset.to_dataframe()
+        self.assertIsInstance(df, pandas.DataFrame)
+        print(df)

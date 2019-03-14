@@ -26,16 +26,26 @@ test_metrics = {"metrics": {
              "quasi_identifiers": ["Innvandrerbakgrunn", "Ytelse", "Innsatsgruppe", "Ledighetsstatus"]
         }}
 
+test_anon_response = {"anonymizeResult": {
+        "data": [["name", "id"], ["lars", "0"]]
+    }}
+
 class MockResponse:
 
     @property
     def text(self):
         return json.dumps(test_metrics)
 
+class MockAnonymzationResponse:
+
+    @property
+    def text(self):
+        return json.dumps(test_anon_response)
+
 class MockAaasConnector(AaaSConnector):
 
     def anonymize_data(self, payload: Body):
-        return {"data": payload["data"]}
+        return MockAnonymzationResponse()
 
     def risk_profile(self, payload: Body):
         return MockResponse()
@@ -53,6 +63,7 @@ class AaaSTest(unittest.TestCase):
         self.test_dataset = Dataset(self.test_data, self.test_attribute_type_mapping)
 
         self.test_metrics_dict = copy.deepcopy(test_metrics)
+        self.test_anon_response = copy.deepcopy(test_anon_response)
 
     def test_init(self):
         AaaS('http://localhost')
@@ -70,3 +81,8 @@ class AaaSTest(unittest.TestCase):
         risk_profile = aaas.risk_profile(self.test_dataset)
         df = risk_profile.to_dataframe()
         self.assertEqual(self.test_metrics_dict["metrics"]["records_affected_by_highest_risk"], df["records_affected_by_highest_risk"][0])
+
+    def test_anonymize_return_value(self):
+        aaas = AaaS('http://localhost', connector=MockAaasConnector)
+        anonymized_dataset = aaas.anonymize(self.test_dataset, [KAnonymity(4)])
+        self.assertIsInstance(anonymized_dataset, Dataset)

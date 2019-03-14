@@ -89,6 +89,9 @@ class Dataset:
         for attribute, hierarchy in hierarchies.items():
             self.set_hierarchy(attribute, hierarchy)
 
+    def to_dataframe(self):
+        return pandas.DataFrame(self._data[1:], columns=self._data[0])
+
     class _Attribute:
         """
         Understands Dataset field
@@ -130,6 +133,7 @@ class Dataset:
         @property
         def payload(self):
             return {"field": self._field_name, "attributeTypeModel": self._type.value, "hierarchy": self._hierarchy}
+
 
 
 

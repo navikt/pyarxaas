@@ -19,7 +19,10 @@ class AaaS:
         for model in list(privacy_models):
             models.append(model._payload())
         data_dict["privacyModels"] = models
-        return self._connector.anonymize_data(data_dict)
+        response = self._connector.anonymize_data(data_dict)
+        json_string = response.text
+        response_dict = json.loads(json_string)
+        return Dataset(response_dict["anonymizeResult"]["data"])
 
     def risk_profile(self, dataset: Dataset):
         data_dict = dataset._payload()
