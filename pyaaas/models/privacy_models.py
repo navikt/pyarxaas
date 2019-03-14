@@ -23,6 +23,9 @@ class PrivacyModel(ABC, Mapping):
     def __str__(self):
         return self._print_message
 
+    def _payload(self):
+        return {"privacyModel": self.name, "params": self._internal_dict}
+
 
 class KAnonymity(PrivacyModel):
     """ Configuration class for KAnonymity"""

@@ -1,101 +1,88 @@
-import unittest
-from pprint import pprint as pp
+import copy
 import json
-import pandas as pd
+import unittest
 
+from uplink import Body
+
+from pyaaas.aaas_connector import AaaSConnector
+from pyaaas import KAnonymity
 from pyaaas.aaas import AaaS
 from pyaaas.attribute_type import AttributeType
-from pyaaas.models.privacy_models import KAnonymity
-from pyaaas.models.anonymize_result import AnonymizeResult
+from pyaaas.dataset import Dataset
 
+test_metrics = {"metrics": {
+            "measure_value": "[%]",
+            "records_affected_by_highest_risk": "2.8000000000000003",
+             "sample_uniques": "2.8000000000000003",
+            "estimated_prosecutor_risk": "100.0",
+             "population_model": "PITMAN",
+            "records_affected_by_lowest_risk": "15.620000000000001",
+             "estimated_marketer_risk": "12.06",
+            "highest_prosecutor_risk": "100.0",
+             "estimated_journalist_risk": "100.0",
+            "lowest_risk": "0.4878048780487805",
+             "average_prosecutor_risk": "12.06",
+            "population_uniques": "0.042243729241281044",
+             "quasi_identifiers": ["Innvandrerbakgrunn", "Ytelse", "Innsatsgruppe", "Ledighetsstatus"]
+        }}
 
-class MockRequestResult:
-    """ Mock class for requests result object"""
+test_anon_response = {"anonymizeResult": {
+        "data": [["name", "id"], ["lars", "0"]]
+    }}
+
+class MockResponse:
 
     @property
     def text(self):
-        return '{"test": "test"}'
+        return json.dumps(test_metrics)
+
+class MockAnonymzationResponse:
 
     @property
-    def status_code(self):
-        return 200
+    def text(self):
+        return json.dumps(test_anon_response)
+
+class MockAaasConnector(AaaSConnector):
+
+    def anonymize_data(self, payload: Body):
+        return MockAnonymzationResponse()
+
+    def risk_profile(self, payload: Body):
+        return MockResponse()
 
 
 class AaaSTest(unittest.TestCase):
 
     def setUp(self):
+        self.test_data = [['id', 'name'],
+                         ['0', 'Viktor'],
+                         ['1', 'Jerry']]
+        self.test_attribute_type_mapping = {'id': AttributeType.IDENTIFYING,
+                                            'name': AttributeType.QUASIIDENTIFYING}
 
-        self.test_data_dict = {'age': {0: 34,
-  1: 35,
-  2: 36,
-  3: 37,
-  4: 38,
-  5: 39,
-  6: 40,
-  7: 41,
-  8: 42,
-  9: 43,
-  10: 44},
- ' gender': {0: ' male',
-  1: ' female',
-  2: ' male',
-  3: ' female',
-  4: ' male',
-  5: ' female',
-  6: ' male',
-  7: ' female',
-  8: ' male',
-  9: ' female',
-  10: ' male'},
- ' zipcode': {0: 81667,
-  1: 81668,
-  2: 81669,
-  3: 81670,
-  4: 81671,
-  5: 81672,
-  6: 81673,
-  7: 81674,
-  8: 81675,
-  9: 81676,
-  10: 81677}}
+        self.test_dataset = Dataset(self.test_data, self.test_attribute_type_mapping)
 
-        self.test_df = pd.DataFrame(self.test_data_dict)
+        self.test_metrics_dict = copy.deepcopy(test_metrics)
+        self.test_anon_response = copy.deepcopy(test_anon_response)
 
-        self.test_hierachy_list = [['81667','8166*', '816**', '81***', '8****', '*****'],
-    ['81668', '8166*', '816**', '81***', '8****', '*****'],
-    ['81669', '8166*', '816**', '81***', '8****', '*****'],
-    ['81670', '8167*', '816**', '81***', '8****', '*****'],
-    ['81671', '8167*', '816**', '81***', '8****', '*****'],
-    ['81672', '8167*', '816**', '81***', '8****', '*****'],
-    ['81673', '8167*', '816**', '81***', '8****', '*****'],
-    ['81674', '8167*', '816**', '81***', '8****', '*****'],
-    ['81675', '8167*', '816**', '81***', '8****', '*****'],
-    ['81676', '8167*', '816**', '81***', '8****', '*****'],
-    ['81677', '8167*', '816**', '81***', '8****', '*****']]
+    def test_init(self):
+        AaaS('http://localhost')
+        
+    def test_analyze(self):
+        aaas = AaaS('http://localhost', connector=MockAaasConnector)
+        self.assertIsNotNone(aaas.risk_profile(self.test_dataset))
 
-        self.test_model = KAnonymity(k=4)
-        self.test_attributes = {"age":AttributeType.INSENSITIVE,
-                           "gender":AttributeType.INSENSITIVE,
-                           "zipcode":AttributeType.INSENSITIVE}
-        self.test_data = "age, gender, zipcode\n34, male, 81667\n35, female, 81668\n36, male, 81669\n37, female, 81670\n38, male, 81671\n39, female, 81672\n40, male, 81673\n41, female, 81674\n42, male, 81675\n43, female, 81676\n44, male, 81677"
+    def test_anaonymize(self):
+        aaas = AaaS('http://localhost', connector=MockAaasConnector)
+        self.assertIsNotNone(aaas.anonymize(self.test_dataset, privacy_models=[KAnonymity(4)]))
 
-        aaas = AaaS("test_url")
-        aaas.set_data(self.test_data)
-        aaas.set_attribute_type(self.test_attributes)
-        aaas.set_hierarchy("zipcode", self.test_hierachy_list)
-        aaas.set_model(self.test_model)
-        self.test_aaas = aaas
+    def test_risk_profile_return_value(self):
+        aaas = AaaS('http://localhost', connector=MockAaasConnector)
+        risk_profile = aaas.risk_profile(self.test_dataset)
+        df = risk_profile.to_dataframe()
+        self.assertEqual(self.test_metrics_dict["metrics"]["records_affected_by_highest_risk"], df["records_affected_by_highest_risk"][0])
 
-    def mock_anonymize_data(self, *args, **kwargs):
-        return MockRequestResult()
-
-    def test_run_with_mock_api_call(self):
-        aaas = AaaS("test_url")
-        aaas._conn.anonymize_data = self.mock_anonymize_data
-        aaas.set_data(self.test_data)
-        aaas.set_attribute_type(self.test_attributes)
-        aaas.set_hierarchy("zipcode", self.test_hierachy_list)
-        aaas.set_model(self.test_model)
-        result = aaas.anonymize()
-        self.assertIsInstance(result, AnonymizeResult)
-
+    def test_anonymize_return_value(self):
+        aaas = AaaS('http://localhost', connector=MockAaasConnector)
+        anonymized_dataset = aaas.anonymize(self.test_dataset, [KAnonymity(4)])
+        self.assertIsInstance(anonymized_dataset, Dataset)
