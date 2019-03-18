@@ -35,6 +35,11 @@ class DatasetTest(unittest.TestCase):
         # assert default AttributeType is set
         self.assertEqual(Dataset._DEFAULT_ATTRIBUTE_TYPE.value, dataset._attributes[0].type.value)
 
+    def test_set_attribute_types_default_value(self):
+        dataset = Dataset(self.test_data)
+        self.assertEqual(AttributeType.QUASIIDENTIFYING.value, dataset._attributes[0].type.value)
+        self.assertEqual(AttributeType.QUASIIDENTIFYING.value, dataset._attributes[1].type.value)
+
     def test_set_attribute_types(self):
         dataset = Dataset(self.test_data)
         dataset.set_attributes(["id", "name"], AttributeType.QUASIIDENTIFYING)
