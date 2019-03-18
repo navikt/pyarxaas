@@ -107,7 +107,7 @@ class DatasetTest(unittest.TestCase):
     def test__payload(self):
         dataset = Dataset(self.test_data)
         payload = dataset._payload()
-        self.assertEqual(AttributeType.INSENSITIVE.value, payload["attributes"][0]["attributeTypeModel"])
+        self.assertEqual(AttributeType.QUASIIDENTIFYING.value, payload["attributes"][0]["attributeTypeModel"])
         self.assertEqual(None, payload["attributes"][0]["hierarchy"])
 
     def test__payload__with_hierarchies(self):
