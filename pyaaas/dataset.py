@@ -11,7 +11,7 @@ class Dataset:
     """
     Understand tabular data containing personal data.
     """
-    _DEFAULT_ATTRIBUTE_TYPE = AttributeType.INSENSITIVE
+    _DEFAULT_ATTRIBUTE_TYPE = AttributeType.QUASIIDENTIFYING
 
     def __init__(self, data: list, attribute_types: Mapping = None):
         if attribute_types is None:
