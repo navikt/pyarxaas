@@ -10,6 +10,6 @@ class AaaSConnector(Consumer):
         """Post data to AaaS Backend"""
 
     @json
-    @post("api/analyse")
+    @post("api/analyze")
     def risk_profile(self, payload: Body):
         """Post data to AaaS Backend"""
