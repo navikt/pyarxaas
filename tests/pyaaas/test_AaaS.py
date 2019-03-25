@@ -116,11 +116,19 @@ class MockResponse:
     def text(self):
         return json.dumps(test_metrics)
 
+    @property
+    def status_code(self):
+        return 200
+
 class MockAnonymzationResponse:
 
     @property
     def text(self):
         return json.dumps(test_anon_response)
+
+    @property
+    def status_code(self):
+        return 200
 
 class MockAaasConnector(AaaSConnector):
 
