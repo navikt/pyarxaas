@@ -7,12 +7,20 @@ from pandas import DataFrame
 class RiskProfile:
 
     def __init__(self, metrics: Mapping):
-        self._reIdentificationOfRisk = copy.deepcopy(metrics["reIdentificationRisk"])
-        self._distributionOfRisk = copy.deepcopy(metrics["distributionOfRisk"])
+        self._re_identification_of_risk = copy.deepcopy(metrics["reIdentificationRisk"])
+        self._distribution_of_risk = copy.deepcopy(metrics["distributionOfRisk"])
 
-    def reIdentificationRisk_to_dataframe(self):
-        df = DataFrame([self._reIdentificationOfRisk])
+    @property
+    def re_identification_risk(self):
+        return copy.deepcopy(self._re_identification_of_risk)
+
+    @property
+    def distribution_of_risk(self):
+        return copy.deepcopy(self.distribution_of_risk)
+
+    def re_identification_risk_dataframe(self):
+        df = DataFrame([self._re_identification_of_risk])
         return df
 
-    def distributionOfRisk_to_dataframe(self):
-        return DataFrame.from_dict(self._distributionOfRisk["riskIntervalList"])
+    def distribution_of_risk_dataframe(self):
+        return DataFrame.from_dict(self._distribution_of_risk["riskIntervalList"])

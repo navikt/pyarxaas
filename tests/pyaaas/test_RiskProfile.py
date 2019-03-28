@@ -109,16 +109,16 @@ class RiskProfileTest(unittest.TestCase):
 
     def test_to_dataframe(self):
         risk_profile = RiskProfile(self.test_metric)
-        df = risk_profile.reIdentificationRisk_to_dataframe()
+        df = risk_profile.re_identification_risk_dataframe()
         self.assertIsInstance(df, DataFrame)
 
     def test_reIdentificationRisk_to_dataframe_shape(self):
         risk_profile = RiskProfile(self.test_metric)
-        df = risk_profile.reIdentificationRisk_to_dataframe()
+        df = risk_profile.re_identification_risk_dataframe()
         self.assertEqual(self.test_metric["reIdentificationRisk"]["records_affected_by_highest_prosecutor_risk"], df["records_affected_by_highest_prosecutor_risk"][0])
 
     def test_distributionOfRisk_to_dataframe_shape(self):
         risk_profile = RiskProfile(self.test_metric)
-        df = risk_profile.distributionOfRisk_to_dataframe()
+        df = risk_profile.distribution_of_risk_dataframe()
         self.assertEqual(self.test_metric["distributionOfRisk"]["riskIntervalList"][0]["interval"],
                          df["interval"][0])

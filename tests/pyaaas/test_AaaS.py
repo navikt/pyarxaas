@@ -167,7 +167,7 @@ class AaaSTest(unittest.TestCase):
     def test_risk_profile_return_value(self):
         aaas = AaaS('http://localhost', connector=MockAaasConnector)
         risk_profile = aaas.risk_profile(self.test_dataset)
-        df = risk_profile.reIdentificationRisk_to_dataframe()
+        df = risk_profile.re_identification_risk_dataframe()
         self.assertEqual(self.test_metrics_dict["reIdentificationRisk"]["records_affected_by_highest_prosecutor_risk"], df["records_affected_by_highest_prosecutor_risk"][0])
 
     def test_anonymize_return_value(self):
