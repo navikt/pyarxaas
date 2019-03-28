@@ -12,8 +12,8 @@ class AaaS:
     Understands connection to ARXaaS
     """
 
-    def __init__(self, url: str, connector=AaaSConnector):
-        self._connector = connector(url)
+    def __init__(self, url: str, connector=AaaSConnector, client=None):
+        self._connector = connector(url, client=client)
 
     def anonymize(self, dataset: Dataset, privacy_models):
         data_dict = dataset._payload()
