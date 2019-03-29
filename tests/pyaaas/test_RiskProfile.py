@@ -107,6 +107,19 @@ class RiskProfileTest(unittest.TestCase):
     def test_init(self):
         RiskProfile(self.test_metric)
 
+    def test_equality(self):
+        risk_profile_1 = RiskProfile(self.test_metric)
+        risk_profile_2 = RiskProfile(self.test_metric)
+        self.assertEqual(risk_profile_1, risk_profile_2)
+        risk_profile_2._re_identification_of_risk["estimated_prosecutor_risk"] = "50.0"
+        self.assertNotEqual(risk_profile_1, risk_profile_2)
+
+    def test_hash(self):
+        risk_profile_1 = RiskProfile(self.test_metric)
+        risk_profile_2 = RiskProfile(self.test_metric)
+        test_set = {risk_profile_1, risk_profile_2}
+        self.assertEqual(1, len(test_set))
+
     def test_to_dataframe(self):
         risk_profile = RiskProfile(self.test_metric)
         df = risk_profile.re_identification_risk_dataframe()

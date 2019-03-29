@@ -4,6 +4,7 @@ import pandas
 
 from pyaaas.attribute_type import AttributeType
 from pyaaas.dataset import Dataset
+from tests.pyaaas import data_generator
 
 
 class DatasetTest(unittest.TestCase):
@@ -17,6 +18,20 @@ class DatasetTest(unittest.TestCase):
 
     def test_init(self):
         Dataset(self.test_data, self.test_attribute_type_mapping)
+
+    def test_equality(self):
+        dataset_1 = data_generator.id_name_dataset()
+        dataset_2 = data_generator.id_name_dataset()
+        self.assertEqual(dataset_1, dataset_2)
+        self.assertIsNot(dataset_1, dataset_2)
+        dataset_2.set_attribute("id", AttributeType.QUASIIDENTIFYING)
+        self.assertNotEqual(dataset_1, dataset_2)
+
+    def test_hash(self):
+        dataset_1 = data_generator.id_name_dataset()
+        dataset_2 = data_generator.id_name_dataset()
+        test_set = {dataset_1, dataset_2}
+        self.assertEqual(1, len(test_set))
 
     def test_init__without_attribute_types_param(self):
         dataset = Dataset(self.test_data)
