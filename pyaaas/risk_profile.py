@@ -12,14 +12,14 @@ class RiskProfile:
 
     @property
     def re_identification_risk(self):
-        return copy.deepcopy(self._re_identification_of_risk)
+        return copy.deepcopy(self._re_identification_of_risk["measures"])
 
     @property
     def distribution_of_risk(self):
         return copy.deepcopy(self.distribution_of_risk)
 
     def re_identification_risk_dataframe(self):
-        df = DataFrame([self._re_identification_of_risk])
+        df = DataFrame([self._re_identification_of_risk["measures"]])
         return df
 
     def distribution_of_risk_dataframe(self):
