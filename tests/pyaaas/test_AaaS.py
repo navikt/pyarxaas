@@ -10,7 +10,7 @@ from pyaaas.aaas import AaaS
 from pyaaas.attribute_type import AttributeType
 from pyaaas.dataset import Dataset
 
-test_metrics = {"reIdentificationRisk": {
+test_metrics = {"reIdentificationRisk": { "measures":{
             "measure_value": "[%]",
             "Prosecutor_attacker_success_rate": "98.72",
             "records_affected_by_highest_prosecutor_risk": "97.46000000000001",
@@ -29,7 +29,7 @@ test_metrics = {"reIdentificationRisk": {
             "records_affected_by_highest_journalist_risk": "97.46000000000001",
             "population_uniques": "39.64593493418713",
             "quasi_identifiers": ["Innvandrerbakgrunn", "Ytelse", "Innsatsgruppe", "Ledighetsstatus"]
-        },
+        }},
             "distributionOfRisk": {"riskIntervalList": [{"interval": "]50,100]",
                        "recordsWithRiskWithinInteval": 0.9746,
                        "recordsWithMaxmalRiskWithinInterval": 1.0},
@@ -168,7 +168,7 @@ class AaaSTest(unittest.TestCase):
         aaas = AaaS('http://localhost', connector=MockAaasConnector)
         risk_profile = aaas.risk_profile(self.test_dataset)
         df = risk_profile.re_identification_risk_dataframe()
-        self.assertEqual(self.test_metrics_dict["reIdentificationRisk"]["records_affected_by_highest_prosecutor_risk"], df["records_affected_by_highest_prosecutor_risk"][0])
+        self.assertEqual(self.test_metrics_dict["reIdentificationRisk"]["measures"]["records_affected_by_highest_prosecutor_risk"], df["records_affected_by_highest_prosecutor_risk"][0])
 
     def test_anonymize_return_value(self):
         aaas = AaaS('http://localhost', connector=MockAaasConnector)
