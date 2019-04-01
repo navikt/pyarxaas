@@ -8,7 +8,7 @@ from pyaaas.risk_profile import RiskProfile
 class RiskProfileTest(unittest.TestCase):
 
     def setUp(self):
-        self.test_metric = {"reIdentificationRisk": {
+        self.risk_profile_response = {"reIdentificationRisk": {"measures": {
             "measure_value": "[%]",
             "Prosecutor_attacker_success_rate": "98.72",
             "records_affected_by_highest_prosecutor_risk": "97.46000000000001",
@@ -27,7 +27,7 @@ class RiskProfileTest(unittest.TestCase):
             "records_affected_by_highest_journalist_risk": "97.46000000000001",
             "population_uniques": "39.64593493418713",
             "quasi_identifiers": ["Innvandrerbakgrunn", "Ytelse", "Innsatsgruppe", "Ledighetsstatus"]
-        },
+        }},
             "distributionOfRisk": {"riskIntervalList": [{"interval": "]50,100]",
                        "recordsWithRiskWithinInteval": 0.9746,
                        "recordsWithMaxmalRiskWithinInterval": 1.0},
@@ -105,20 +105,20 @@ class RiskProfileTest(unittest.TestCase):
         }
 
     def test_init(self):
-        RiskProfile(self.test_metric)
+        RiskProfile(self.risk_profile_response)
 
     def test_to_dataframe(self):
-        risk_profile = RiskProfile(self.test_metric)
+        risk_profile = RiskProfile(self.risk_profile_response)
         df = risk_profile.re_identification_risk_dataframe()
         self.assertIsInstance(df, DataFrame)
 
     def test_reIdentificationRisk_to_dataframe_shape(self):
-        risk_profile = RiskProfile(self.test_metric)
+        risk_profile = RiskProfile(self.risk_profile_response)
         df = risk_profile.re_identification_risk_dataframe()
-        self.assertEqual(self.test_metric["reIdentificationRisk"]["records_affected_by_highest_prosecutor_risk"], df["records_affected_by_highest_prosecutor_risk"][0])
+        self.assertEqual(self.risk_profile_response["reIdentificationRisk"]["measures"]["records_affected_by_highest_prosecutor_risk"], df["records_affected_by_highest_prosecutor_risk"][0])
 
     def test_distributionOfRisk_to_dataframe_shape(self):
-        risk_profile = RiskProfile(self.test_metric)
+        risk_profile = RiskProfile(self.risk_profile_response)
         df = risk_profile.distribution_of_risk_dataframe()
-        self.assertEqual(self.test_metric["distributionOfRisk"]["riskIntervalList"][0]["interval"],
+        self.assertEqual(self.risk_profile_response["distributionOfRisk"]["riskIntervalList"][0]["interval"],
                          df["interval"][0])
