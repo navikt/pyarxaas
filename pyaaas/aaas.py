@@ -64,9 +64,8 @@ class AaaS:
         json_string = response.text
         response_dict = json.loads(json_string)
         dataset = Dataset(response_dict["anonymizeResult"]["data"])
-        risk_profile = RiskProfile(response_dict["afterAnonymizationMetrics"])
+        risk_profile = RiskProfile(response_dict["riskProfile"])
         raw_metrics = {"anonymization_status": response_dict["anonymizeResult"]["anonymizationStatus"]}
-        raw_metrics.update(response_dict["anonymizeResult"]["statistics"])
         return AnonymizeResult._from_response(dataset, risk_profile, raw_metrics)
 
     def risk_profile(self, dataset: Dataset):

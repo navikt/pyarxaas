@@ -7,6 +7,7 @@ from uplink import Body
 from pyaaas.aaas_connector import AaaSConnector
 from pyaaas import KAnonymity
 from pyaaas.aaas import AaaS
+from pyaaas.anonymize_result import AnonymizeResult
 from pyaaas.attribute_type import AttributeType
 from pyaaas.dataset import Dataset
 
@@ -106,9 +107,12 @@ test_metrics = {"reIdentificationRisk": { "measures":{
 
         }
 
-test_anon_response = {"anonymizeResult": {
-        "data": [["name", "id"], ["lars", "0"]]
-    }}
+test_anon_response = {
+    "anonymizeResult": {
+        "data": [["name", "id"], ["lars", "0"]],
+        "anonymizationStatus": "ANONYMOUS"},
+    "riskProfile": test_metrics}
+
 
 class MockResponse:
 
@@ -119,6 +123,7 @@ class MockResponse:
     @property
     def status_code(self):
         return 200
+
 
 class MockAnonymzationResponse:
 
@@ -173,4 +178,4 @@ class AaaSTest(unittest.TestCase):
     def test_anonymize_return_value(self):
         aaas = AaaS('http://localhost', connector=MockAaasConnector)
         anonymized_dataset = aaas.anonymize(self.test_dataset, [KAnonymity(4)])
-        self.assertIsInstance(anonymized_dataset, Dataset)
+        self.assertIsInstance(anonymized_dataset, AnonymizeResult)
