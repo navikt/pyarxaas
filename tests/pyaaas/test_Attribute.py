@@ -4,7 +4,7 @@ from pyaaas.attribute_type import AttributeType
 from pyaaas.dataset import Dataset
 
 
-class FieldTest(unittest.TestCase):
+class AttributeTest(unittest.TestCase):
 
     def test_name(self):
         field = Dataset._Attribute("id", AttributeType.QUASIIDENTIFYING)

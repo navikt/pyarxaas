@@ -20,6 +20,27 @@ class Dataset:
         self._data = data
         self._attributes = self._create_attributes(attribute_types)
 
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        return hash(self) == hash(other)
+
+    def __hash__(self):
+        return hash(hash(self._data[0][0]) + self._hash_of_attributes())
+
+    def _hash_of_attributes(self):
+        a_hash = hash(self._attributes[0])
+        for attribute in self._attributes[0:]:
+            a_hash = hash(a_hash + hash(attribute))
+        return a_hash
+
+    def _has_of_data(self):
+        r_hash = ""
+        for row in self._data:
+            for cell in row:
+                r_hash = hash(r_hash + hash(cell))
+        return r_hash
+
     def _create_attributes(self, attribute_types: Mapping):
         fields = []
         for field_name, type in attribute_types.items():
@@ -101,6 +122,14 @@ class Dataset:
             self._field_name = field_name
             self._type = type
             self._hierarchy = None
+
+        def __eq__(self, other):
+            if not isinstance(other, self.__class__):
+                return False
+            return hash(self) == hash(other)
+
+        def __hash__(self):
+            return hash(hash(self._field_name) + hash(self._hierarchy) + hash(self._type))
 
         @property
         def name(self):
