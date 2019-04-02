@@ -28,15 +28,35 @@ class RiskProfile:
 
     @property
     def re_identification_risk(self):
+        """
+        Re-identification risk metrics for a given Dataset
+
+        :return: dict containing re-identification metrics
+        """
         return copy.deepcopy(self._re_identification_of_risk["measures"])
 
     @property
     def distribution_of_risk(self):
+        """
+        Distribution of risk for a given Dataset
+
+        :return: dict containing the distribution of risks in a given Dataset
+        """
         return copy.deepcopy(self._distribution_of_risk)
 
     def re_identification_risk_dataframe(self):
+        """
+        Re-identification risk as a pandas.DataFrame
+
+        :return: pandas.Dataframe with risk metrics
+        """
         df = DataFrame([self._re_identification_of_risk["measures"]])
         return df
 
     def distribution_of_risk_dataframe(self):
+        """
+        Distribution of risk as a pandas.DataFrame
+
+        :return: pandas.DataFrame
+        """
         return DataFrame.from_dict(self._distribution_of_risk["riskIntervalList"])

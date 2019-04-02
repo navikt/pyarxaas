@@ -44,10 +44,20 @@ class AnonymizeResult:
 
     @property
     def dataset(self):
+        """
+        The dataset created
+
+        :return: Dataset
+        """
         return copy.deepcopy(self._dataset)
 
     @property
     def risk_profile(self):
+        """
+        The RiskProfile for the new Dataset
+
+        :return: RiskProfile
+        """
         return copy.deepcopy(self._risk_profile)
 
     @property

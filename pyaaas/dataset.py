@@ -124,7 +124,7 @@ class Dataset:
 
         :param attribute: attribute in the Dataset
         :param hierarchy: to be applied  to the attribute
-        :return:None
+        :return: None
         """
         hierarchy = self._create_from_hierarchy_source(hierarchy)
         field_map = {field.name: field for field in self._attributes}
