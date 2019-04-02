@@ -1,5 +1,5 @@
 import unittest
-from models.anonymization_metrics import AnonymizationMetrics
+from pyaaas.models.anonymization_metrics import AnonymizationMetrics
 from tests.pyaaas import data_generator
 
 
