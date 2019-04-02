@@ -1,3 +1,5 @@
 uplink==0.7.0
 pandas
 IPython
+sphinx
+sphinx_rtd_theme
