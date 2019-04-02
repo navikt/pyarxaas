@@ -1,17 +1,18 @@
 import copy
 
-from models.anonymization_metrics import AnonymizationMetrics
-from models.dataset import Dataset
-from models.risk_profile import RiskProfile
+from pyaaas.models.anonymization_metrics import AnonymizationMetrics
+from pyaaas.models.dataset import Dataset
+from pyaaas.models.risk_profile import RiskProfile
 
 
 class AnonymizeResult:
     """ Understands the result of a anonymization process"""
 
-    def __init__(self, dataset: Dataset, risk_profile: RiskProfile, anonymization_metrics: AnonymizationMetrics):
+    def __init__(self, dataset: Dataset, risk_profile: RiskProfile, anonymization_metrics: AnonymizationMetrics, anonymization_status):
         self._anonymization_metrics = anonymization_metrics
         self._risk_profile = risk_profile
         self._dataset = dataset
+        self._anonymization_status = anonymization_status
 
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
@@ -33,10 +34,14 @@ class AnonymizeResult:
     def anonymization_metrics(self):
         return copy.deepcopy(self._anonymization_metrics)
 
+    @property
+    def anonymization_status(self):
+        return self._anonymization_status
+
     @classmethod
-    def _from_response(cls, dataset, risk_profile, anon_metrics):
+    def _from_response(cls, dataset, risk_profile, anon_metrics, anon_status):
         anonymize_metrics = AnonymizationMetrics(anon_metrics)
-        return cls(dataset, risk_profile, anonymize_metrics)
+        return cls(dataset, risk_profile, anonymize_metrics, anon_status)
 
 
 
