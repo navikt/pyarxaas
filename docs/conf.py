@@ -14,8 +14,13 @@
 #
 import os
 import sys
+from os import path
+
 sys.path.append(os.path.abspath('../'))
 
+here = path.abspath(path.dirname(__file__))
+with open(path.join(here, '../VERSION'), encoding='utf-8') as f:
+    version = f.read()
 
 # -- Project information -----------------------------------------------------
 
@@ -24,9 +29,8 @@ copyright = '2019, OsloMET-Group-8'
 author = 'OsloMET-Group-8'
 
 # The short X.Y version
-version = '0.0.2'
 # The full version, including alpha/beta/rc tags
-release = '0.0.2'
+release = version
 
 
 # -- General configuration ---------------------------------------------------
