@@ -4,9 +4,9 @@ from collections.abc import Mapping
 import requests
 
 from pyaaas.aaas_connector import AaaSConnector
-from models.anonymize_result import AnonymizeResult
-from models.dataset import Dataset
-from models.risk_profile import RiskProfile
+from pyaaas.models.anonymize_result import AnonymizeResult
+from pyaaas.models.dataset import Dataset
+from pyaaas.models.risk_profile import RiskProfile
 
 
 class AaaS:
@@ -65,8 +65,9 @@ class AaaS:
         response_dict = json.loads(json_string)
         dataset = Dataset(response_dict["anonymizeResult"]["data"])
         risk_profile = RiskProfile(response_dict["riskProfile"])
-        raw_metrics = {"anonymization_status": response_dict["anonymizeResult"]["anonymizationStatus"]}
-        return AnonymizeResult._from_response(dataset, risk_profile, raw_metrics)
+        anon_status = response_dict["anonymizeResult"]["anonymizationStatus"]
+        anonymization_metrics = response_dict["anonymizeResult"]["metrics"]
+        return AnonymizeResult._from_response(dataset, risk_profile, anonymization_metrics, anon_status)
 
     def risk_profile(self, dataset: Dataset):
         """
