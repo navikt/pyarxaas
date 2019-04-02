@@ -1,7 +1,7 @@
 import unittest
 
-from models.attribute_type import AttributeType
-from models.dataset import Dataset
+from pyaaas.models.attribute_type import AttributeType
+from pyaaas.models.dataset import Dataset
 
 
 class AttributeTest(unittest.TestCase):

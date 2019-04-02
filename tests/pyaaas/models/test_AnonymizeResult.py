@@ -1,8 +1,8 @@
 import unittest
 
-from models.anonymization_metrics import AnonymizationMetrics
-from models.anonymize_result import AnonymizeResult
-from models.dataset import Dataset
+from pyaaas.models.anonymization_metrics import AnonymizationMetrics
+from pyaaas.models.anonymize_result import AnonymizeResult
+from pyaaas.models.dataset import Dataset
 from tests.pyaaas import data_generator
 
 

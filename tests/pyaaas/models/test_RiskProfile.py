@@ -2,7 +2,7 @@ import unittest
 
 from pandas import DataFrame
 
-from models.risk_profile import RiskProfile
+from pyaaas.models.risk_profile import RiskProfile
 
 
 class RiskProfileTest(unittest.TestCase):
