@@ -1,8 +1,8 @@
 import unittest
-from pyaaas.attribute_type import AttributeType
-from pyaaas.dataset import Dataset
-from pyaaas.risk_profile import RiskProfile
-from pyaaas.anonymize_result import AnonymizeResult
+from models.attribute_type import AttributeType
+from models.dataset import Dataset
+from models.risk_profile import RiskProfile
+from models.anonymize_result import AnonymizeResult
 
 class AnonymizationResultTest(unittest.TestCase):
 

@@ -1,5 +1,6 @@
 import unittest
-from pyaaas.anonymization_metrics import AnonymizationMetrics
+from models.anonymization_metrics import AnonymizationMetrics
+
 
 class AnonymizationMetricsTest(unittest.TestCase):
 

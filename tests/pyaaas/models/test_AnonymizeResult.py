@@ -1,7 +1,7 @@
 import unittest
 
-from pyaaas.anonymize_result import AnonymizeResult
-from pyaaas.dataset import Dataset
+from models.anonymize_result import AnonymizeResult
+from models.dataset import Dataset
 from tests.pyaaas import data_generator
 
 

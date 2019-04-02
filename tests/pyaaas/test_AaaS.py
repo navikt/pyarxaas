@@ -7,9 +7,9 @@ from uplink import Body
 from pyaaas.aaas_connector import AaaSConnector
 from pyaaas import KAnonymity
 from pyaaas.aaas import AaaS
-from pyaaas.anonymize_result import AnonymizeResult
-from pyaaas.attribute_type import AttributeType
-from pyaaas.dataset import Dataset
+from models.anonymize_result import AnonymizeResult
+from models.attribute_type import AttributeType
+from models.dataset import Dataset
 
 test_metrics = {"reIdentificationRisk": { "measures":{
             "measure_value": "[%]",

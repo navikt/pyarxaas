@@ -4,9 +4,9 @@ from collections.abc import Mapping
 import requests
 
 from pyaaas.aaas_connector import AaaSConnector
-from pyaaas.anonymize_result import AnonymizeResult
-from pyaaas.dataset import Dataset
-from pyaaas.risk_profile import RiskProfile
+from models.anonymize_result import AnonymizeResult
+from models.dataset import Dataset
+from models.risk_profile import RiskProfile
 
 
 class AaaS:

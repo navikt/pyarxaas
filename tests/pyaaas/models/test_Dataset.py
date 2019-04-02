@@ -2,8 +2,8 @@ import unittest
 
 import pandas
 
-from pyaaas.attribute_type import AttributeType
-from pyaaas.dataset import Dataset
+from models.attribute_type import AttributeType
+from models.dataset import Dataset
 from tests.pyaaas import data_generator
 
 
