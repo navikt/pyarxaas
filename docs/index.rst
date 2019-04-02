@@ -45,6 +45,7 @@ Features
    :caption: Contents:
 
    api/aaas
+   api/dataset
 
 
 
