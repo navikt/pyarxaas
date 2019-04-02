@@ -8,27 +8,6 @@ from pyaaas.risk_profile import RiskProfile
 class AnonymizeResult:
     """ Understands the result of a anonymization process"""
 
-    class AnonymizationMetrics:
-        """ Understands metrics from a anonymization process"""
-
-        def __init__(self, metrics: Mapping):
-            self._metrics = metrics
-
-        def __eq__(self, other):
-            if not isinstance(other, self.__class__):
-                return False
-            return hash(self) == hash(other)
-
-        def __hash__(self):
-            am_hash = hash("")
-            for metric, value in self._metrics.items():
-                am_hash = hash(am_hash + hash(metric) + hash(str(value)))
-            return am_hash
-
-        @property
-        def metrics(self):
-            return copy.deepcopy(self._metrics)
-
     def __init__(self, dataset: Dataset, risk_profile: RiskProfile, anonymization_metrics: AnonymizationMetrics):
         self._anonymization_metrics = anonymization_metrics
         self._risk_profile = risk_profile
