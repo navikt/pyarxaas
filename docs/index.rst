@@ -6,9 +6,9 @@
 Welcome to PyAaaS's documentation!
 ==================================
 
-PyAaaS is a Python wrapper package for the AaaS Web Service.
-It provides user-friendly abstractions for the APIs exposed by the AaaS Web Service.
-`Github link <https://github.com/OsloMET-Gruppe-8/PyAaaS>`_
+PyAaaS is a Python wrapper package for the ARXaaS Web Service.
+It provides user-friendly abstractions for the APIs exposed by the ARXaaS Web Service.
+`Github link <https://github.com/oslomet-arx-as-a-service/PyAaaS>`_
 
 For more in-depth information about the API see :ref:`api` .
 
@@ -16,36 +16,52 @@ Simple use
 ----------
 Quick overview of how to get started using the package::
 
-   from pyaaas import AaaS
+
+   from pyaaas.aaas import AaaS
+   from pyaaas.models.privacy_models import KAnonymity
+   from pyaaas.attribute_type import AttributeType
+   from pyaaas.dataset import Dataset
+   import pandas as pd
+
    aaas = AaaS(url) # url contains url to AaaS web service
 
-   ... # add data and configurations
+   df = pd.read_csv("data.csv", sep=";")
 
-   result = aaas.anonymize()
-   df = result.to_dataframe()
+   # create Dataset
+   dataset = Dataset.from_pandas(data_df)
 
-This will use the provided Privacy Models and Transform Models to attempt to anonymize the dataset with minimal information loss.
+
+   # set attribute type
+   dataset.set_attributes(['name','gender'], AttributeType.QUASIIDENTIFYING)
+   dataset.set_attribute('id', AttributeType.IDENTIFYING)
+
+   # get the risk profle of the dataset
+   risk_profile = aaas.risk_profile(dataset)
+
+   # get risk metrics
+   re_indentifiation_risk = risk_profile.re_identification_risk
+   distribution_of_risk = risk_profile.distribution_of_risk
+
 
 How it works
 ------------
 
-PyAaaS is a simple pure Python package that only provides abstractions for interacting with the AaaS Web Service.
-The AaaS Web Service uses the ARX library to analyze and anonymize the dataset.
+PyAaaS is a simple pure Python package that only provides abstractions for interacting with the ARXaaS Web Service.
+The ARXaaS Web Service uses the ARX library to analyze and anonymize the dataset.
 
 Features
 --------
 
  - AaaS class for configuration and calling actions.
+ - Dataset class for encapsulating and configuring a dataset
  - PrivacyModel classes for configurating the Privacy Models to use.
- - HirarchyGenerator classes for easy generation of Transform Model hierarchies.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
-   api/aaas
-   api/dataset
+   api/api
 
 
 
