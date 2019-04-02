@@ -35,7 +35,7 @@ class AnonymizeResult:
 
     @classmethod
     def _from_response(cls, dataset, risk_profile, anon_metrics):
-        anonymize_metrics = cls.AnonymizationMetrics(anon_metrics)
+        anonymize_metrics = AnonymizationMetrics(anon_metrics)
         return cls(dataset, risk_profile, anonymize_metrics)
 
 
