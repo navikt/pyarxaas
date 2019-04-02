@@ -44,7 +44,7 @@ Features
    :maxdepth: 2
    :caption: Contents:
 
-   api/api
+   api/aaas
 
 
 
