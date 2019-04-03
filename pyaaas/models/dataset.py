@@ -75,6 +75,12 @@ class Dataset:
 
     @classmethod
     def from_pandas(cls, dataframe: pandas.DataFrame):
+        """
+        Create the dataset from a pandas DataFrame
+
+        :param dataframe: pandas Dataframe
+        :return: Dataset
+        """
         headers = dataframe.columns.values.tolist()
         values = dataframe.values.tolist()
         data = [headers] + values
@@ -88,6 +94,13 @@ class Dataset:
         return attribute_type_map
 
     def set_attribute(self, attribute, attribute_type: AttributeType):
+        """
+        Set Attribute type for a attribute in the dataset
+
+        :param attribute: attribute in the dataset
+        :param attribute_type: AttributeType for the attribute
+        :return: None
+        """
         field_map = {field.name: field for field in self._attributes}
         try:
             field_map[attribute].type = attribute_type
@@ -95,10 +108,24 @@ class Dataset:
             raise KeyError(f"attribute=({attribute}) could not be found")
 
     def set_attributes(self, attributes, attribute_type: AttributeType):
+        """
+        Set AttributeType for a collection of attributes
+
+        :param attributes: collection of attributes in the dataset
+        :param attribute_type: AttributeType for the attributes
+        :return: None
+        """
         for attribute in attributes:
             self.set_attribute(attribute, attribute_type)
 
     def set_hierarchy(self, attribute, hierarchy):
+        """
+        Set hierarchy for a attribute in the Dataset
+
+        :param attribute: attribute in the Dataset
+        :param hierarchy: to be applied  to the attribute
+        :return: None
+        """
         hierarchy = self._create_from_hierarchy_source(hierarchy)
         field_map = {field.name: field for field in self._attributes}
         try:
@@ -111,6 +138,11 @@ class Dataset:
             self.set_hierarchy(attribute, hierarchy)
 
     def to_dataframe(self):
+        """
+        Create pandas DataFrame of the Dataset
+
+        :return: pandas.DataFrame
+        """
         return pandas.DataFrame(self._data[1:], columns=self._data[0])
 
     class _Attribute:

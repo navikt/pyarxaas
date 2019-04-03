@@ -3,13 +3,9 @@
 API Documentation
 =================
 
-.. module:: pyaaas.aaas
+.. toctree::
 
-.. autoclass:: AaaS
-    :members:
-
-
-.. module:: pyaaas.aaas_connector
-
-.. autoclass:: AaaSConnector
-    :members:
+    aaas
+    dataset
+    anonymize_result
+    risk_profile
