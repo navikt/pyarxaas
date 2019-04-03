@@ -24,18 +24,39 @@ class AnonymizeResult:
 
     @property
     def dataset(self):
+        """
+        Dataset created from the anonymization
+
+        :return: Dataset
+        """
         return copy.deepcopy(self._dataset)
 
     @property
     def risk_profile(self):
+        """
+        RiskProfile asscocciated with the new Dataset
+
+        :return: RiskProfile
+        """
         return copy.deepcopy(self._risk_profile)
 
     @property
     def anonymization_metrics(self):
+        """
+        AnonymizationMetrics about the anonymization process.
+        Contains data on hierarchy level used and privacy model configuration
+
+        :return: AnonymizationMetrics
+        """
         return copy.deepcopy(self._anonymization_metrics)
 
     @property
     def anonymization_status(self):
+        """
+        Anonymization status for the new Dataset
+
+        :return: str
+        """
         return self._anonymization_status
 
     @classmethod
