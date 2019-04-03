@@ -79,3 +79,8 @@ class AaaSTest(unittest.TestCase):
         aaas = AaaS('http://localhost', connector=MockAaasConnector)
         anonymized_dataset = aaas.anonymize(self.test_dataset, [KAnonymity(4)])
         self.assertIsInstance(anonymized_dataset, AnonymizeResult)
+
+    def test_anonymize__dataset_attributes_are_correct(self):
+        aaas = AaaS('http://localhost', connector=MockAaasConnector)
+        anonymize_result = aaas.anonymize(self.test_dataset, [KAnonymity(4)])
+        self.assertEqual(AttributeType.IDENTIFYING, AttributeType(anonymize_result.dataset._attributes[0].type))
