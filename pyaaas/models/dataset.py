@@ -4,7 +4,7 @@ from collections.abc import Mapping
 
 import pandas
 
-from pyaaas.attribute_type import AttributeType
+from pyaaas.models.attribute_type import AttributeType
 
 
 class Dataset:
