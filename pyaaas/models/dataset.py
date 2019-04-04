@@ -163,6 +163,12 @@ class Dataset:
         def __hash__(self):
             return hash(hash(self._field_name) + hash(self._hierarchy) + hash(self._type))
 
+        def __str__(self) -> str:
+            return f"{self.__class__}(field_name={self.name}, type={self.type}, hierarchy={self.hierarchy})"
+
+        def __repr__(self):
+            return self.__str__()
+
         @property
         def name(self):
             return self._field_name

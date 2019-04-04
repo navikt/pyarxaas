@@ -63,7 +63,8 @@ class AaaS:
         """
         json_string = response.text
         response_dict = json.loads(json_string)
-        dataset = Dataset(response_dict["anonymizeResult"]["data"])
+        attributes = self._attributes(response_dict)
+        dataset = Dataset(response_dict["anonymizeResult"]["data"], attributes)
         risk_profile = RiskProfile(response_dict["riskProfile"])
         anon_status = response_dict["anonymizeResult"]["anonymizationStatus"]
         anonymization_metrics = response_dict["anonymizeResult"]["metrics"]
@@ -96,6 +97,11 @@ class AaaS:
         response = self._connector.risk_profile(data_dict)
         self._throw_exeption_on_error_response(response)
         return response
+
+    def _attributes(self, response_dict):
+        raw = response_dict["anonymizeResult"]["attributes"]
+        attribute_dict = {attribute["field"]: attribute["attributeTypeModel"] for attribute in raw}
+        return attribute_dict
 
     @staticmethod
     def _throw_exeption_on_error_response(response: requests.Response) -> None:
