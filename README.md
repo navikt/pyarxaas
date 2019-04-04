@@ -18,31 +18,37 @@ Read more about PyAaaS at: https://pyaaas.readthedocs.io/
 #### Installation
 
 ````bash
-pip3 install pyaaas
+pip install pyaaas
 
 ````
 
 #### Basic Usage
 
 ````python
-from aaas import AaaS, KAnonymity
 
-aaas = AaaS(url) # instantiate AaaS object
+   from pyaaas.aaas import AaaS
+   from pyaaas.models.privacy_models import KAnonymity
+   from pyaaas.attribute_type import AttributeType
+   from pyaaas.dataset import Dataset
+   import pandas as pd
 
-aaas.set_data(df) # add data (csv_str, pandas.DataFrame)
+   aaas = AaaS(url) # url contains url to AaaS web service
 
-aaas.set_attribute_types(attr) # sett attribute types for fields
+   df = pd.read_csv("data.csv", sep=";")
 
-aaas.set_hierarchy(field, hierarchy_data) # set a hierarchy for a field
-
-k_anon = KAnonymity(k=4) # instantiate a PrivacyModel
-
-aaas.set_model(k_anon) # add model
+   # create Dataset
+   dataset = Dataset.from_pandas(data_df)
 
 
-result = aaas.anonymize() # run anonymization
+   # set attribute type
+   dataset.set_attributes(['name','gender'], AttributeType.QUASIIDENTIFYING)
+   dataset.set_attribute('id', AttributeType.IDENTIFYING)
 
-anonymized_df = result.to_dataframe() # retreive anonymized dataframe
+   # get the risk profle of the dataset
+   risk_profile = aaas.risk_profile(dataset)
 
+   # get risk metrics
+   re_indentifiation_risk = risk_profile.re_identification_risk
+   distribution_of_risk = risk_profile.distribution_of_risk
 
 ````
