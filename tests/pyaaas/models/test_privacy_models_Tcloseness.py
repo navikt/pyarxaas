@@ -23,7 +23,3 @@ class PrivacyModelsTclosenessTest(unittest.TestCase):
     def test_set_data_TClosenessOrderedDistance(self):
         self.distict = TClosenessOrderedDistance(t=3, column_name="sensitive_column_name")
         self.assertEqual(self.distict._anonymity_name, "TCLOSENESS_ORDERED_DISTANCE", "Recursive model name not correct")
-
-
-
-
