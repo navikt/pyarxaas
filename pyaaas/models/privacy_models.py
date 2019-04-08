@@ -70,3 +70,19 @@ class LDiversityRecursive(PrivacyModel):
         self._internal_dict = {"l": l, "c": c, "column_name": column_name}
         self._anonymity_name = "LDIVERSITY_RECURSIVE"
         self._print_message = f"LDiversityRecursive(l={l}, c={c}, column_name={column_name})"
+
+class TClosenessOrderedDistance(PrivacyModel):
+    """ Configuration class for TCloseness"""
+
+    def __init__(self, t, column_name):
+        self._internal_dict = {"t": t, "column_name": column_name}
+        self._anonymity_name = "TCLOSENESS_ORDERED_DISTANCE"
+        self._print_message = f"TClosenessOrderedDistance(t={t}, column_name={column_name})"
+
+class TClosenessEqualDistance(PrivacyModel):
+    """ Configuration class for TCloseness"""
+
+    def __init__(self, t, column_name):
+        self._internal_dict = {"t": t, "column_name": column_name}
+        self._anonymity_name = "TCLOSENESS_EQUAL_DISTANCE"
+        self._print_message = f"TClosenessEqualDistance(t={t}, column_name={column_name})"
