@@ -3,6 +3,7 @@ from collections.abc import Mapping
 
 import requests
 
+from models.request_builder import RequestBuilder
 from pyaaas.aaas_connector import AaaSConnector
 from pyaaas.models.anonymize_result import AnonymizeResult
 from pyaaas.models.dataset import Dataset
@@ -25,11 +26,11 @@ class AaaS:
         :param privacy_models: privacy models to be used in the anonymization
         :return: Dataset with anonymized data
         """
-        payload = self.anonymize_payload(dataset, privacy_models)
-        response = self._anonymize(payload)
+        request_payload = self._anonymize_payload(dataset, privacy_models)
+        response = self._anonymize(request_payload)
         return self.anonymize_result(response)
 
-    def anonymize_payload(self, dataset, privacy_models) -> Mapping:
+    def _anonymize_payload(self, dataset, privacy_models) -> Mapping:
         """
         Creates a anonymize payload to be sent to the backend
 
@@ -37,12 +38,10 @@ class AaaS:
         :param privacy_models: privacy models to be used in the anonymization
         :return: Mapping payload
         """
-        data_dict = dataset._payload()
-        models = []
-        for model in list(privacy_models):
-            models.append(model._payload())
-        data_dict["privacyModels"] = models
-        return data_dict
+
+        return RequestBuilder(dataset)\
+            .add_privacy_models(privacy_models)\
+            .build_anonymize_request()
 
     def _anonymize(self, payload):
         """
@@ -82,10 +81,20 @@ class AaaS:
         :return: RiskProfile
         """
 
-        data_dict = dataset._payload()
-        response = self._risk_profile(data_dict)
+        analyze_request = self._risk_profile_payload(dataset)
+        response = self._risk_profile(analyze_request)
         metric_dict = json.loads(response.text)
         return RiskProfile(metric_dict)
+
+    def _risk_profile_payload(self, dataset):
+        """
+        Creates a risk profile payload to be sent to the backend
+
+        :param dataset: Dataset to be analyzed
+        :return: Mapping payload
+        """
+
+        return RequestBuilder(dataset).build_analyze_request()
 
     def _risk_profile(self, data_dict):
         """
