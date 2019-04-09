@@ -3,7 +3,7 @@ from collections.abc import Mapping
 
 import requests
 
-from models.request_builder import RequestBuilder
+from pyaaas.models.request_builder import RequestBuilder
 from pyaaas.aaas_connector import AaaSConnector
 from pyaaas.models.anonymize_result import AnonymizeResult
 from pyaaas.models.dataset import Dataset
