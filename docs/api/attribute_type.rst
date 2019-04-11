@@ -1,4 +1,4 @@
-.. _attribute-type:
+.. _attribute_type:
 
 Attribute Type
 =================
