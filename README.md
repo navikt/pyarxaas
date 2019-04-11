@@ -6,11 +6,9 @@
 
 # PyAaaS
 
-Python Package for easy access to ARX Web API Service
+Python Package for interfacing with ARXaaS in Python
 
 Read more about PyAaaS at: https://pyaaas.readthedocs.io/
-
-
 
 
 ## Getting Started
