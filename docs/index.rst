@@ -6,16 +6,35 @@
 Welcome to PyAaaS's documentation!
 ==================================
 
+.. image:: images/arxaas_logo.png
+   :height: 100px
+
 PyAaaS is a Python wrapper package for ARXaaS.
 It provides user-friendly abstractions for the APIs exposed ARXaaS.
 `Github link <https://github.com/oslomet-arx-as-a-service/PyAaaS>`_
 
-For more in-depth information about the API see :ref:`api` .
+- For quick-start see :ref:`quick-start`
+- For more in-depth information about the API see :ref:`api` .
 
-Simple use
-----------
+
+How it works
+-------------
+
+PyAaaS is a simple pure Python package that only provides abstractions for interacting with the ARXaaS Web Service.
+The ARXaaS Web Service uses the ARX library to analyze and anonymize the dataset.
+
+
+Features
+--------
+
+ - :ref:`aaas` class for configuration and calling actions.
+ - :ref:`dataset`  class for encapsulating and configuring a dataset
+ - :ref:`privacy_model` classes for configuring the Privacy Models to use in anonymization.
+
+
+Simple Use Case
+---------------
 Quick overview of how to get started using the package::
-
 
    # import dependencies
    from pyaaas.aaas import AaaS
@@ -43,19 +62,6 @@ Quick overview of how to get started using the package::
    re_indentifiation_risk = risk_profile.re_identification_risk
    distribution_of_risk = risk_profile.distribution_of_risk
 
-
-How it works
-------------
-
-PyAaaS is a simple pure Python package that only provides abstractions for interacting with the ARXaaS Web Service.
-The ARXaaS Web Service uses the ARX library to analyze and anonymize the dataset.
-
-Features
---------
-
- - AaaS class for configuration and calling actions.
- - Dataset class for encapsulating and configuring a dataset
- - PrivacyModel classes for configurating the Privacy Models to use.
 
 
 .. toctree::
