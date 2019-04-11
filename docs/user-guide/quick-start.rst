@@ -91,10 +91,10 @@ Anonymize a dataset using PyAaaS is also very simple.
 3. **In addtion to setting attribute types we need to provide Transformation Models known as hierarchies for the dataset fields/columns with type AttributeType.QUASIIDENTIFYING**
  Hierarchies can be added as pandas.DataFrame objects::
 
-    id_hierarchy = pd.read_csv("id_hierarchy.csv")
+    id_hierarchy = pd.read_csv("id_hierarchy.csv", header=None)
     dataset.set_hierarchy('id', id_hierarchy)
 
-    name_hierarchy = pd.read_csv("name_hierarchy.csv")
+    name_hierarchy = pd.read_csv("name_hierarchy.csv", header=None)
     dataset.set_hierarchy('name', name_hierarchy)
 
 
