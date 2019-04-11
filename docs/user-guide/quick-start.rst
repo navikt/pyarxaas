@@ -106,3 +106,18 @@ Hierarchies can be added as pandas.DataFrame objects::
 After the AaaS object is created we can use it to call the ARXaaS instance. Back if the anonymization is succesfull we receceive an :ref:`anonymize_result` ::
 
     anonymize_result = aaas.anonymize(dataset, [kanon])
+
+:ref:`anonymize_result` contains the new :ref:`dataset`, the :ref:`risk_profile` for the new , the :ref:`dataset`,
+ the anonymization status for the :ref:`dataset` and :ref:`anonymization_metrics` which contains metrics regarding the anonymzation performed on the dataset.
+
+ ::
+
+    # get the new dataset
+    anonymized_dataset = anonymize_result.dataset
+    anon_dataframe = anonymized_dataset.to_dataframe()
+
+    # get the risk profile for the new dataset
+    anon_risk_profile = anonymize_result.risk_profile
+
+    # get the anonymiztion metrics
+    anon_metrics = anonymize_result.anonymization_metrics
