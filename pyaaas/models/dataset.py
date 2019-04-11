@@ -11,6 +11,7 @@ class Dataset:
     """
     Understand tabular data containing personal data.
     """
+
     _DEFAULT_ATTRIBUTE_TYPE = AttributeType.QUASIIDENTIFYING
 
     def __init__(self, data: list, attribute_types: Mapping = None):
@@ -81,6 +82,7 @@ class Dataset:
         :param dataframe: pandas Dataframe
         :return: Dataset
         """
+
         headers = dataframe.columns.values.tolist()
         values = dataframe.values.tolist()
         data = [headers] + values
@@ -101,6 +103,7 @@ class Dataset:
         :param attribute_type: AttributeType for the attribute
         :return: None
         """
+
         field_map = {field.name: field for field in self._attributes}
         try:
             field_map[attribute].type = attribute_type
@@ -115,6 +118,7 @@ class Dataset:
         :param attribute_type: AttributeType for the attributes
         :return: None
         """
+
         for attribute in attributes:
             self.set_attribute(attribute, attribute_type)
 
@@ -126,6 +130,7 @@ class Dataset:
         :param hierarchy: to be applied  to the attribute
         :return: None
         """
+
         hierarchy = self._create_from_hierarchy_source(hierarchy)
         field_map = {field.name: field for field in self._attributes}
         try:
@@ -143,6 +148,7 @@ class Dataset:
 
         :return: pandas.DataFrame
         """
+
         return pandas.DataFrame(self._data[1:], columns=self._data[0])
 
     class _Attribute:
