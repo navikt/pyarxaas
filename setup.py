@@ -36,7 +36,7 @@ setup(
     #
     # This field corresponds to the "Home-Page" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#home-page-optional
-    url='https://github.com/OsloMET-Gruppe-8/PyAaaS',  # Optional
+    url='https://github.com/oslomet-arx-as-a-service/PyARXaaS',  # Optional
 
     # This should be your name or the name of the organization which owns the
     # project.
@@ -71,7 +71,7 @@ setup(
     # project page. What does your project relate to?
     #
     # Note that this is a string of words separated by whitespace, not a list.
-    keywords='anonymization ARX AaaS Anonymization-as-a-Service',  # Optional
+    keywords='anonymization ARX ARXaaS ARX-as-a-Service',  # Optional
 
     # You can just specify package directories manually here if your project is
     # simple. Or you can use find_packages().
@@ -116,7 +116,7 @@ setup(
     # maintainers, and where to support the project financially. The key is
     # what's used to render the link text on PyPI.
     project_urls={  # Optional
-        'Bug Reports': 'https://github.com/OsloMET-Gruppe-8/PyAaaS/issues',
-        'Source': 'https://github.com/OsloMET-Gruppe-8/PyAaaS',
+        'Bug Reports': 'https://github.com/oslomet-arx-as-a-service/PyARXaaS/issues',
+        'Source': 'https://github.com/oslomet-arx-as-a-service/PyARXaaS',
     }
 )
