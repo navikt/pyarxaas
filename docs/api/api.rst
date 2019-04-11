@@ -9,3 +9,4 @@ API Documentation
     dataset
     anonymize_result
     risk_profile
+    attribute_type

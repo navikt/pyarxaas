@@ -6,8 +6,8 @@
 Welcome to PyAaaS's documentation!
 ==================================
 
-PyAaaS is a Python wrapper package for the ARXaaS Web Service.
-It provides user-friendly abstractions for the APIs exposed by the ARXaaS Web Service.
+PyAaaS is a Python wrapper package for ARXaaS.
+It provides user-friendly abstractions for the APIs exposed ARXaaS.
 `Github link <https://github.com/oslomet-arx-as-a-service/PyAaaS>`_
 
 For more in-depth information about the API see :ref:`api` .
@@ -17,6 +17,7 @@ Simple use
 Quick overview of how to get started using the package::
 
 
+   # import dependencies
    from pyaaas.aaas import AaaS
    from pyaaas.models.privacy_models import KAnonymity
    from pyaaas.attribute_type import AttributeType
@@ -61,7 +62,9 @@ Features
    :maxdepth: 3
    :caption: Contents:
 
+   user-guide/user-guide
    api/api
+
 
 
 

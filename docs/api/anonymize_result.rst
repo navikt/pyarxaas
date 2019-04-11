@@ -5,7 +5,7 @@ AnonymizeResult
 
 AnonymizeResult encapsulates the response from a ARXaaS anonymize call
 
-.. module:: pyaaas.anonymize_result
+.. module:: pyaaas.models.anonymize_result
 
 .. autoclass:: AnonymizeResult
     :members:
