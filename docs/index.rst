@@ -73,6 +73,7 @@ PyARXaaS is distributed under the MIT license. See `LICENCE <https://github.com/
 
    user-guide/user-guide
    api/api
+   notebooks/notebooks.rst
 
 
 
