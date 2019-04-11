@@ -10,3 +10,5 @@ API Documentation
     anonymize_result
     risk_profile
     attribute_type
+    anonymization_metrics
+    privacy_model
