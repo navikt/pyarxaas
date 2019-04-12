@@ -119,11 +119,16 @@ Anonymizing a dataset using PyAaaS.
 5. **To make a call to the ARXaaS instance we need to make a instance of the AaaS class. The AaaS connector class needs a url to the ARXaaS instance. In this example we have ARXaaS running locally.** ::
 
 
+    # import the aaas module
     from pyaaas.aaas import AaaS
+
+    # establishing a connection to the ARXaaS service using the URL
     aaas = AaaS("http://localhost:8080")
 
 6. **After the** :ref:`aaas` **object is created we can use it to call the ARXaaS instance. Back if the anonymization is successful we receive an** :ref:`anonymize_result` ::
 
+
+    # specify the dataset as the first parameter, and privacy model list as the second paramter
     anonymize_result = aaas.anonymize(dataset, [kanon])
 
  :ref:`anonymize_result` contains the new :ref:`dataset`, the :ref:`risk_profile` for the new , the :ref:`dataset`,
@@ -137,6 +142,14 @@ Anonymizing a dataset using PyAaaS.
 
     # get the risk profile for the new dataset
     anon_risk_profile = anonymize_result.risk_profile
+
+    # get risk metrics as a dictionary
+    re_indentifiation_risk = anon_risk_profile.re_identification_risk
+    distribution_of_risk = anon_risk_profile.distribution_of_risk
+
+    # get risk metrivs as pandas.DataFrame
+    re_i_risk_df = anon_risk_profile.distribution_of_risk_dataframe()
+    dist_risk_df = anon_risk_profile.distribution_of_risk_dataframe()
 
     # get the anonymiztion metrics
     anon_metrics = anonymize_result.anonymization_metrics
