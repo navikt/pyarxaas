@@ -23,7 +23,6 @@ Analyze the risk of a dataset using PyAaaS is very simple.
 1. **Begin by importing the Dataset class and pandas which we are going to use to create a** :ref:`dataset` ::
 
     from pyaaas.models.dataset import Dataset
-    from pyaaas.models.attribute_type import AttributeType
     import pandas as pd
 
  Then we create a Dataset from a local csv file
@@ -40,10 +39,12 @@ Analyze the risk of a dataset using PyAaaS is very simple.
 
 2. **Then we set the**  :ref:`attribute_type` **for the Dataset fields.** ::
 
-    # set attribute type
-    dataset.set_attributes(['name','gender'], AttributeType.QUASIIDENTIFYING)
-    dataset.set_attribute('id', AttributeType.IDENTIFYING)
+    # import the attribute_type module
+     from pyaaas.models.attribute_type import AttributeType
 
+    # set attribute type
+    dataset.set_attributes(['COLUMN_1','COLUMN_2'], AttributeType.QUASIIDENTIFYING)
+    dataset.set_attributes(['COLUMN_5','COLUMN_6'], AttributeType.IDENTIFYING)
 
 3. **To make a call to the ARXaaS instance we need to make a instance of the** :ref:`aaas` **class.**
 
@@ -80,15 +81,17 @@ Anonymizing a dataset using PyAaaS.
 1. **Begin by importing the Dataset class and pandas which we are going to use to create a Dataset** ::
 
         from pyaaas.models.dataset import Dataset
-        from pyaaas.models.attribute_type import AttributeType
         import pandas as pd
 
 
 2. **Same as when in analyze we set the attribute type for the dataset fields**::
 
+    # import the attribute_type module
+     from pyaaas.models.attribute_type import AttributeType
+
     # set attribute type
-    dataset.set_attributes(['name','gender'], AttributeType.QUASIIDENTIFYING)
-    dataset.set_attribute('id', AttributeType.IDENTIFYING)
+    dataset.set_attributes(['COLUMN_1','COLUMN_2'], AttributeType.QUASIIDENTIFYING)
+    dataset.set_attributes(['COLUMN_5','COLUMN_6'], AttributeType.IDENTIFYING)
 
 3. **In addtion to setting attribute types we need to provide Transformation Models known as hierarchies for the dataset fields/columns with type AttributeType.QUASIIDENTIFYING**
  Hierarchies can be added as pandas.DataFrame objects::
