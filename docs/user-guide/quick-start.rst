@@ -22,7 +22,7 @@ Analyze the risk of a dataset using PyAaaS is very simple.
 
 1. **Begin by importing the Dataset class and pandas which we are going to use to create a** :ref:`dataset` ::
 
-    from pyaaas.dataset import Dataset
+    from pyaaas.models.dataset import Dataset
     from pyaaas.models.attribute_type import AttributeType
     import pandas as pd
 
@@ -79,7 +79,7 @@ Anonymize a dataset using PyAaaS is also very simple.
 
 1. **Begin by importing the Dataset class and pandas which we are going to use to create a Dataset** ::
 
-        from pyaaas.dataset import Dataset
+        from pyaaas.models.dataset import Dataset
         from pyaaas.models.attribute_type import AttributeType
         import pandas as pd
 
