@@ -43,8 +43,8 @@ Analyze the risk of a dataset using PyAaaS is very simple.
      from pyaaas.models.attribute_type import AttributeType
 
     # set attribute type
-    dataset.set_attributes(['COLUMN_1','COLUMN_2'], AttributeType.QUASIIDENTIFYING)
-    dataset.set_attributes(['COLUMN_5','COLUMN_6'], AttributeType.IDENTIFYING)
+    dataset.set_attributes(['name','gender'], AttributeType.QUASIIDENTIFYING)
+    dataset.set_attributes(['id'], AttributeType.IDENTIFYING)
 
 3. **To make a call to the ARXaaS instance we need to make a instance of the** :ref:`aaas` **class.**
 
@@ -90,8 +90,8 @@ Anonymizing a dataset using PyAaaS.
      from pyaaas.models.attribute_type import AttributeType
 
     # set attribute type
-    dataset.set_attributes(['COLUMN_1','COLUMN_2'], AttributeType.QUASIIDENTIFYING)
-    dataset.set_attributes(['COLUMN_5','COLUMN_6'], AttributeType.IDENTIFYING)
+    dataset.set_attributes(['name','gender'], AttributeType.QUASIIDENTIFYING)
+    dataset.set_attributes(['id'], AttributeType.IDENTIFYING)
 
 3. **In addtion to setting attribute types we need to provide Transformation Models known as hierarchies for the dataset fields/columns with type AttributeType.QUASIIDENTIFYING**
  Hierarchies can be added as pandas.DataFrame objects::
