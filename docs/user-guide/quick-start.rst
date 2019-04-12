@@ -50,7 +50,10 @@ Analyze the risk of a dataset using PyAaaS is very simple.
 
  The AaaS connector class needs a url to the ARXaaS instance. In this example we have ARXaaS running locally. ::
 
+    # import the aaas module
     from pyaaas.aaas import AaaS
+
+    # establishing a connection to the ARXaaS service using the URL
     aaas = AaaS("http://localhost:8080")
 
 4. **After the** :ref:`aaas` **object is created we can use it to call the ARXaaS instance to make a** :ref:`risk_profile` **for our Dataset.** ::
@@ -96,19 +99,25 @@ Anonymizing a dataset using PyAaaS.
 3. **In addtion to setting attribute types we need to provide Transformation Models known as hierarchies for the dataset fields/columns with type AttributeType.QUASIIDENTIFYING**
  Hierarchies can be added as pandas.DataFrame objects::
 
+    # importing the hierarchies from a local csv file. Specify the file path as the first parameter
     id_hierarchy = pd.read_csv("id_hierarchy.csv", header=None)
-    dataset.set_hierarchy('id', id_hierarchy)
-
     name_hierarchy = pd.read_csv("name_hierarchy.csv", header=None)
+
+    # setting the imported csv file. Specify the column name as the fist parameter, and the hierarchy as the second parameter
+    dataset.set_hierarchy('id', id_hierarchy)
     dataset.set_hierarchy('name', name_hierarchy)
 
 
 4. **When anonymizing we need to supply a** :ref:`privacy_model` **for ARXaaS to run on the dataset. You can read more about the models here** `ARX Privacy Models <https://arx.deidentifier.org/overview/privacy-criteria/>`_ ::
 
+    # importing the privacy_models module
     from pyaaas.models.privacy_models import KAnonymity
+
+    # creating a privacy_models object
     kanon = KAnonymity(4)
 
 5. **To make a call to the ARXaaS instance we need to make a instance of the AaaS class. The AaaS connector class needs a url to the ARXaaS instance. In this example we have ARXaaS running locally.** ::
+
 
     from pyaaas.aaas import AaaS
     aaas = AaaS("http://localhost:8080")
