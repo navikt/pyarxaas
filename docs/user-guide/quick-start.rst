@@ -23,6 +23,7 @@ Analyze the risk of a dataset using PyAaaS is very simple.
 1. **Begin by importing the Dataset class and pandas which we are going to use to create a** :ref:`dataset` ::
 
     from pyaaas.dataset import Dataset
+    from pyaaas.models.attribute_type import AttributeType
     import pandas as pd
 
  Then we create a Dataset from a local csv file
@@ -79,6 +80,7 @@ Anonymize a dataset using PyAaaS is also very simple.
 1. **Begin by importing the Dataset class and pandas which we are going to use to create a Dataset** ::
 
         from pyaaas.dataset import Dataset
+        from pyaaas.models.attribute_type import AttributeType
         import pandas as pd
 
 
@@ -100,7 +102,7 @@ Anonymize a dataset using PyAaaS is also very simple.
 
 4. **When anonymizing we need to supply a** :ref:`privacy_model` **for ARXaaS to run on the dataset. You can read more about the models here** `ARX Privacy Models <https://arx.deidentifier.org/overview/privacy-criteria/>` ::
 
-    from pyaaas.model.privacy_models import KAnonymity
+    from pyaaas.models.privacy_models import KAnonymity
     kanon = KAnonymity(4)
 
 5. **To make a call to the ARXaaS instance we need to make a instance of the AaaS class. The AaaS connector class needs a url to the ARXaaS instance. In this example we have ARXaaS running locally.** ::
