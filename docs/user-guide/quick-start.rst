@@ -75,7 +75,7 @@ Analyze the risk of a dataset using PyAaaS is very simple.
 
 Anonymize a dataset
 -----------------------------
-Anonymize a dataset using PyAaaS is also very simple.
+Anonymizing a dataset using PyAaaS.
 
 1. **Begin by importing the Dataset class and pandas which we are going to use to create a Dataset** ::
 
@@ -100,7 +100,7 @@ Anonymize a dataset using PyAaaS is also very simple.
     dataset.set_hierarchy('name', name_hierarchy)
 
 
-4. **When anonymizing we need to supply a** :ref:`privacy_model` **for ARXaaS to run on the dataset. You can read more about the models here** `ARX Privacy Models <https://arx.deidentifier.org/overview/privacy-criteria/>` ::
+4. **When anonymizing we need to supply a** :ref:`privacy_model` **for ARXaaS to run on the dataset. You can read more about the models here** `ARX Privacy Models <https://arx.deidentifier.org/overview/privacy-criteria/>`_ ::
 
     from pyaaas.models.privacy_models import KAnonymity
     kanon = KAnonymity(4)
@@ -110,7 +110,7 @@ Anonymize a dataset using PyAaaS is also very simple.
     from pyaaas.aaas import AaaS
     aaas = AaaS("http://localhost:8080")
 
-6. **After the** :ref:`aaas` **object is created we can use it to call the ARXaaS instance. Back if the anonymization is succesfull we receceive an** :ref:`anonymize_result` ::
+6. **After the** :ref:`aaas` **object is created we can use it to call the ARXaaS instance. Back if the anonymization is successful we receive an** :ref:`anonymize_result` ::
 
     anonymize_result = aaas.anonymize(dataset, [kanon])
 
