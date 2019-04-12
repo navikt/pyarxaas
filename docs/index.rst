@@ -3,20 +3,41 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to PyAaaS's documentation!
-==================================
+Welcome to PyARXaaS's documentation!
+====================================
 
-PyAaaS is a Python wrapper package for the ARXaaS Web Service.
-It provides user-friendly abstractions for the APIs exposed by the ARXaaS Web Service.
-`Github link <https://github.com/oslomet-arx-as-a-service/PyAaaS>`_
+.. image:: images/arxaas_logo.png
+   :height: 100px
 
-For more in-depth information about the API see :ref:`api` .
+PyARXaaS is a Python wrapper package for ARXaaS.
+It provides user-friendly abstractions for the APIs exposed ARXaaS.
+`Github link <https://github.com/oslomet-arx-as-a-service/PyARXaaS>`_
 
-Simple use
-----------
+- For quick-start see :ref:`quick-start`
+- For more in-depth information about the API see :ref:`api` .
+
+
+How it works
+-------------
+
+PyARXaaS is a simple pure Python client package that provides abstractions for interacting with
+a `ARXaaS <https://github.com/oslomet-arx-as-a-service/ARXaaS>`_ instance.
+The package supports analyzing re-identification risks and anonymizing tabular datasets containing sensitive personal data.
+
+Features
+--------
+
+ - :ref:`aaas` class for configuration and calling actions.
+ - :ref:`dataset`  class for encapsulating and configuring a dataset
+ - :ref:`privacy_model` classes for configuring the Privacy Models to use in anonymization.
+ - Easy integration with `pandas <https://pandas.pydata.org/>`_ DataFrames
+
+
+Simple Use Case
+---------------
 Quick overview of how to get started using the package::
 
-
+   # import dependencies
    from pyaaas.aaas import AaaS
    from pyaaas.models.privacy_models import KAnonymity
    from pyaaas.attribute_type import AttributeType
@@ -42,26 +63,18 @@ Quick overview of how to get started using the package::
    re_indentifiation_risk = risk_profile.re_identification_risk
    distribution_of_risk = risk_profile.distribution_of_risk
 
-
-How it works
-------------
-
-PyAaaS is a simple pure Python package that only provides abstractions for interacting with the ARXaaS Web Service.
-The ARXaaS Web Service uses the ARX library to analyze and anonymize the dataset.
-
-Features
---------
-
- - AaaS class for configuration and calling actions.
- - Dataset class for encapsulating and configuring a dataset
- - PrivacyModel classes for configurating the Privacy Models to use.
-
+Licensing
+---------
+PyARXaaS is distributed under the MIT license. See `LICENCE <https://github.com/oslomet-arx-as-a-service/PyARXaaS/blob/master/LICENSE>`_
 
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
 
+   user-guide/user-guide
    api/api
+   notebooks/notebooks.rst
+
 
 
 

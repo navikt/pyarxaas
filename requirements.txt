@@ -3,3 +3,5 @@ pandas
 IPython
 sphinx
 sphinx_rtd_theme
+nbsphinx
+pandoc
