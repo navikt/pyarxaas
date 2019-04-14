@@ -117,3 +117,10 @@ class AaaS:
         # if status code does not start with 2xx throw exception
         if not str(response.status_code)[0] == "2":
             raise SystemError(response.text)
+
+    def hierarchy(self, redaction_builder):
+        request = redaction_builder._request_payload()
+        response = self._connector.hierarchy(request)
+        self._throw_exeption_on_error_response(response)
+        response_dict = json.loads(response.text)
+        return response_dict["hierarchy"]

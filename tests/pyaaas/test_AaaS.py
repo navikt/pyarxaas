@@ -4,6 +4,7 @@ import unittest
 
 from uplink import Body
 
+from pyaaas.models.hierarchy.reduction_hierarchy_builder import RedactionHierarchyBuilder
 from pyaaas.aaas_connector import AaaSConnector
 from pyaaas import KAnonymity
 from pyaaas.aaas import AaaS
@@ -35,6 +36,17 @@ class AnonymzationResponseStub:
         return 200
 
 
+class HierarchyResponseStub:
+
+    @property
+    def text(self):
+        return '{"hierarchy":[["1123","*123","**23","***3","****"],["1321","*321","**21","***1","****"],["1234","*234","**34","***4","****"],["1532","*532","**32","***2","****"]]}'
+
+    @property
+    def status_code(self):
+        return 200
+
+
 class MockAaasConnector(AaaSConnector):
 
     def anonymize_data(self, payload: Body):
@@ -42,6 +54,9 @@ class MockAaasConnector(AaaSConnector):
 
     def risk_profile(self, payload: Body):
         return AnalyzationResponseStub()
+
+    def hierarchy(self, payload: Body):
+        return HierarchyResponseStub()
 
 
 class AaaSTest(unittest.TestCase):
@@ -84,3 +99,16 @@ class AaaSTest(unittest.TestCase):
         aaas = AaaS('http://localhost', connector=MockAaasConnector)
         anonymize_result = aaas.anonymize(self.test_dataset, [KAnonymity(4)])
         self.assertEqual(AttributeType.IDENTIFYING, AttributeType(anonymize_result.dataset._attributes[0].type))
+
+    def test_redaction_based_hierarchy(self):
+        expected = [["1123","*123","**23","***3","****"],["1321","*321","**21","***1","****"],["1234","*234","**34","***4","****"],["1532","*532","**32","***2","****"]]
+        aaas = AaaS('http://localhost:8080', connector=MockAaasConnector)
+        redaction_builder = RedactionHierarchyBuilder(
+            " ",
+            "*",
+            RedactionHierarchyBuilder.Order.RIGHT_TO_LEFT,
+            RedactionHierarchyBuilder.Order.LEFT_TO_RIGHT)
+        redaction_builder.prepare(["1123", "1321", "1234", "1532"])
+        hierarchy = aaas.hierarchy(redaction_builder)
+        self.assertEqual(expected, hierarchy)
+
