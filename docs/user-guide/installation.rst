@@ -7,6 +7,12 @@ PyAaaS is available on PyPI
 `PyPI link <https://pypi.org/project/PyAaaS/>`_
 
 
+Pip install
+-----------
+
+.. code-block:: bash
+
+    pip install pyaaas
 
 (Optional) Setup virtual environment
 ------------------------------------
@@ -20,13 +26,6 @@ Mac/Linux
     source venv/bin/activate
 
 .. todo:: make setup for Windows
-
-Pip install
------------
-
-.. code-block:: bash
-
-    pip install pyaaas
 
 Get the Source Code
 -------------------
