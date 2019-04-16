@@ -47,6 +47,17 @@ class HierarchyResponseStub:
         return 200
 
 
+class RootResponseStub:
+
+    @property
+    def text(self):
+        return '{"_links": {_self: "test"}}'
+
+    @property
+    def status_code(self):
+        return 200
+
+
 class MockAaasConnector(AaaSConnector):
 
     def anonymize_data(self, payload: Body):
@@ -57,6 +68,10 @@ class MockAaasConnector(AaaSConnector):
 
     def hierarchy(self, payload: Body):
         return HierarchyResponseStub()
+
+    def root(self):
+        return RootResponseStub()
+
 
 
 class AaaSTest(unittest.TestCase):
@@ -74,7 +89,7 @@ class AaaSTest(unittest.TestCase):
         self.test_raw_anon_response = data_generator.anonymize_response()
 
     def test_init(self):
-        AaaS('http://localhost')
+        AaaS('http://localhost', connector=MockAaasConnector)
         
     def test_analyze(self):
         aaas = AaaS('http://localhost', connector=MockAaasConnector)
