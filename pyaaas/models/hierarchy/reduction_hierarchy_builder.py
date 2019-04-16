@@ -15,6 +15,7 @@ class RedactionHierarchyBuilder:
                  redaction_char: str = "*",
                  padding_order: Order = Order.RIGHT_TO_LEFT,
                  redaction_order: Order = Order.RIGHT_TO_LEFT):
+        self._assert_padding_is_valid(redaction_char, padding_char)
         self._padding_char = padding_char
         self._reduction_char = redaction_char
         self._padding_order = padding_order
@@ -35,3 +36,8 @@ class RedactionHierarchyBuilder:
                 "redactionOrder": self._redaction_order.value
             }
         }
+
+    def _assert_padding_is_valid(self, *characters):
+        for char in characters:
+            if len(char) > 1:
+                raise AttributeError(f"characters can only be a single character: len({char}) > 1")

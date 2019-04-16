@@ -51,3 +51,11 @@ class RedactionHierarchyBuildTest(unittest.TestCase):
 
         request_payload = redaction_builder._request_payload()
         self.assertEqual(expected, request_payload)
+
+    def test_padding_characters_can_only_be_single_char(self):
+        with self.assertRaises(AttributeError):
+            RedactionHierarchyBuilder(padding_char="ab")
+
+        with self.assertRaises(AttributeError):
+            RedactionHierarchyBuilder(redaction_char="ab")
+
