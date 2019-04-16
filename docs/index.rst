@@ -38,10 +38,10 @@ Simple Use Case
 Quick overview of how to get started using the package::
 
    # import dependencies
-   from pyaaas.aaas import AaaS
-   from pyaaas.models.privacy_models import KAnonymity
-   from pyaaas.attribute_type import AttributeType
-   from pyaaas.dataset import Dataset
+   from pyaaas import AaaS
+   from pyaaas.privacy_models import KAnonymity
+   from pyaaas import AttributeType
+   from pyaaas import Dataset
    import pandas as pd
 
    aaas = AaaS(url) # url contains url to AaaS web service

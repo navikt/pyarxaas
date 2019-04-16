@@ -3,7 +3,7 @@
 Privacy Model
 =============
 
-.. module:: pyaaas.models.privacy_models
+.. module:: pyaaas.privacy_models
 
 .. autoclass:: PrivacyModel
     :members:
