@@ -11,7 +11,10 @@ class RedactionHierarchyBuilder:
         LEFT_TO_RIGHT = "LEFT_TO_RIGHT"
         RIGHT_TO_LEFT = "RIGHT_TO_LEFT"
 
-    def __init__(self, padding_char:str, redaction_char: str, padding_order: Order, redaction_order: Order):
+    def __init__(self, padding_char:str = " ",
+                 redaction_char: str = "*",
+                 padding_order: Order = Order.RIGHT_TO_LEFT,
+                 redaction_order: Order = Order.RIGHT_TO_LEFT):
         self._padding_char = padding_char
         self._reduction_char = redaction_char
         self._padding_order = padding_order

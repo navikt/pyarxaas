@@ -36,3 +36,18 @@ class RedactionHierarchyBuildTest(unittest.TestCase):
         redaction_builder.prepare(["1123", "1321", "1234", "1532"])
         request_payload = redaction_builder._request_payload()
         self.assertEqual(expected, request_payload)
+
+    def test_redaction_builder_with_zero_params(self):
+        expected = {'column': ['1123', '1321', '1234', '1532'],
+                    'builder': {'type': 'redactionBased',
+                                'paddingCharacter': ' ',
+                                'redactionCharacter': '*',
+                                'paddingOrder': 'RIGHT_TO_LEFT',
+                                'redactionOrder': 'RIGHT_TO_LEFT'}
+                    }
+
+        redaction_builder = RedactionHierarchyBuilder()
+        redaction_builder.prepare(["1123", "1321", "1234", "1532"])
+
+        request_payload = redaction_builder._request_payload()
+        self.assertEqual(expected, request_payload)
