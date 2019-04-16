@@ -6,7 +6,7 @@ from uplink import Body
 
 from pyaaas.models.hierarchy.reduction_hierarchy_builder import RedactionHierarchyBuilder
 from pyaaas.aaas_connector import AaaSConnector
-from pyaaas import KAnonymity
+from pyaaas.privacy_models import KAnonymity
 from pyaaas.aaas import AaaS
 from pyaaas.models.anonymize_result import AnonymizeResult
 from pyaaas.models.attribute_type import AttributeType

@@ -3,7 +3,7 @@ import unittest
 import pandas
 
 from pyaaas import converters
-from pyaaas.models.privacy_models import KAnonymity, LDiversityDistinct, LDiversityRecursive
+from pyaaas.privacy_models import KAnonymity, LDiversityDistinct, LDiversityRecursive
 
 
 class ConvertersTest(unittest.TestCase):
