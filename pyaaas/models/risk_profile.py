@@ -44,7 +44,7 @@ class RiskProfile:
         """
         return copy.deepcopy(self._distribution_of_risk)
 
-    def re_identification_risk_dataframe(self):
+    def re_identification_risk_dataframe(self) -> DataFrame:
         """
         Re-identification risk as a pandas.DataFrame
 
@@ -53,7 +53,7 @@ class RiskProfile:
         df = DataFrame([self._re_identification_of_risk["measures"]])
         return df
 
-    def distribution_of_risk_dataframe(self):
+    def distribution_of_risk_dataframe(self) -> DataFrame:
         """
         Distribution of risk as a pandas.DataFrame
 

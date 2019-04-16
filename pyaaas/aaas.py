@@ -18,7 +18,7 @@ class AaaS:
     def __init__(self, url: str, connector=AaaSConnector, client=None):
         self._connector = connector(url, client=client)
 
-    def anonymize(self, dataset: Dataset, privacy_models):
+    def anonymize(self, dataset: Dataset, privacy_models) -> AnonymizeResult:
         """
         Attempt to anonymize a dataset with provided privacy models
 
@@ -69,7 +69,7 @@ class AaaS:
         anonymization_metrics = response_dict["anonymizeResult"]["metrics"]
         return AnonymizeResult._from_response(dataset, risk_profile, anonymization_metrics, anon_status)
 
-    def risk_profile(self, dataset: Dataset):
+    def risk_profile(self, dataset: Dataset) -> RiskProfile:
         """
         Creates a risk profile for a provided Dataset
 
