@@ -22,7 +22,7 @@ Analyze the risk of a dataset using PyAaaS is very simple.
 
 1. **Begin by importing the Dataset class and pandas which we are going to use to create a** :ref:`dataset` ::
 
-    from pyaaas.models.dataset import Dataset
+    from pyaaas import Dataset
     import pandas as pd
 
  Then we create a Dataset from a local csv file
@@ -40,7 +40,7 @@ Analyze the risk of a dataset using PyAaaS is very simple.
 2. **Then we set the**  :ref:`attribute_type` **for the Dataset fields.** ::
 
     # import the attribute_type module
-     from pyaaas.models.attribute_type import AttributeType
+     from pyaaas import AttributeType
 
     # set attribute type
     dataset.set_attributes(['name','gender'], AttributeType.QUASIIDENTIFYING)
@@ -51,7 +51,7 @@ Analyze the risk of a dataset using PyAaaS is very simple.
  The AaaS connector class needs a url to the ARXaaS instance. In this example we have ARXaaS running locally. ::
 
     # import the aaas module
-    from pyaaas.aaas import AaaS
+    from pyaaas import AaaS
 
     # establishing a connection to the ARXaaS service using the URL
     aaas = AaaS("http://localhost:8080")
@@ -83,14 +83,14 @@ Anonymizing a dataset using PyAaaS.
 
 1. **Begin by importing the Dataset class and pandas which we are going to use to create a Dataset** ::
 
-        from pyaaas.models.dataset import Dataset
+        from pyaaas import Dataset
         import pandas as pd
 
 
 2. **Same as when in analyze we set the attribute type for the dataset fields**::
 
     # import the attribute_type module
-     from pyaaas.models.attribute_type import AttributeType
+     from pyaaas import AttributeType
 
     # set attribute type
     dataset.set_attributes(['name','gender'], AttributeType.QUASIIDENTIFYING)
@@ -111,7 +111,7 @@ Anonymizing a dataset using PyAaaS.
 4. **When anonymizing we need to supply a** :ref:`privacy_model` **for ARXaaS to run on the dataset. You can read more about the models here** `ARX Privacy Models <https://arx.deidentifier.org/overview/privacy-criteria/>`_ ::
 
     # importing the privacy_models module
-    from pyaaas.models.privacy_models import KAnonymity
+    from pyaaas.privacy_models import KAnonymity
 
     # creating a privacy_models object
     kanon = KAnonymity(4)
@@ -120,7 +120,7 @@ Anonymizing a dataset using PyAaaS.
 
 
     # import the aaas module
-    from pyaaas.aaas import AaaS
+    from pyaaas import AaaS
 
     # establishing a connection to the ARXaaS service using the URL
     aaas = AaaS("http://localhost:8080")
