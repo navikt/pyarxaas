@@ -1,3 +1,5 @@
+urllib3
+requests
 uplink==0.7.0
 pandas
 IPython

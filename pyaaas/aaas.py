@@ -2,6 +2,8 @@ import json
 from collections.abc import Mapping
 
 import requests
+from urllib3.util import parse_url
+import logging
 
 from pyaaas.models.request_builder import RequestBuilder
 from pyaaas.aaas_connector import AaaSConnector
@@ -15,8 +17,10 @@ class AaaS:
     Understands connection to ARXaaS
     """
 
-    def __init__(self, url: str, connector=AaaSConnector, client=None):
+    def __init__(self, url: str, connector=AaaSConnector, client=None, logger=logging.getLogger()):
         self._connector = connector(url, client=client)
+        self._logger = logger
+        self._connector.test_connection()
 
     def anonymize(self, dataset: Dataset, privacy_models) -> AnonymizeResult:
         """
@@ -50,7 +54,6 @@ class AaaS:
         :return:
         """
         response = self._connector.anonymize_data(payload)
-        self._throw_exeption_on_error_response(response)
         return response
 
     def anonymize_result(self, response):
@@ -104,7 +107,6 @@ class AaaS:
         """
 
         response = self._connector.risk_profile(data_dict)
-        self._throw_exeption_on_error_response(response)
         return response
 
     def _attributes(self, response_dict):
@@ -112,15 +114,8 @@ class AaaS:
         attribute_dict = {attribute["field"]: attribute["attributeTypeModel"] for attribute in raw}
         return attribute_dict
 
-    @staticmethod
-    def _throw_exeption_on_error_response(response: requests.Response) -> None:
-        # if status code does not start with 2xx throw exception
-        if not str(response.status_code)[0] == "2":
-            raise SystemError(response.text)
-
     def hierarchy(self, redaction_builder):
         request = redaction_builder._request_payload()
         response = self._connector.hierarchy(request)
-        self._throw_exeption_on_error_response(response)
         response_dict = json.loads(response.text)
         return response_dict["hierarchy"]
