@@ -1,4 +1,4 @@
-from pyaaas.models.privacy_models import LDiversityDistinct, LDiversityGrassbergerEntropy, LDiversityShannonEntropy, LDiversityRecursive
+from pyaaas.privacy_models import LDiversityDistinct, LDiversityGrassbergerEntropy, LDiversityShannonEntropy, LDiversityRecursive
 import unittest
 
 

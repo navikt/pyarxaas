@@ -1,6 +1,6 @@
 import unittest
 
-from pyaaas import KAnonymity
+from pyaaas.privacy_models import KAnonymity
 from pyaaas.models.request_builder import RequestBuilder
 from tests.pyaaas import data_generator
 

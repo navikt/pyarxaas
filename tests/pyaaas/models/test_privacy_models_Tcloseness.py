@@ -1,4 +1,4 @@
-from pyaaas.models.privacy_models import TClosenessEqualDistance, TClosenessOrderedDistance
+from pyaaas.privacy_models import TClosenessEqualDistance, TClosenessOrderedDistance
 import unittest
 
 

@@ -2,7 +2,7 @@ from collections.abc import Sequence, Mapping
 
 import pandas
 
-from pyaaas.models.privacy_models import PrivacyModel
+from pyaaas.privacy_models import PrivacyModel
 
 
 def create_privacy_models_dataframe(privacy_models: Sequence) -> pandas.DataFrame:

@@ -1,7 +1,7 @@
 import copy
 from collections.abc import Mapping, Sequence
 
-from pyaaas.models.privacy_models import PrivacyModel
+from pyaaas.privacy_models import PrivacyModel
 from pyaaas.models.dataset import Dataset
 
 
