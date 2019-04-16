@@ -23,7 +23,7 @@ class AnonymizeResult:
         return hash(hash(self._anonymization_metrics) + hash(self._risk_profile) + hash(self._dataset))
 
     @property
-    def dataset(self):
+    def dataset(self) -> Dataset:
         """
         Dataset created from the anonymization
 
@@ -32,7 +32,7 @@ class AnonymizeResult:
         return copy.deepcopy(self._dataset)
 
     @property
-    def risk_profile(self):
+    def risk_profile(self) -> RiskProfile:
         """
         RiskProfile asscocciated with the new Dataset
 
@@ -41,7 +41,7 @@ class AnonymizeResult:
         return copy.deepcopy(self._risk_profile)
 
     @property
-    def anonymization_metrics(self):
+    def anonymization_metrics(self) -> AnonymizationMetrics:
         """
         AnonymizationMetrics about the anonymization process.
         Contains data on hierarchy level used and privacy model configuration
@@ -51,7 +51,7 @@ class AnonymizeResult:
         return copy.deepcopy(self._anonymization_metrics)
 
     @property
-    def anonymization_status(self):
+    def anonymization_status(self) -> str:
         """
         Anonymization status for the new Dataset
 

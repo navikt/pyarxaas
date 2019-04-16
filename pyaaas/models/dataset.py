@@ -142,7 +142,7 @@ class Dataset:
         for attribute, hierarchy in hierarchies.items():
             self.set_hierarchy(attribute, hierarchy)
 
-    def to_dataframe(self):
+    def to_dataframe(self) -> pandas.DataFrame:
         """
         Create pandas DataFrame of the Dataset
 
