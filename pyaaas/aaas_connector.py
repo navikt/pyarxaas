@@ -13,3 +13,8 @@ class AaaSConnector(Consumer):
     @post("api/analyze")
     def risk_profile(self, payload: Body):
         """Post data to AaaS Backend"""
+
+    @json
+    @post("api/hierarchy")
+    def hierarchy(self, payload: Body):
+        """Post data to AaaS Backend"""
