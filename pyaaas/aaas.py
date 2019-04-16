@@ -1,10 +1,6 @@
 import json
 from collections.abc import Mapping
 
-import requests
-from urllib3.util import parse_url
-import logging
-
 from pyaaas.models.request_builder import RequestBuilder
 from pyaaas.aaas_connector import AaaSConnector
 from pyaaas.models.anonymize_result import AnonymizeResult
@@ -17,9 +13,8 @@ class AaaS:
     Understands connection to ARXaaS
     """
 
-    def __init__(self, url: str, connector=AaaSConnector, client=None, logger=logging.getLogger()):
+    def __init__(self, url: str, connector=AaaSConnector, client=None):
         self._connector = connector(url, client=client)
-        self._logger = logger
         self._connector.test_connection()
 
     def anonymize(self, dataset: Dataset, privacy_models) -> AnonymizeResult:
@@ -32,7 +27,7 @@ class AaaS:
         """
         request_payload = self._anonymize_payload(dataset, privacy_models)
         response = self._anonymize(request_payload)
-        return self.anonymize_result(response)
+        return self._anonymize_result(response)
 
     def _anonymize_payload(self, dataset, privacy_models) -> Mapping:
         """
@@ -56,7 +51,7 @@ class AaaS:
         response = self._connector.anonymize_data(payload)
         return response
 
-    def anonymize_result(self, response):
+    def _anonymize_result(self, response):
         """
         Creates the result to be delivered back to the caller
 

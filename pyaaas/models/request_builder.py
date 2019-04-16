@@ -1,4 +1,3 @@
-import copy
 from collections.abc import Mapping, Sequence
 
 from pyaaas.privacy_models import PrivacyModel
