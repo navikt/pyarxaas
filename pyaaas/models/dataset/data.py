@@ -18,7 +18,7 @@ class Data:
     def dataframe(self):
         return pandas.DataFrame(self._rows, columns=self._headers)
 
-    def describe_data(self, indent):
+    def describe(self, indent):
         print("data:")
         print(self._describe_data_headers(indent))
         print("rows:")
