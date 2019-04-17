@@ -42,10 +42,10 @@ class DatasetTest(unittest.TestCase):
     def test_create_from_pandas_dataframe(self):
         dataframe = pandas.DataFrame(self.test_data[1:], columns=self.test_data[0])
         dataset = Dataset.from_pandas(dataframe)
+        pandas_df = dataset.to_dataframe()
 
         # assert column names are in top row
-        self.assertEqual("id", dataset._data[0][0])
-        self.assertEqual("name", dataset._data[0][1])
+        self.assertEqual(dataframe.to_dict(), pandas_df.to_dict())
 
         # assert default AttributeType is set
         self.assertEqual(Dataset._DEFAULT_ATTRIBUTE_TYPE.value, dataset._attributes[0].type.value)

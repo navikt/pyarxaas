@@ -4,6 +4,7 @@ from collections.abc import Mapping
 
 import pandas
 
+from pyaaas.models.dataset.data import Data
 from pyaaas.models.dataset.attribute import Attribute
 from pyaaas.models.attribute_type import AttributeType
 
@@ -19,7 +20,7 @@ class Dataset:
         if attribute_types is None:
             attribute_types = self._create_default_attribute_map(data[0])
 
-        self._data = data
+        self._data = Data(data[0], data[1:])
         self._attributes = self._create_attributes(attribute_types)
 
     def set_attribute(self, attribute, attribute_type: AttributeType):
@@ -82,7 +83,7 @@ class Dataset:
         :return: pandas.DataFrame
         """
 
-        return pandas.DataFrame(self._data[1:], columns=self._data[0])
+        return self._data.dataframe
 
     def describe(self):
         """
@@ -92,40 +93,9 @@ class Dataset:
         """
 
         indent = 2
-        self.describe_data(indent)
+        self._data.describe_data(indent)
         print("attributes:")
         print(self._describe_attributes(indent))
-
-    def describe_data(self, indent):
-        print("data:")
-        print(self._describe_data_headers(indent))
-        print("rows:")
-        print(self._describe_data_rows(indent))
-
-    def _describe_data_headers(self, indent):
-        string = " "*indent + "headers:\n"
-        string += " " * indent*2 + str(self._data[0])
-        return string
-
-    def _describe_data_rows(self, indent):
-        indent = indent*2
-        max_rows_to_print = 5
-        rows_to_print = min(max_rows_to_print, (len(self._data) + 1))
-        max_columns_to_print = 8
-        string = ""
-        for row in self._data[1:rows_to_print]:
-            if len(row) > max_columns_to_print:
-                columns_to_print_mid = max_columns_to_print // 2
-                print_row = row[:columns_to_print_mid]
-                print_row.append("...")
-                print_row += row[-columns_to_print_mid:]
-                row = print_row
-            string += " "*indent +\
-                      str(row) +\
-                      "\n"
-        if len(self._data) > max_rows_to_print:
-            string += " "*indent + str("...")
-        return string
 
     def _describe_attributes(self, indent):
         string = ""
@@ -142,7 +112,7 @@ class Dataset:
 
     def _to_dict(self):
         return {
-            "data": self._data,
+            "data": self._data.payload,
             "attributes": self._create_attributes_payload()
         }
 
@@ -186,10 +156,7 @@ class Dataset:
         return hash(self) == hash(other)
 
     def __hash__(self):
-        return hash(hash(self._data[0][0]) + self._hash_of_attributes())
-
-    def __repr__(self) -> str:
-        return f"Dataset(data={self._data}, attributes={self._attributes})"
+        return hash(hash(self._data) + self._hash_of_attributes())
 
     def _hash_of_attributes(self):
         a_hash = hash(self._attributes[0])
@@ -197,12 +164,9 @@ class Dataset:
             a_hash = hash(a_hash + hash(attribute))
         return a_hash
 
-    def _has_of_data(self):
-        r_hash = ""
-        for row in self._data:
-            for cell in row:
-                r_hash = hash(r_hash + hash(cell))
-        return r_hash
+    def __repr__(self) -> str:
+        return f"Dataset(data={self._data}, attributes={self._attributes})"
+
 
 
 
