@@ -22,16 +22,67 @@ class Dataset:
         self._data = data
         self._attributes = self._create_attributes(attribute_types)
 
-    def __eq__(self, other):
-        if not isinstance(other, self.__class__):
-            return False
-        return hash(self) == hash(other)
+    def set_attribute(self, attribute, attribute_type: AttributeType):
+        """
+        Set Attribute type for a attribute in the dataset
 
-    def __hash__(self):
-        return hash(hash(self._data[0][0]) + self._hash_of_attributes())
+        :param attribute: attribute in the dataset
+        :param attribute_type: AttributeType for the attribute
+        :return: None
+        """
 
-    def __repr__(self) -> str:
-        return f"Dataset(data={self._data}, attributes={self._attributes})"
+        field_map = {field.name: field for field in self._attributes}
+        try:
+            field_map[attribute].type = attribute_type
+        except KeyError:
+            raise KeyError(f"attribute=({attribute}) could not be found")
+
+    def set_attributes(self, attributes, attribute_type: AttributeType):
+        """
+        Set AttributeType for a collection of attributes
+
+        :param attributes: collection of attributes in the dataset
+        :param attribute_type: AttributeType for the attributes
+        :return: None
+        """
+
+        for attribute in attributes:
+            self.set_attribute(attribute, attribute_type)
+
+    def _create_attributes(self, attribute_types: Mapping):
+        fields = []
+        for field_name, type in attribute_types.items():
+            fields.append(Attribute(field_name, type))
+        return fields
+
+    def set_hierarchy(self, attribute, hierarchy):
+        """
+        Set hierarchy for a attribute in the Dataset
+
+        :param attribute: attribute in the Dataset
+        :param hierarchy: to be applied  to the attribute
+        :return: None
+        """
+
+        hierarchy = self._create_from_hierarchy_source(hierarchy)
+        field_map = {field.name: field for field in self._attributes}
+        try:
+            field_map[attribute].hierarchy = hierarchy
+        except KeyError:
+            raise KeyError(f"attribute=({attribute}) could not be found")
+
+    def set_hierarchies(self, hierarchies):
+        for attribute, hierarchy in hierarchies.items():
+            self.set_hierarchy(attribute, hierarchy)
+
+    def to_dataframe(self) -> pandas.DataFrame:
+        """
+        Create pandas DataFrame of the Dataset
+
+        :return: pandas.DataFrame
+        """
+
+        return pandas.DataFrame(self._data[1:], columns=self._data[0])
 
     def describe(self):
         """
@@ -41,12 +92,15 @@ class Dataset:
         """
 
         indent = 2
+        self.describe_data(indent)
+        print("attributes:")
+        print(self._describe_attributes(indent))
+
+    def describe_data(self, indent):
         print("data:")
         print(self._describe_data_headers(indent))
         print("rows:")
         print(self._describe_data_rows(indent))
-        print("attributes:")
-        print(self._describe_attributes(indent))
 
     def _describe_data_headers(self, indent):
         string = " "*indent + "headers:\n"
@@ -79,31 +133,6 @@ class Dataset:
             string += " "*indent + str(attribute) + "\n"
         return string
 
-    def _hash_of_attributes(self):
-        a_hash = hash(self._attributes[0])
-        for attribute in self._attributes[0:]:
-            a_hash = hash(a_hash + hash(attribute))
-        return a_hash
-
-    def _has_of_data(self):
-        r_hash = ""
-        for row in self._data:
-            for cell in row:
-                r_hash = hash(r_hash + hash(cell))
-        return r_hash
-
-    def _create_attributes(self, attribute_types: Mapping):
-        fields = []
-        for field_name, type in attribute_types.items():
-            fields.append(Attribute(field_name, type))
-        return fields
-
-    def _create_attributes_payload(self):
-        attributes = []
-        for field in self._attributes:
-            attributes.append(field.payload)
-        return attributes
-
     def _payload(self):
         payload = {}
         dataset_dict = self._to_dict()
@@ -117,12 +146,11 @@ class Dataset:
             "attributes": self._create_attributes_payload()
         }
 
-    @staticmethod
-    def _create_from_hierarchy_source(source):
-        if isinstance(source, Sequence):
-            return copy.deepcopy(source)
-        if isinstance(source, pandas.DataFrame):
-            return source.values.tolist()
+    def _create_attributes_payload(self):
+        attributes = []
+        for field in self._attributes:
+            attributes.append(field.payload)
+        return attributes
 
     @classmethod
     def from_pandas(cls, dataframe: pandas.DataFrame):
@@ -145,62 +173,36 @@ class Dataset:
             attribute_type_map[field] = cls._DEFAULT_ATTRIBUTE_TYPE
         return attribute_type_map
 
-    def set_attribute(self, attribute, attribute_type: AttributeType):
-        """
-        Set Attribute type for a attribute in the dataset
+    @staticmethod
+    def _create_from_hierarchy_source(source):
+        if isinstance(source, Sequence):
+            return copy.deepcopy(source)
+        if isinstance(source, pandas.DataFrame):
+            return source.values.tolist()
 
-        :param attribute: attribute in the dataset
-        :param attribute_type: AttributeType for the attribute
-        :return: None
-        """
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        return hash(self) == hash(other)
 
-        field_map = {field.name: field for field in self._attributes}
-        try:
-            field_map[attribute].type = attribute_type
-        except KeyError:
-            raise KeyError(f"attribute=({attribute}) could not be found")
+    def __hash__(self):
+        return hash(hash(self._data[0][0]) + self._hash_of_attributes())
 
-    def set_attributes(self, attributes, attribute_type: AttributeType):
-        """
-        Set AttributeType for a collection of attributes
+    def __repr__(self) -> str:
+        return f"Dataset(data={self._data}, attributes={self._attributes})"
 
-        :param attributes: collection of attributes in the dataset
-        :param attribute_type: AttributeType for the attributes
-        :return: None
-        """
+    def _hash_of_attributes(self):
+        a_hash = hash(self._attributes[0])
+        for attribute in self._attributes[0:]:
+            a_hash = hash(a_hash + hash(attribute))
+        return a_hash
 
-        for attribute in attributes:
-            self.set_attribute(attribute, attribute_type)
-
-    def set_hierarchy(self, attribute, hierarchy):
-        """
-        Set hierarchy for a attribute in the Dataset
-
-        :param attribute: attribute in the Dataset
-        :param hierarchy: to be applied  to the attribute
-        :return: None
-        """
-
-        hierarchy = self._create_from_hierarchy_source(hierarchy)
-        field_map = {field.name: field for field in self._attributes}
-        try:
-            field_map[attribute].hierarchy = hierarchy
-        except KeyError:
-            raise KeyError(f"attribute=({attribute}) could not be found")
-
-    def set_hierarchies(self, hierarchies):
-        for attribute, hierarchy in hierarchies.items():
-            self.set_hierarchy(attribute, hierarchy)
-
-    def to_dataframe(self) -> pandas.DataFrame:
-        """
-        Create pandas DataFrame of the Dataset
-
-        :return: pandas.DataFrame
-        """
-
-        return pandas.DataFrame(self._data[1:], columns=self._data[0])
-
+    def _has_of_data(self):
+        r_hash = ""
+        for row in self._data:
+            for cell in row:
+                r_hash = hash(r_hash + hash(cell))
+        return r_hash
 
 
 
