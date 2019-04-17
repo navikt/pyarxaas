@@ -24,7 +24,7 @@ class DatasetTest(unittest.TestCase):
         dataset_2 = data_generator.id_name_dataset()
         self.assertEqual(dataset_1, dataset_2)
         self.assertIsNot(dataset_1, dataset_2)
-        dataset_2.set_attribute("id", AttributeType.QUASIIDENTIFYING)
+        dataset_2._set_attribute_type("id", AttributeType.QUASIIDENTIFYING)
         self.assertNotEqual(dataset_1, dataset_2)
 
     def test_hash(self):
@@ -55,15 +55,20 @@ class DatasetTest(unittest.TestCase):
         self.assertEqual(AttributeType.QUASIIDENTIFYING.value, dataset._attributes[0].type.value)
         self.assertEqual(AttributeType.QUASIIDENTIFYING.value, dataset._attributes[1].type.value)
 
-    def test_set_attribute_types(self):
+    def test_set_attribute_type_with_sequence_of_attributes(self):
         dataset = Dataset(self.test_data)
-        dataset.set_attributes(["id", "name"], AttributeType.QUASIIDENTIFYING)
-        self.assertEqual(AttributeType.QUASIIDENTIFYING.value, dataset._attributes[0].type.value)
-        self.assertEqual(AttributeType.QUASIIDENTIFYING.value, dataset._attributes[1].type.value)
+        dataset.set_attribute_type(AttributeType.IDENTIFYING, "id", "name")
+        self.assertEqual(AttributeType.IDENTIFYING.value, dataset._attributes[0].type.value)
+        self.assertEqual(AttributeType.IDENTIFYING.value, dataset._attributes[1].type.value)
+
+    def test_set_attribute_type_with_single_attribute(self):
+        dataset = Dataset(self.test_data)
+        dataset.set_attribute_type(AttributeType.IDENTIFYING, "id")
+        self.assertEqual(AttributeType.IDENTIFYING.value, dataset._attributes[0].type.value)
 
     def test_set_attribute_type__single_attribute(self):
         dataset = Dataset(self.test_data)
-        dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
+        dataset._set_attribute_type("id", AttributeType.QUASIIDENTIFYING)
         self.assertEqual(AttributeType.QUASIIDENTIFYING.value, dataset._attributes[0].type.value)
         self.assertEqual(Dataset._DEFAULT_ATTRIBUTE_TYPE.value, dataset._attributes[1].type.value)
 
@@ -72,7 +77,7 @@ class DatasetTest(unittest.TestCase):
         test_hierarchy = [["0", "*"], ["1", "*"]]
 
         dataset = Dataset(self.test_data)
-        dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
+        dataset._set_attribute_type("id", AttributeType.QUASIIDENTIFYING)
         dataset.set_hierarchy("id", test_hierarchy)
         self.assertEqual(dataset._attributes[0].hierarchy, test_hierarchy)
 
@@ -81,7 +86,7 @@ class DatasetTest(unittest.TestCase):
         test_hierarchy = [["0", "*"], ["1", "*"]]
 
         dataset = Dataset(self.test_data)
-        dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
+        dataset._set_attribute_type("id", AttributeType.QUASIIDENTIFYING)
         with self.assertRaises(KeyError):
             dataset.set_hierarchy("fail", test_hierarchy)
         self.assertIsNone(dataset._attributes[0].hierarchy)
@@ -91,7 +96,7 @@ class DatasetTest(unittest.TestCase):
         test_hierarchy = [["0", "*"], ["1", "*"]]
 
         dataset = Dataset(self.test_data)
-        dataset.set_attribute("id", AttributeType.INSENSITIVE)
+        dataset._set_attribute_type("id", AttributeType.INSENSITIVE)
         with self.assertRaises(ValueError):
             dataset.set_hierarchy("id", test_hierarchy)
         self.assertIsNone(dataset._attributes[0].hierarchy)
@@ -103,8 +108,8 @@ class DatasetTest(unittest.TestCase):
         test_hierarchy_name = [["Viktor", "*"], ["Jerry", "*"]]
 
         dataset = Dataset(self.test_data)
-        dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
-        dataset.set_attribute("name", AttributeType.QUASIIDENTIFYING)
+        dataset._set_attribute_type("id", AttributeType.QUASIIDENTIFYING)
+        dataset._set_attribute_type("name", AttributeType.QUASIIDENTIFYING)
         dataset.set_hierarchies({"id": test_hierarchy_id, "name": test_hierarchy_name})
         self.assertEqual(dataset._attributes[0].hierarchy, test_hierarchy_id)
         self.assertEqual(dataset._attributes[1].hierarchy, test_hierarchy_name)
@@ -115,7 +120,7 @@ class DatasetTest(unittest.TestCase):
         hierarchy_df = pandas.DataFrame(test_hierarchy)
 
         dataset = Dataset(self.test_data)
-        dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
+        dataset._set_attribute_type("id", AttributeType.QUASIIDENTIFYING)
         dataset.set_hierarchy("id", hierarchy_df)
         self.assertEqual(dataset._attributes[0].hierarchy, test_hierarchy)
 
@@ -131,8 +136,8 @@ class DatasetTest(unittest.TestCase):
         test_hierarchy_name = [["Viktor", "NAME"], ["Jerry", "NAME"]]
 
         dataset = Dataset(self.test_data)
-        dataset.set_attribute("id", AttributeType.QUASIIDENTIFYING)
-        dataset.set_attribute("name", AttributeType.QUASIIDENTIFYING)
+        dataset._set_attribute_type("id", AttributeType.QUASIIDENTIFYING)
+        dataset._set_attribute_type("name", AttributeType.QUASIIDENTIFYING)
         dataset.set_hierarchies({"id": test_hierarchy_id, "name": test_hierarchy_name})
         payload = dataset._payload()
         self.assertEqual(test_hierarchy_id, payload["attributes"][0]["hierarchy"])
