@@ -34,6 +34,12 @@ class Dataset:
         return f"Dataset(data={self._data}, attributes={self._attributes})"
 
     def describe(self):
+        """
+        Prints a description of the Dataset to stdout
+
+        :return: None
+        """
+
         indent = 2
         print("data:")
         print(self._describe_data_headers(indent))
