@@ -5,6 +5,9 @@ from pandas import DataFrame
 
 
 class RiskProfile:
+    """
+    Represents the re-identification risks associated with a Dataset
+    """
 
     def __init__(self, metrics: Mapping):
         self._re_identification_of_risk = copy.deepcopy(metrics["reIdentificationRisk"])
