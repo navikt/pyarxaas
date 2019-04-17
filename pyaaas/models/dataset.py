@@ -29,6 +29,49 @@ class Dataset:
     def __hash__(self):
         return hash(hash(self._data[0][0]) + self._hash_of_attributes())
 
+    def __repr__(self) -> str:
+        return f"Dataset(data={self._data}, attributes={self._attributes})"
+
+    def describe(self):
+        indent = 2
+        print("data:")
+        print(self._describe_data_headers(indent))
+        print("rows:")
+        print(self._describe_data_rows(indent))
+        print("attributes:")
+        print(self._describe_attributes(indent))
+
+    def _describe_data_headers(self, indent):
+        string = " "*indent + "headers:\n"
+        string += " " * indent*2 + str(self._data[0])
+        return string
+
+    def _describe_data_rows(self, indent):
+        indent = indent*2
+        max_rows_to_print = 5
+        rows_to_print = min(max_rows_to_print, (len(self._data) + 1))
+        max_columns_to_print = 8
+        string = ""
+        for row in self._data[1:rows_to_print]:
+            if len(row) > max_columns_to_print:
+                columns_to_print_mid = max_columns_to_print // 2
+                print_row = row[:columns_to_print_mid]
+                print_row.append("...")
+                print_row += row[-columns_to_print_mid:]
+                row = print_row
+            string += " "*indent +\
+                      str(row) +\
+                      "\n"
+        if len(self._data) > max_rows_to_print:
+            string += " "*indent + str("...")
+        return string
+
+    def _describe_attributes(self, indent):
+        string = ""
+        for attribute in self._attributes:
+            string += " "*indent + str(attribute) + "\n"
+        return string
+
     def _hash_of_attributes(self):
         a_hash = hash(self._attributes[0])
         for attribute in self._attributes[0:]:
@@ -170,10 +213,10 @@ class Dataset:
             return hash(hash(self._field_name) + hash(self._hierarchy) + hash(self._type))
 
         def __str__(self) -> str:
-            return f"{self.__class__}(field_name={self.name}, type={self.type}, hierarchy={self.hierarchy})"
+            return f"field_name={self.name}, type={self.type.name}, hierarchy={self.hierarchy}"
 
         def __repr__(self):
-            return self.__str__()
+            return f"_Attribute(field_name={self.name}, type={self.type}, hierarchy={self.hierarchy})"
 
         @property
         def name(self):
