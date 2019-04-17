@@ -23,7 +23,7 @@ class Dataset:
         self._data = Data(data[0], data[1:])
         self._attributes = self._create_attributes(attribute_types)
 
-    def set_attribute(self, attribute, attribute_type: AttributeType):
+    def _set_attribute_type(self, attribute, attribute_type: AttributeType):
         """
         Set Attribute type for a attribute in the dataset
 
@@ -38,7 +38,7 @@ class Dataset:
         except KeyError:
             raise KeyError(f"attribute=({attribute}) could not be found")
 
-    def set_attributes(self, attributes, attribute_type: AttributeType):
+    def set_attribute_type(self, attribute_type: AttributeType, *attributes):
         """
         Set AttributeType for a collection of attributes
 
@@ -46,9 +46,8 @@ class Dataset:
         :param attribute_type: AttributeType for the attributes
         :return: None
         """
-
         for attribute in attributes:
-            self.set_attribute(attribute, attribute_type)
+            self._set_attribute_type(attribute, attribute_type)
 
     def _create_attributes(self, attribute_types: Mapping):
         fields = []
@@ -166,6 +165,8 @@ class Dataset:
 
     def __repr__(self) -> str:
         return f"Dataset(data={self._data}, attributes={self._attributes})"
+
+
 
 
 
