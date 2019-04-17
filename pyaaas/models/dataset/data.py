@@ -35,7 +35,7 @@ class Data:
         rows_to_print = min(max_rows_to_print, (len(self._rows)))
         max_columns_to_print = 8
         string = ""
-        for row in self._rows[rows_to_print]:
+        for row in self._rows[0: rows_to_print]:
             if len(row) > max_columns_to_print:
                 columns_to_print_mid = max_columns_to_print // 2
                 print_row = row[:columns_to_print_mid]
