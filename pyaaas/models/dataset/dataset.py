@@ -93,7 +93,7 @@ class Dataset:
         """
 
         indent = 2
-        self._data.describe_data(indent)
+        self._data.describe(indent)
         print("attributes:")
         print(self._describe_attributes(indent))
 
