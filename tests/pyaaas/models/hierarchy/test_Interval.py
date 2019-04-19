@@ -1,6 +1,6 @@
 import unittest
 
-from models.hierarchy.interval_builder.interval import Interval
+from pyaaas.models.hierarchy.interval_builder.interval import Interval
 
 
 class IntervalTest(unittest.TestCase):
