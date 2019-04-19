@@ -51,10 +51,10 @@ Analyze the risk of a dataset using PyAaaS is very simple.
  The AaaS connector class needs a url to the ARXaaS instance. In this example we have ARXaaS running locally. ::
 
     # import the aaas module
-    from pyaaas import AaaS
+    from pyaaas import ARXaaS
 
     # establishing a connection to the ARXaaS service using the URL
-    aaas = AaaS("http://localhost:8080")
+    aaas = ARXaaS("http://localhost:8080")
 
 4. **After the** :ref:`aaas` **object is created we can use it to call the ARXaaS instance to make a** :ref:`risk_profile` **for our Dataset.** ::
 
@@ -120,10 +120,10 @@ Anonymizing a dataset using PyAaaS.
 
 
     # import the aaas module
-    from pyaaas import AaaS
+    from pyaaas import ARXaaS
 
     # establishing a connection to the ARXaaS service using the URL
-    aaas = AaaS("http://localhost:8080")
+    aaas = ARXaaS("http://localhost:8080")
 
 6. **After the** :ref:`aaas` **object is created we can use it to call the ARXaaS instance. Back if the anonymization is successful we receive an** :ref:`anonymize_result` ::
 
