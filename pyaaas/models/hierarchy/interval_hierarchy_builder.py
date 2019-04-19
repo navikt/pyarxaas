@@ -23,12 +23,31 @@ class Level:
                 "groups": [group.payload() for group in self._groups]}
 
 
+class Interval:
+
+    def __init__(self, from_, to, label):
+        if from_ > to:
+            raise AttributeError(f"from={from_} cannot be bigger than to={to}")
+        self._from = from_
+        self._to = to
+        self._label = label
+
+    def payload(self):
+        return {"from": self._from,
+                "to": self._to,
+                "label": self._label}
+
+
 class IntervalHierarchyGenerator:
 
     def __init__(self):
         self._levels = []
+        self._intervals = []
         self._level_count = 0
         self._column = None
+
+    def add_interval(self, from_, to, label: str=None):
+        self._intervals.append(Interval(from_, to, label))
 
     def level(self, level):
         if level > self._level_count:
