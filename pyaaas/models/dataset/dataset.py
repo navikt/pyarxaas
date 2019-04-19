@@ -124,7 +124,7 @@ class Dataset:
     @classmethod
     def from_pandas(cls, dataframe: pandas.DataFrame):
         """
-        Create the dataset from a pandas DataFrame
+        Create a Dataset from a pandas DataFrame
 
         :param dataframe: pandas Dataframe
         :return: Dataset
@@ -134,6 +134,18 @@ class Dataset:
         values = dataframe.values.tolist()
         data = [headers] + values
         return Dataset(data=data, attribute_types=cls._create_default_attribute_map(headers))
+
+    @classmethod
+    def from_dict(cls, dictionary):
+        """
+        Create Dataset from a python dictionary
+
+        :param dictionary: Mapping object to create Dataset from
+        :return: Dataset
+        """
+
+        df = pandas.DataFrame.from_dict(dictionary)
+        return cls.from_pandas(df)
 
     @classmethod
     def _create_default_attribute_map(cls, fields):
