@@ -8,7 +8,7 @@ from pyaaas.models.dataset import Dataset
 from pyaaas.models.risk_profile import RiskProfile
 
 
-class AaaS:
+class ARXaaS:
     """
     Understands connection to ARXaaS
     """
