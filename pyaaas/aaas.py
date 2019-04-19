@@ -17,29 +17,32 @@ class AaaS:
         self._connector = connector(url, client=client)
         self._connector.test_connection()
 
-    def anonymize(self, dataset: Dataset, privacy_models) -> AnonymizeResult:
+    def anonymize(self, dataset: Dataset, privacy_models,suppression_limit: float = None) -> AnonymizeResult:
         """
         Attempt to anonymize a dataset with provided privacy models
 
         :param dataset: Dataset to be anonymized
         :param privacy_models: privacy models to be used in the anonymization
+        :param suppression_limit: suppression limit to be used in the anonymization
         :return: Dataset with anonymized data
         """
-        request_payload = self._anonymize_payload(dataset, privacy_models)
+        request_payload = self._anonymize_payload(dataset, privacy_models, suppression_limit)
         response = self._anonymize(request_payload)
         return self._anonymize_result(response)
 
-    def _anonymize_payload(self, dataset, privacy_models) -> Mapping:
+    def _anonymize_payload(self, dataset, privacy_models, suppression_limit) -> Mapping:
         """
         Creates a anonymize payload to be sent to the backend
 
         :param dataset: Dataset to be anonymized
         :param privacy_models: privacy models to be used in the anonymization
+        :param suppression_limit: suppression limit to be used in the anonymization
         :return: Mapping payload
         """
 
         return RequestBuilder(dataset)\
             .add_privacy_models(privacy_models)\
+            .add_suppression_limit(suppression_limit)\
             .build_anonymize_request()
 
     def _anonymize(self, payload):
