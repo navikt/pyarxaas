@@ -147,4 +147,13 @@ class DatasetTest(unittest.TestCase):
         dataset = Dataset(self.test_data, self.test_attribute_type_mapping)
         df = dataset.to_dataframe()
         self.assertIsInstance(df, pandas.DataFrame)
-        print(df)
+
+    def test_from_dict(self):
+        data = {"id": [1, 2], "name": ["Monsen", "Mikkel"]}
+        expected_df = pandas.DataFrame.from_dict(data)
+        dataset = Dataset.from_dict(data)
+        self.assertIsNotNone(dataset)
+        self.assertIsInstance(dataset, Dataset)
+        self.assertEqual(expected_df.to_dict(), dataset.to_dataframe().to_dict())
+
+
