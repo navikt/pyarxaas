@@ -4,7 +4,7 @@ from pyaaas.models.hierarchy.grouping_based_hierarchy import GroupingBasedHierar
 from pyaaas.models.hierarchy.interval_builder.interval import Interval
 
 
-class IntervalHierarchyGenerator(GroupingBasedHierarchy):
+class IntervalHierarchyBuilder(GroupingBasedHierarchy):
     """
     Represents a specific strategy for creating a value generalization hierarchy
     """
