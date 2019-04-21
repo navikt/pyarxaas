@@ -26,6 +26,7 @@ class IntervalHierarchyGenerator:
     def add_interval(self, from_, to, label: str=None):
         """
         Add a interval to the builder
+        from_ is inclusive, to is exclusive
 
         :param from_: create interval with and from this value
         :param to: create interval to this value
