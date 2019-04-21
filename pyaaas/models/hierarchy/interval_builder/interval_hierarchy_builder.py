@@ -11,7 +11,7 @@ class IntervalHierarchyBuilder(GroupingBasedHierarchy):
 
     def __init__(self):
         super().__init__()
-        self._intervals = set()
+        self._intervals = {}
 
     @property
     def intervals(self):
@@ -28,13 +28,14 @@ class IntervalHierarchyBuilder(GroupingBasedHierarchy):
         :return: None
 
         """
-        self._intervals.add(Interval(from_, to, label))
+        # using dict to enforce uniqueness and order
+        self._intervals[Interval(from_, to, label)] = ""
 
     def _request_payload(self):
         return {
             "builder": {
                 "type": "intervalBased",
-                "intervals": [interval.payload() for interval in self._intervals],
+                "intervals": [interval.payload() for interval in self._intervals.keys()],
                 "levels": [level.payload() for level in self.levels]
             }
         }

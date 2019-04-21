@@ -49,3 +49,13 @@ class IntervalHierarchyBuilderTest(unittest.TestCase):
         ib.add_interval(0, 10)
         self.assertEqual(1, len(ib.intervals))
 
+    def test_intervals_order(self):
+        ib = IntervalHierarchyBuilder()
+        ib.add_interval(0, 10)
+        ib.add_interval(10, 20)
+        ib.add_interval(20, 30)
+        self.assertEqual(10, ib.intervals[0]._to)
+        self.assertEqual(20, ib.intervals[1]._to)
+        self.assertEqual(30, ib.intervals[2]._to)
+
+
