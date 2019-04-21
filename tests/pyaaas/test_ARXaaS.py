@@ -40,7 +40,8 @@ class HierarchyResponseStub:
 
     @property
     def text(self):
-        return '{"hierarchy":[["1123","*123","**23","***3","****"],["1321","*321","**21","***1","****"],["1234","*234","**34","***4","****"],["1532","*532","**32","***2","****"]]}'
+        return '{"hierarchy":[["1123","*123","**23","***3","****"],["1321","*321","**21","***1","****"],["1234",' \
+               '"*234","**34","***4","****"],["1532","*532","**32","***2","****"]]} '
 
     @property
     def status_code(self):
@@ -73,13 +74,12 @@ class MockAaasConnector(AaaSConnector):
         return RootResponseStub()
 
 
-
-class AaaSTest(unittest.TestCase):
+class ARXaaSTest(unittest.TestCase):
 
     def setUp(self):
         self.test_data = [['id', 'name'],
-                         ['0', 'Viktor'],
-                         ['1', 'Jerry']]
+                          ['0', 'Viktor'],
+                          ['1', 'Jerry']]
         self.test_attribute_type_mapping = {'id': AttributeType.IDENTIFYING,
                                             'name': AttributeType.QUASIIDENTIFYING}
 
@@ -90,7 +90,7 @@ class AaaSTest(unittest.TestCase):
 
     def test_init(self):
         ARXaaS('http://localhost', connector=MockAaasConnector)
-        
+
     def test_analyze(self):
         aaas = ARXaaS('http://localhost', connector=MockAaasConnector)
         self.assertIsNotNone(aaas.risk_profile(self.test_dataset))
@@ -103,7 +103,9 @@ class AaaSTest(unittest.TestCase):
         aaas = ARXaaS('http://localhost', connector=MockAaasConnector)
         risk_profile = aaas.risk_profile(self.test_dataset)
         df = risk_profile.re_identification_risk_dataframe()
-        self.assertEqual(self.test_raw_analyze_response["reIdentificationRisk"]["measures"]["records_affected_by_highest_prosecutor_risk"], df["records_affected_by_highest_prosecutor_risk"][0])
+        self.assertEqual(self.test_raw_analyze_response["reIdentificationRisk"]["measures"][
+                             "records_affected_by_highest_prosecutor_risk"],
+                         df["records_affected_by_highest_prosecutor_risk"][0])
 
     def test_anonymize_return_value(self):
         aaas = ARXaaS('http://localhost', connector=MockAaasConnector)
@@ -116,14 +118,14 @@ class AaaSTest(unittest.TestCase):
         self.assertEqual(AttributeType.IDENTIFYING, AttributeType(anonymize_result.dataset._attributes[0].type))
 
     def test_redaction_based_hierarchy(self):
-        expected = [["1123","*123","**23","***3","****"],["1321","*321","**21","***1","****"],["1234","*234","**34","***4","****"],["1532","*532","**32","***2","****"]]
+        expected = [["1123", "*123", "**23", "***3", "****"], ["1321", "*321", "**21", "***1", "****"],
+                    ["1234", "*234", "**34", "***4", "****"], ["1532", "*532", "**32", "***2", "****"]]
         aaas = ARXaaS('http://localhost:8080', connector=MockAaasConnector)
         redaction_builder = RedactionHierarchyBuilder(
             " ",
             "*",
             RedactionHierarchyBuilder.Order.RIGHT_TO_LEFT,
             RedactionHierarchyBuilder.Order.LEFT_TO_RIGHT)
-        redaction_builder.prepare(["1123", "1321", "1234", "1532"])
-        hierarchy = aaas.hierarchy(redaction_builder)
+        column = ["1123", "1321", "1234", "1532"]
+        hierarchy = aaas.hierarchy(redaction_builder, column)
         self.assertEqual(expected, hierarchy)
-

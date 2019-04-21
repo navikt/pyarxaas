@@ -1,31 +1,30 @@
 import unittest
 
-from pyaaas.models.hierarchy.interval_builder.interval_hierarchy_builder import IntervalHierarchyGenerator
+from pyaaas.models.hierarchy.interval_builder.interval_hierarchy_builder import IntervalHierarchyBuilder
 
 
-class IntervalHierarchyGeneratorTest(unittest.TestCase):
+class IntervalHierarchyBuilderTest(unittest.TestCase):
 
     def test_init(self):
-        IntervalHierarchyGenerator()
+        IntervalHierarchyBuilder()
 
     def test_add_level(self):
-        ib = IntervalHierarchyGenerator()
+        ib = IntervalHierarchyBuilder()
         ib.level(0).add_group(2, "test_label")
         ib.level(1).add_group(4)
 
     def test_add_levels_not_availible_raises_exception(self):
         with self.assertRaises(AttributeError):
-            ib = IntervalHierarchyGenerator()
+            ib = IntervalHierarchyBuilder()
             ib.level(1).add_group(2)
 
         with self.assertRaises(AttributeError):
-            ib = IntervalHierarchyGenerator()
+            ib = IntervalHierarchyBuilder()
             ib.level(0).add_group(2)
             ib.level(2).add_group(1)
 
     def test__request_payload(self):
         expected = {
-            "column" : [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ],
             "builder" : {
                 "type" : "intervalBased",
                 "intervals": [],
@@ -39,14 +38,13 @@ class IntervalHierarchyGeneratorTest(unittest.TestCase):
             }
         }
 
-        ib = IntervalHierarchyGenerator()
+        ib = IntervalHierarchyBuilder()
         ib.level(0).add_group(2, "test_label")
-        ib.prepare([ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
         payload = ib._request_payload()
         self.assertEqual(expected, payload)
 
     def test_intervals_are_unique(self):
-        ib = IntervalHierarchyGenerator()
+        ib = IntervalHierarchyBuilder()
         ib.add_interval(0, 10)
         ib.add_interval(0, 10)
         self.assertEqual(1, len(ib.intervals))

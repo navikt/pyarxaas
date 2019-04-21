@@ -20,14 +20,9 @@ class RedactionHierarchyBuilder:
         self._reduction_char = redaction_char
         self._padding_order = padding_order
         self._redaction_order = redaction_order
-        self._column = None
-
-    def prepare(self, column):
-        self._column = column
 
     def _request_payload(self)-> Mapping:
         return {
-            "column": self._column,
             "builder": {
                 "type": "redactionBased",
                 "paddingCharacter": self._padding_char,
