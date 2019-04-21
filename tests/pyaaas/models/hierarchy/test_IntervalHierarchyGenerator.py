@@ -25,7 +25,6 @@ class IntervalHierarchyGeneratorTest(unittest.TestCase):
 
     def test__request_payload(self):
         expected = {
-            "column" : [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ],
             "builder" : {
                 "type" : "intervalBased",
                 "intervals": [],
@@ -41,7 +40,6 @@ class IntervalHierarchyGeneratorTest(unittest.TestCase):
 
         ib = IntervalHierarchyGenerator()
         ib.level(0).add_group(2, "test_label")
-        ib.prepare([ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
         payload = ib._request_payload()
         self.assertEqual(expected, payload)
 

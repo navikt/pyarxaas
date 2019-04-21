@@ -112,8 +112,9 @@ class ARXaaS:
         attribute_dict = {attribute["field"]: attribute["attributeTypeModel"] for attribute in raw}
         return attribute_dict
 
-    def hierarchy(self, redaction_builder):
+    def hierarchy(self, redaction_builder, column):
         request = redaction_builder._request_payload()
+        request["column"] = column
         response = self._connector.hierarchy(request)
         response_dict = json.loads(response.text)
         return response_dict["hierarchy"]

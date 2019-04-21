@@ -12,7 +12,6 @@ class IntervalHierarchyGenerator(GroupingBasedHierarchy):
     def __init__(self):
         super().__init__()
         self._intervals = set()
-        self._column = None
 
     @property
     def intervals(self):
@@ -31,12 +30,8 @@ class IntervalHierarchyGenerator(GroupingBasedHierarchy):
         """
         self._intervals.add(Interval(from_, to, label))
 
-    def prepare(self, column):
-        self._column = column
-
     def _request_payload(self):
         return {
-            "column": self._column,
             "builder": {
                 "type": "intervalBased",
                 "intervals": [interval.payload() for interval in self._intervals],
