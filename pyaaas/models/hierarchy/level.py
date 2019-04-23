@@ -8,8 +8,9 @@ class Level:
         self._level = level
         self._groups = []
 
-    def add_group(self, grouping, label=None):
+    def add_group(self, grouping, label=None) -> "Level":
         self._groups.append(Group(grouping, label))
+        return self
 
     def payload(self):
         return {"level": self._level,
