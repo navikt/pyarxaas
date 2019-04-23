@@ -58,4 +58,12 @@ class IntervalHierarchyBuilderTest(unittest.TestCase):
         self.assertEqual(20, ib.intervals[1]._to)
         self.assertEqual(30, ib.intervals[2]._to)
 
-
+    def test_group_building(self):
+        ib = IntervalHierarchyBuilder()
+        ib.level(0)\
+            .add_group(2)\
+            .add_group(2)
+        ib.level(1)\
+            .add_group(2)
+        self.assertEqual(2, len(ib.levels[0]._groups))
+        self.assertEqual(1, len(ib.levels[1]._groups))
