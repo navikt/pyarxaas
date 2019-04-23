@@ -5,6 +5,7 @@ language: python
 python:
 - 3.7-dev
 install:
+- pip install .
 - pip install -r requirements.txt
 - pip install pytest
 - pip install coverage

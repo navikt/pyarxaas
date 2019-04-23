@@ -1,24 +1,28 @@
 {
   "reIdentificationRisk" : {
     "measures" : {
-      "Prosecutor_attacker_success_rate" : "100.0",
-      "records_affected_by_highest_prosecutor_risk" : "100.0",
-      "sample_uniques" : "100.0",
-      "estimated_prosecutor_risk" : "100.0",
-      "population_model" : "ZAYATZ",
-      "highest_journalist_risk" : "100.0",
-      "records_affected_by_lowest_risk" : "100.0",
-      "estimated_marketer_risk" : "100.0",
-      "Journalist_attacker_success_rate" : "100.0",
-      "highest_prosecutor_risk" : "100.0",
-      "estimated_journalist_risk" : "100.0",
-      "lowest_risk" : "100.0",
-      "Marketer_attacker_success_rate" : "100.0",
-      "average_prosecutor_risk" : "100.0",
-      "records_affected_by_highest_journalist_risk" : "100.0",
-      "population_uniques" : "100.0",
-      "quasi_identifiers" : "[zipcode]"
-    }
+      "estimated_journalist_risk" : 1.0,
+      "records_affected_by_highest_prosecutor_risk" : 1.0,
+      "sample_uniques" : 1.0,
+      "lowest_risk" : 1.0,
+      "estimated_prosecutor_risk" : 1.0,
+      "highest_journalist_risk" : 1.0,
+      "records_affected_by_lowest_risk" : 1.0,
+      "average_prosecutor_risk" : 1.0,
+      "estimated_marketer_risk" : 1.0,
+      "highest_prosecutor_risk" : 1.0,
+      "records_affected_by_highest_journalist_risk" : 1.0,
+      "population_uniques" : 1.0
+    },
+    "attackerSuccessRate" : {
+      "successRates" : {
+        "Prosecutor_attacker_success_rate" : 1.0,
+        "Marketer_attacker_success_rate" : 1.0,
+        "Journalist_attacker_success_rate" : 1.0
+      }
+    },
+    "quasiIdentifiers" : [ "zipcode" ],
+    "populationModel" : "ZAYATZ"
   },
   "distributionOfRisk" : {
     "riskIntervalList" : [ {
