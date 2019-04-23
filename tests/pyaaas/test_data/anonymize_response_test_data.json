@@ -8,7 +8,7 @@
         "type" : "QUASI_IDENTIFYING_ATTRIBUTE",
         "generalizationLevel" : 2
       } ],
-      "processTimeMillisecounds" : 2,
+      "processTimeMillisecounds" : 0,
       "privacyModels" : [ {
         "monotonicWithGeneralization" : true,
         "k" : 5,
@@ -61,24 +61,28 @@
   "riskProfile" : {
     "reIdentificationRisk" : {
       "measures" : {
-        "Prosecutor_attacker_success_rate" : "9.090909090909092",
-        "records_affected_by_highest_prosecutor_risk" : "100.0",
-        "sample_uniques" : "0.0",
-        "estimated_prosecutor_risk" : "9.090909090909092",
-        "population_model" : "DANKAR",
-        "highest_journalist_risk" : "9.090909090909092",
-        "records_affected_by_lowest_risk" : "100.0",
-        "estimated_marketer_risk" : "9.090909090909092",
-        "Journalist_attacker_success_rate" : "9.090909090909092",
-        "highest_prosecutor_risk" : "9.090909090909092",
-        "estimated_journalist_risk" : "9.090909090909092",
-        "lowest_risk" : "9.090909090909092",
-        "Marketer_attacker_success_rate" : "9.090909090909092",
-        "average_prosecutor_risk" : "9.090909090909092",
-        "records_affected_by_highest_journalist_risk" : "100.0",
-        "population_uniques" : "0.0",
-        "quasi_identifiers" : "[zipcode]"
-      }
+        "estimated_journalist_risk" : 0.09090909090909091,
+        "records_affected_by_highest_prosecutor_risk" : 1.0,
+        "sample_uniques" : 0.0,
+        "lowest_risk" : 0.09090909090909091,
+        "estimated_prosecutor_risk" : 0.09090909090909091,
+        "highest_journalist_risk" : 0.09090909090909091,
+        "records_affected_by_lowest_risk" : 1.0,
+        "average_prosecutor_risk" : 0.09090909090909091,
+        "estimated_marketer_risk" : 0.09090909090909091,
+        "highest_prosecutor_risk" : 0.09090909090909091,
+        "records_affected_by_highest_journalist_risk" : 1.0,
+        "population_uniques" : 0.0
+      },
+      "attackerSuccessRate" : {
+        "successRates" : {
+          "Prosecutor_attacker_success_rate" : 0.09090909090909091,
+          "Marketer_attacker_success_rate" : 0.09090909090909091,
+          "Journalist_attacker_success_rate" : 0.09090909090909091
+        }
+      },
+      "quasiIdentifiers" : [ "zipcode" ],
+      "populationModel" : "DANKAR"
     },
     "distributionOfRisk" : {
       "riskIntervalList" : [ {
