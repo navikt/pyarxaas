@@ -10,8 +10,11 @@ class RiskProfile:
     """
 
     def __init__(self, metrics: Mapping):
-        self._re_identification_of_risk = copy.deepcopy(metrics["reIdentificationRisk"])
+        self._re_identification_of_risk = copy.deepcopy(metrics["reIdentificationRisk"]["measures"])
         self._distribution_of_risk = copy.deepcopy(metrics["distributionOfRisk"])
+        self._attacker_success_rate = copy.deepcopy(metrics["reIdentificationRisk"]["attackerSuccessRate"]["successRates"])
+        self._quasi_identifiers = metrics["reIdentificationRisk"]["quasiIdentifiers"]
+        self._population_model = metrics["reIdentificationRisk"]["populationModel"]
 
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
@@ -36,7 +39,7 @@ class RiskProfile:
 
         :return: dict containing re-identification metrics
         """
-        return copy.deepcopy(self._re_identification_of_risk["measures"])
+        return copy.deepcopy(self._re_identification_of_risk)
 
     @property
     def distribution_of_risk(self):
@@ -47,13 +50,25 @@ class RiskProfile:
         """
         return copy.deepcopy(self._distribution_of_risk)
 
+    @property
+    def attacker_success_rate(self):
+        return copy.deepcopy(self._attacker_success_rate)
+
+    @property
+    def quasi_identifiers(self):
+        return copy.deepcopy(self._quasi_identifiers)
+
+    @property
+    def population_model(self):
+        return self._population_model
+
     def re_identification_risk_dataframe(self) -> DataFrame:
         """
         Re-identification risk as a pandas.DataFrame
 
         :return: pandas.Dataframe with risk metrics
         """
-        df = DataFrame([self._re_identification_of_risk["measures"]])
+        df = DataFrame([self._re_identification_of_risk])
         return df
 
     def distribution_of_risk_dataframe(self) -> DataFrame:
