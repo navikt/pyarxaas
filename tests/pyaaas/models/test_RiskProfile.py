@@ -1,9 +1,8 @@
 import json
-import pandas
 import unittest
 from pathlib import Path
 
-from numpy.core._multiarray_umath import dtype
+from numpy import dtype
 from pandas import DataFrame
 
 from pyaaas.models.risk_profile import RiskProfile
