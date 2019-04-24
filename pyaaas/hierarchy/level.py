@@ -1,3 +1,4 @@
+import uuid
 
 class Level:
     """
@@ -42,7 +43,11 @@ class Group:
         return hash(self) == hash(other)
 
     def __hash__(self):
-        return hash(self._grouping) + hash(self._label)
+        # Groups are only equal if labels are present and the same
+        label = self._label
+        if label is None:
+            label = uuid.uuid1()
+        return hash(self._grouping) + hash(label)
 
     def __repr__(self):
         return f"Group(grouping={self._grouping}, label={self._label})"
