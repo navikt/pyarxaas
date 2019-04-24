@@ -1,6 +1,6 @@
 import unittest
 
-from pyaaas.models.hierarchy.order_builder.order_hierarchy_builder import OrderHierarchyBuilder
+from pyaaas.hierarchy import OrderHierarchyBuilder
 
 
 class OrderHierarchyBuilderTest(unittest.TestCase):

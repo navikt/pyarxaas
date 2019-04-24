@@ -13,6 +13,11 @@ class Interval:
                 "to": self._to,
                 "label": self._label}
 
+    def is_decimal(self):
+        if isinstance(self._from, float) or isinstance(self._to, float):
+            return True
+        return False
+
     def __repr__(self):
         return f"Interval(from={self._from}, to={self._to}, label={self._label})"
 
