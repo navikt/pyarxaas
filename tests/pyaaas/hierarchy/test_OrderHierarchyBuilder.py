@@ -17,3 +17,10 @@ class OrderHierarchyBuilderTest(unittest.TestCase):
         ob = OrderHierarchyBuilder()
         ob.level(0).add_group(2, "upper-body-clothes")
         self.assertEqual(expected, ob._request_payload())
+
+    def test_adding_same_group_twice_is_not_possible(self):
+        ob = OrderHierarchyBuilder()
+        ob.level(0).add_group(2, "lower-body-clothes")
+        ob.level(0).add_group(2, "upper-body-clothes")
+        ob.level(0).add_group(2, "lower-body-clothes")
+        self.assertEqual(2, len(ob.level(0)._groups))

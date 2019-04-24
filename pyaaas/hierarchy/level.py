@@ -6,15 +6,15 @@ class Level:
 
     def __init__(self, level):
         self._level = level
-        self._groups = []
+        self._groups = {}
 
     def add_group(self, grouping, label=None) -> "Level":
-        self._groups.append(Group(grouping, label))
+        self._groups[Group(grouping, label)] = None
         return self
 
     def payload(self):
         return {"level": self._level,
-                "groups": [group.payload() for group in self._groups]}
+                "groups": [group.payload() for group in self._groups.keys()]}
 
     def __repr__(self):
         return f"Level(level={self._level}, groups={self._groups})"
@@ -35,6 +35,14 @@ class Group:
     def payload(self):
         return {"grouping": self._grouping,
                 "label": self._label}
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        return hash(self) == hash(other)
+
+    def __hash__(self):
+        return hash(self._grouping) + hash(self._label)
 
     def __repr__(self):
         return f"Group(grouping={self._grouping}, label={self._label})"
