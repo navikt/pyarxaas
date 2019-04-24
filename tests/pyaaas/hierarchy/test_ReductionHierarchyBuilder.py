@@ -1,6 +1,6 @@
 import unittest
 
-from pyaaas.models.hierarchy.reduction_hierarchy_builder import RedactionHierarchyBuilder
+from pyaaas.hierarchy import RedactionHierarchyBuilder
 
 
 class RedactionHierarchyBuildTest(unittest.TestCase):

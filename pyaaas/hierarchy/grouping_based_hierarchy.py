@@ -1,7 +1,7 @@
 import copy
 from abc import ABC
 
-from pyaaas.models.hierarchy.level import Level
+from pyaaas.hierarchy.level import Level
 
 
 class GroupingBasedHierarchy(ABC):

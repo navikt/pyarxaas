@@ -1,7 +1,7 @@
 import copy
 
-from pyaaas.models.hierarchy.grouping_based_hierarchy import GroupingBasedHierarchy
-from pyaaas.models.hierarchy.interval_builder.interval import Interval
+from pyaaas.hierarchy.grouping_based_hierarchy import GroupingBasedHierarchy
+from pyaaas.hierarchy.interval_builder.interval import Interval
 
 
 class IntervalHierarchyBuilder(GroupingBasedHierarchy):
@@ -35,7 +35,18 @@ class IntervalHierarchyBuilder(GroupingBasedHierarchy):
         return {
             "builder": {
                 "type": "intervalBased",
+                "dataType": self._data_type(),
                 "intervals": [interval.payload() for interval in self._intervals.keys()],
                 "levels": [level.payload() for level in self.levels]
             }
         }
+
+    def _data_type(self):
+        for interval in self._intervals:
+            if interval.is_decimal():
+                return "DOUBLE"
+        return "LONG"
+
+    @staticmethod
+    def _is_decimal(number):
+        return "." in number

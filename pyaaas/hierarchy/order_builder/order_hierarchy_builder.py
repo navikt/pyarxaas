@@ -1,4 +1,4 @@
-from pyaaas.models.hierarchy.grouping_based_hierarchy import GroupingBasedHierarchy
+from pyaaas.hierarchy.grouping_based_hierarchy import GroupingBasedHierarchy
 
 
 class OrderHierarchyBuilder(GroupingBasedHierarchy):

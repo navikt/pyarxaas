@@ -1,6 +1,6 @@
 import unittest
 
-from pyaaas.models.hierarchy.interval_builder.interval_hierarchy_builder import IntervalHierarchyBuilder
+from pyaaas.hierarchy import IntervalHierarchyBuilder
 
 
 class IntervalHierarchyBuilderTest(unittest.TestCase):
@@ -27,6 +27,7 @@ class IntervalHierarchyBuilderTest(unittest.TestCase):
         expected = {
             "builder" : {
                 "type" : "intervalBased",
+                "dataType": "LONG",
                 "intervals": [],
                 "levels" : [ {
                     "level" : 0,
@@ -67,3 +68,38 @@ class IntervalHierarchyBuilderTest(unittest.TestCase):
             .add_group(2)
         self.assertEqual(2, len(ib.levels[0]._groups))
         self.assertEqual(1, len(ib.levels[1]._groups))
+
+    def test_decimal_interval(self):
+        expected = {'builder':
+                        {'type': 'intervalBased',
+                         'dataType': 'DOUBLE',
+                         'intervals':
+                             [{'from': 0.0, 'to': 10, 'label': None},
+                              {'from': 10, 'to': 20, 'label': None},
+                              {'from': 20, 'to': 30, 'label': None}],
+                         'levels': []}}
+
+        ib = IntervalHierarchyBuilder()
+        ib.add_interval(0.0, 10)
+        ib.add_interval(10, 20)
+        ib.add_interval(20, 30)
+        payload = ib._request_payload()
+        self.assertEqual(expected, payload)
+
+    def test_integer_interval(self):
+        expected = {'builder':
+                        {'type': 'intervalBased',
+                         'dataType': 'LONG',
+                         'intervals':
+                             [{'from': 0.0, 'to': 10, 'label': None},
+                              {'from': 10, 'to': 20, 'label': None},
+                              {'from': 20, 'to': 30, 'label': None}],
+                         'levels': []}}
+
+        ib = IntervalHierarchyBuilder()
+        ib.add_interval(0, 10)
+        ib.add_interval(10, 20)
+        ib.add_interval(20, 30)
+        payload = ib._request_payload()
+        self.assertEqual(expected, payload)
+

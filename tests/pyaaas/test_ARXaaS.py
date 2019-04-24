@@ -1,10 +1,9 @@
-import copy
 import json
 import unittest
 
 from uplink import Body
 
-from pyaaas.models.hierarchy.reduction_hierarchy_builder import RedactionHierarchyBuilder
+from pyaaas.hierarchy import RedactionHierarchyBuilder
 from pyaaas.aaas_connector import AaaSConnector
 from pyaaas.privacy_models import KAnonymity
 from pyaaas.arxaas import ARXaaS
