@@ -1,9 +1,12 @@
 from collections.abc import Mapping
-from abc import ABC, abstractproperty
+from abc import ABC
 
 
 class PrivacyModel(ABC, Mapping):
-    """ ABC for ARX Privacy Models"""
+    """
+    Documentation of the privacy models implemented in the ARXaaS service and the definition of the parameters
+    each privacy model takes.
+    """
     def __init__(self):
         self._internal_dict = {}
 
@@ -28,7 +31,12 @@ class PrivacyModel(ABC, Mapping):
 
 
 class KAnonymity(PrivacyModel):
-    """ Configuration class for KAnonymity"""
+    """
+    Configuration class for K-Anonymity
+
+    :param k: Value of K  to anonymize the dataset. K must have a value of 2 or higher to take effect.
+
+    """
 
     def __init__(self, k):
         self._internal_dict = {"k": k}
@@ -37,7 +45,12 @@ class KAnonymity(PrivacyModel):
 
 
 class LDiversityDistinct(PrivacyModel):
-    """ Configuration class for LDiversity"""
+    """
+    Configuration class for Distinct L-Diversity
+
+    :param l: Value of L to anonymize the dataset based on a column or dataset field that has a sensitive attribute. L must have a value of 2 or higher to take effect.
+    :param column_name: Column or dataset field that has a sensitive attribute type.
+    """
 
     def __init__(self, l, column_name):
         self._internal_dict = {"l": l, "column_name": column_name}
@@ -46,7 +59,12 @@ class LDiversityDistinct(PrivacyModel):
 
 
 class LDiversityShannonEntropy(PrivacyModel):
-    """ Configuration class for LDiversity"""
+    """
+    Configuration class for Shannon Entropy L-Diversity
+
+    :param l: Value of L to anonymize the dataset based on a column or dataset field that has a sensitive attribute. L must have a value of 2 or higher to take effect.
+    :param column_name: Column or dataset field that has a sensitive attribute type.
+    """
 
     def __init__(self, l, column_name):
         self._internal_dict = {"l": l, "column_name": column_name}
@@ -55,7 +73,11 @@ class LDiversityShannonEntropy(PrivacyModel):
 
 
 class LDiversityGrassbergerEntropy(PrivacyModel):
-    """ Configuration class for LDiversity"""
+    """ Configuration class for Grassberger Entropy L-Diversity
+
+    :param l: Value of L to anonymize the dataset based on a column or dataset field that has a sensitive attribute. L must have a value of 2 or higher to take effect.
+    :param column_name: Column or dataset field that has a sensitive attribute type.
+    """
 
     def __init__(self, l, column_name):
         self._internal_dict = {"l": l, "column_name": column_name}
@@ -64,7 +86,12 @@ class LDiversityGrassbergerEntropy(PrivacyModel):
 
 
 class LDiversityRecursive(PrivacyModel):
-    """ Configuration class for LDiversity"""
+    """ Configuration class for Recursive L-Diversity
+
+    :param l: Value of L to anonymize the dataset based on a column or dataset field that has a sensitive attribute. L must have a value of 2 or higher to take effect.
+    :param c: Value of C to anonymize the dataset based on a column or dataset field that has a sensitive attribute. c must have a value of  0.00001 or higher to take effect.
+    :param column_name: Column or dataset field that has a sensitive attribute type.
+    """
 
     def __init__(self, l, c, column_name):
         self._internal_dict = {"l": l, "c": c, "column_name": column_name}
@@ -72,7 +99,12 @@ class LDiversityRecursive(PrivacyModel):
         self._print_message = f"LDiversityRecursive(l={l}, c={c}, column_name={column_name})"
 
 class TClosenessOrderedDistance(PrivacyModel):
-    """ Configuration class for TCloseness"""
+    """
+    Configuration class for Ordered Distance T-Closeness
+
+    :param t: Value of T to anonymize the dataset based on a column or dataset field that has a sensitive attribute. T must have a value between 0.000001 to 1.0
+    :param column_name: Column or dataset field that has a sensitive attribute type.
+    """
 
     def __init__(self, t, column_name):
         self._internal_dict = {"t": t, "column_name": column_name}
@@ -80,7 +112,12 @@ class TClosenessOrderedDistance(PrivacyModel):
         self._print_message = f"TClosenessOrderedDistance(t={t}, column_name={column_name})"
 
 class TClosenessEqualDistance(PrivacyModel):
-    """ Configuration class for TCloseness"""
+    """
+    Configuration class for Equal Distance T-Closeness
+
+    :param t: Value of T to anonymize the dataset based on a column or dataset field that has a sensitive attribute. T must have a value between 0.000001 to 1.0
+    :param column_name: Column or dataset field that has a sensitive attribute type.
+    """
 
     def __init__(self, t, column_name):
         self._internal_dict = {"t": t, "column_name": column_name}
