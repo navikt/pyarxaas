@@ -1,5 +1,5 @@
 from collections.abc import Mapping
-from abc import ABC, abstractproperty
+from abc import ABC
 
 
 class PrivacyModel(ABC, Mapping):
@@ -34,7 +34,7 @@ class KAnonymity(PrivacyModel):
     """
     Configuration class for K-Anonymity
 
-    :param k: Value of K  to anonymize the dataset. K must have a value of 2 or higher.
+    :param k: Value of K  to anonymize the dataset. K must have a value of 2 or higher to take effect.
     """
 
     def __init__(self, k):
@@ -48,7 +48,7 @@ class LDiversityDistinct(PrivacyModel):
     Configuration class for Distinct L-Diversity
 
     :param l: Value of L to anonymize the dataset based on a column or dataset field that has a sensitive attribute.
-    L must have a value of 2 or higher.
+    L must have a value of 2 or higher to take effect.
     :param column_name: Column or dataset field that has a sensitive attribute type.
     """
 
@@ -63,7 +63,7 @@ class LDiversityShannonEntropy(PrivacyModel):
     Configuration class for Shannon Entropy L-Diversity
 
     :param l: Value of L to anonymize the dataset based on a column or dataset field that has a sensitive attribute.
-    L must have a value of 2 or higher.
+    L must have a value of 2 or higher to take effect.
     :param column_name: Column or dataset field that has a sensitive attribute type.
     """
 
@@ -77,7 +77,7 @@ class LDiversityGrassbergerEntropy(PrivacyModel):
     """ Configuration class for Grassberger Entropy L-Diversity
 
     :param l: Value of L to anonymize the dataset based on a column or dataset field that has a sensitive attribute.
-    L must have a value of 2 or higher.
+    L must have a value of 2 or higher to take effect.
     :param column_name: Column or dataset field that has a sensitive attribute type.
     """
 
@@ -91,9 +91,9 @@ class LDiversityRecursive(PrivacyModel):
     """ Configuration class for Recursive L-Diversity
 
     :param l: Value of L to anonymize the dataset based on a column or dataset field that has a sensitive attribute.
-    L must have a value of 2 or higher.
+    L must have a value of 2 or higher to take effect.
     :param c: Value of C to anonymize the dataset based on a column or dataset field that has a sensitive attribute.
-    c must have a value of  0.00001 or higher.
+    c must have a value of  0.00001 or higher to take effect.
     :param column_name: Column or dataset field that has a sensitive attribute type.
     """
 
@@ -107,7 +107,7 @@ class TClosenessOrderedDistance(PrivacyModel):
     Configuration class for Ordered Distance T-Closeness
 
     :param t: Value of T to anonymize the dataset based on a column or dataset field that has a sensitive attribute.
-    T must have a value between 0.000001 to 1.
+    T must have a value between 0.000001 to 1.0
     :param column_name: Column or dataset field that has a sensitive attribute type.
     """
 
@@ -121,7 +121,7 @@ class TClosenessEqualDistance(PrivacyModel):
     Configuration class for Equal Distance T-Closeness
 
     :param t: Value of T to anonymize the dataset based on a column or dataset field that has a sensitive attribute.
-    T must have a value between 0.000001 to 1.
+    T must have a value between 0.000001 to 1.0
     :param column_name: Column or dataset field that has a sensitive attribute type.
     """
 
