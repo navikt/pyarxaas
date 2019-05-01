@@ -3,32 +3,47 @@ from collections.abc import Mapping
 
 
 class AnonymizationMetrics:
-    """ Understands metrics from a anonymization process"""
+    """ Understand metrics from a anonymization process"""
 
     def __init__(self, metrics: Mapping):
-        self._elapsed_time = self.fetch_elapsed_time(metrics)
-        self._attribute_generalization = self.fetch_attribute_generalization(metrics)
-        self._privacy_models = self.fetch_privacy_models(metrics)
+        self._elapsed_time = self._fetch_elapsed_time(metrics)
+        self._attribute_generalization = self._fetch_attribute_generalization(metrics)
+        self._privacy_models = self._fetch_privacy_models(metrics)
 
-    def fetch_elapsed_time(self, metrics):
+    def _fetch_elapsed_time(self, metrics):
         return metrics["processTimeMillisecounds"]
 
-    def fetch_attribute_generalization(self, metrics):
+    def _fetch_attribute_generalization(self, metrics):
         return metrics["attributeGeneralization"]
 
-    def fetch_privacy_models(self, metrics):
+    def _fetch_privacy_models(self, metrics):
         return metrics["privacyModels"]
 
     @property
     def attribute_generalization(self):
+        """
+        Property for getting the attribute generalization
+
+        :return: Returns a dict containing all the quasi-identifying attributes and the transformation level used to anonymize the dataset.
+        """
         return copy.deepcopy(self._attribute_generalization)
 
     @property
     def privacy_models(self):
+        """
+        Property for getting the privacy models with the configurations used in the anonymization process.
+
+        :return: Returns a dict containing all the privacy models with the configuration used.
+        """
         return copy.deepcopy(self._privacy_models)
 
     @property
     def elapsed_time(self):
+        """
+        Property for getting the elapsed time for the anonymization process
+
+        :return: Returns the elapsed time in miliseconds
+        """
         return self._elapsed_time
 
     def __eq__(self, other):
