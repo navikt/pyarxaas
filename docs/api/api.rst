@@ -5,7 +5,7 @@ API Documentation
 
 .. toctree::
 
-    aaas
+    arxaas
     dataset
     anonymize_result
     risk_profile

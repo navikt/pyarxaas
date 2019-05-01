@@ -24,7 +24,7 @@ with open(path.join(here, '../VERSION'), encoding='utf-8') as f:
 
 # -- Project information -----------------------------------------------------
 
-project = 'PyAaaS'
+project = 'PyARXaaS'
 copyright = '2019, OsloMET-Group-8'
 author = 'OsloMET-Group-8'
 
