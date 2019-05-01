@@ -27,7 +27,7 @@ The package supports analyzing re-identification risks and anonymizing tabular d
 Features
 --------
 
- - :ref:`aaas` class for configuration and calling actions.
+ - :ref:`arxaas` class for configuration and calling actions.
  - :ref:`dataset`  class for encapsulating and configuring a dataset
  - :ref:`privacy_model` classes for configuring the Privacy Models to use in anonymization.
  - Easy integration with `pandas <https://pandas.pydata.org/>`_ DataFrames

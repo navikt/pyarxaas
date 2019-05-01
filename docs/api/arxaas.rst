@@ -1,11 +1,11 @@
-.. _aaas:
+.. _arxaas:
 
-AaaS
+ARXaaS
 =================
 
 AaaS encapsulates the connection the service
 
-.. module:: pyaaas.aaas
+.. module:: pyaaas.arxaas
 
-.. autoclass:: AaaS
+.. autoclass:: ARXaaS
     :members:
