@@ -7,5 +7,5 @@ If you are interrested in the theory behind each privacy models, you can read ab
 
 .. module:: pyaaas.privacy_models
 
-.. autoclass:: PrivacyModel
+.. automodule:: pyaaas.privacy_models
     :members:
