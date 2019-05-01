@@ -12,7 +12,7 @@ This page gives a good introduction in how to get started with PyAaaS
 - PyAaaS is up-to-date
 - You have a tabular dataset to use
 - You hava a running ARXaaS instance to connect to.
-    - Instructions on how to run ARXaas can be found here: https://github.com/oslomet-arx-as-a-service/ARXaaS/blob/master/README.md
+    - Instructions on how to run ARXaaS can be found here: https://github.com/oslomet-arx-as-a-service/ARXaaS/blob/master/README.md
 - If you are going to anonymize a dataset, you need to have the required hierarchies. See anonymize section for more information
 
 Let’s get started with some simple examples.
