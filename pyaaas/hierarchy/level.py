@@ -1,5 +1,6 @@
 import uuid
 
+
 class Level:
     """
     Represent a given level in a hierarchy builder
