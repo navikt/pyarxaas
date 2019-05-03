@@ -3,11 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. image:: images/new_hero_2.png
+   :width: 100%
+
+
+
 Welcome to PyARXaaS's documentation!
 ====================================
-
-.. image:: images/arxaas_logo.png
-   :height: 100px
 
 PyARXaaS is a Python wrapper package for ARXaaS.
 It provides user-friendly abstractions for the APIs exposed ARXaaS.
