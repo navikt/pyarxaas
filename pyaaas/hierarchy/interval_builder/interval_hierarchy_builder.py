@@ -17,19 +17,18 @@ class IntervalHierarchyBuilder(GroupingBasedHierarchy):
     def intervals(self):
         return list(copy.deepcopy(self._intervals))
 
-    def add_interval(self, from_, to, label: str=None):
+    def add_interval(self, from_n, to_n, label: str=None):
         """
-        Add a interval to the builder
-        from_ is inclusive, to is exclusive
+        Add a interval to the builder. from_n is inclusive, to_n is exclusive
 
-        :param from_: create interval with and from this value
-        :param to: create interval to this value
+        :param from_n: create interval inclusive from this value
+        :param to_n: create interval to this value
         :param label: (optional) set a string label for the interval
         :return: None
 
         """
         # using dict to enforce uniqueness and order
-        self._intervals[Interval(from_, to, label)] = ""
+        self._intervals[Interval(from_n, to_n, label)] = ""
 
     def _request_payload(self):
         return {

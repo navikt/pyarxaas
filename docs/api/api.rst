@@ -12,3 +12,4 @@ API Documentation
     attribute_type
     anonymization_metrics
     privacy_model
+    hierarchy/hierarchy
