@@ -9,3 +9,4 @@ User Guide
     installation
     quick-start
     using-dataset
+    creating-and-using-hierarchies
