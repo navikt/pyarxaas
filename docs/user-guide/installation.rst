@@ -1,4 +1,4 @@
-Installing PyAaaS
+Installing PyARXaaS
 ==================================
 
 .. note:: PyAaas requires python 3.6 and up. `Python download <https://www.python.org/downloads/>`_
@@ -25,7 +25,20 @@ Mac/Linux
     python3 -m venv
     source venv/bin/activate
 
-.. todo:: make setup for Windows
+Windows (Windows Powershell)
+
+.. code-block:: bash
+
+    // install virtualenv
+    pip install virtualenv
+    // create a new directory
+    mkdir pyaaas-project
+    // change currenct directory to 'pyaaas-project'
+    cd .\pyaaas-project
+    // create a virtual environment named 'venv', feel free to name it anything you like
+    virtualenv venv -p C:\Python\Python36\python.exe
+    // activate the virtual environment
+    .\venv\Scripts\activate
 
 Get the Source Code
 -------------------
