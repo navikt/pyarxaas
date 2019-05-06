@@ -15,6 +15,9 @@ RiskProfile contains two main properties
 - Individuals affected by highest risk.
 - Average prosecutor re-identification risk.
 - Fraction of unique records.
+- Attacker success rate against the re-identification risk.
+- Population Model name
+- Quasi-identifiers
 
 **Distribution of Risks**
 

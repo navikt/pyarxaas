@@ -52,14 +52,29 @@ class RiskProfile:
 
     @property
     def attacker_success_rate(self):
+        """
+        Attacker success rates against re-identification for a given Dataset
+
+        :return: dict containing the attacker success rate.
+        """
         return copy.deepcopy(self._attacker_success_rate)
 
     @property
     def quasi_identifiers(self):
+        """
+        Quasi-identifiers for a given Dataset
+
+        :return: dict containing a list of all the quasi-identifying attribute in a a given Dataset
+        """
         return copy.deepcopy(self._quasi_identifiers)
 
     @property
     def population_model(self):
+        """
+        Population model used to analyze a given Dataset
+
+        :return: The Population model name used to analyze a given Dataset
+        """
         return self._population_model
 
     def re_identification_risk_dataframe(self) -> DataFrame:
