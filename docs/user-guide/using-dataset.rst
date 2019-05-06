@@ -78,7 +78,7 @@ Hierarchies.
 ------------
 
 Hierarchy also referred to as *generalization hierarchies* represented either as pandas.DataFrames or a regular Python
-list are the strategies ARXaaS will use when attempting to anonymize the dataset. Read more about them here.
+list are the strategies ARXaaS will use when attempting to anonymize the dataset. Read more about them :ref:`create_hierarchies`.
 
 **Setting a hierarchy on a Dataset attribute** ::
 
