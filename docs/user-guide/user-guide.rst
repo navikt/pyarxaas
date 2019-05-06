@@ -8,3 +8,4 @@ User Guide
     introduction
     installation
     quick-start
+    using-dataset
