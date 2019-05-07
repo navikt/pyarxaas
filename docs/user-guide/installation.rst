@@ -10,6 +10,8 @@ PyAaaS is available on PyPI
 Pip install
 -----------
 
+Open the command-line interface and write:
+
 .. code-block:: bash
 
     pip install pyaaas
@@ -18,27 +20,46 @@ Pip install
 ------------------------------------
 Mac/Linux
 
-.. code-block:: bash
+1. Create a new directory
 
+.. code-block:: bash
     mkdir pyaaas-project
+
+2. Change currenct directory to 'pyaaas-project'
+
+.. code-block:: bash
     cd pyaaas-project
+
+3. Create a virtual environment
+
+.. code-block:: bash
     python3 -m venv
+
+4. activate the virtual environment
+.. code-block:: bash
     source venv/bin/activate
 
 Windows (Windows Powershell)
 
-.. code-block:: bash
+1. Create a new directory
 
-    // install virtualenv
-    pip install virtualenv
-    // create a new directory
+.. code-block:: bash
     mkdir pyaaas-project
-    // change currenct directory to 'pyaaas-project'
+
+2. Change currenct directory to 'pyaaas-project'
+
+.. code-block:: bash
     cd .\pyaaas-project
-    // create a virtual environment named 'venv', feel free to name it anything you like
-    virtualenv venv -p C:\Python\Python36\python.exe
-    // activate the virtual environment
-    .\venv\Scripts\activate
+
+3. Create a virtual environment
+
+.. code-block:: bash
+    c:\Python35\python -m venv c:\path\to\myenv
+
+4. activate the virtual environment
+
+.. code-block:: bash
+    .\Scripts\activate
 
 Get the Source Code
 -------------------
