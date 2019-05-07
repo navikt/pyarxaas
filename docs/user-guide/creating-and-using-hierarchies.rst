@@ -4,14 +4,14 @@
 Hierarchies
 ===========
 
-After creating a :ref:`dataset` from some data source you can set hierarchies ARXaaS will to use when attempting to anonymize
+After creating a :ref:`dataset` from some data source, you can set the hierarchies ARXaaS will use when attempting to anonymize
 the Dataset. ARXaaS currently only support value generalization hierarchies. Read more about different transformation
 models in `ARX documentation <https://arx.deidentifier.org/overview/transformation-models>`_.
 
 Hierarchy Building
 ------------------
-ARXaaS offer endpoints for use the ARX library hierarchy generation functionality. PyARXaaS implements abstractions to
-make this process as easy as intuitive as possible.
+ARXaaS offers an endpoint to use the ARX library hierarchy generation functionality. PyARXaaS implements abstractions to
+make this process as easy and intuitive as possible.
 
 Hierarchy generation that ARX offers falls into four different categories:
 
@@ -27,9 +27,9 @@ hierarchy builders are importable from the *pyaaas.hierarchy* package
 Redaction based hierarchies
 ----------------------------
 Redaction based hierarchies are hierarchies suited best for categorical but numeric values.
-Attributes such as zipcodes are a prime candidate. The hierarchy strategy is to delete one number at the time from the
+Attributes such as zipcodes are a prime candidate. The hierarchy strategy is to delete one number at a time from the
 attribute column until the privacy model criteria is meet. The hierarchy builder can be configured to start deleting from
-either direction, but will default to RIGHT_TO_LEFT. Redaction hierarchies are the least effort hierarchy to create.
+either direction, but will default to RIGHT_TO_LEFT. Redaction based hierarchies are the hierarchies with the least effort to create.
 
 **Example**
 In this example we will use a list of zipcodes representing a column from a hypothetical dataset. The list could be generated from any source.
@@ -75,8 +75,8 @@ The resulting hierarchy looks like this: ::
 Interval based hierarchies
 ---------------------------
 Interval based hierarchies are well suited for continuous numeric values. Attributes such as age, income or credit score
-are typical generalized with a interval hierarchy. The Interval hierarchy builder requires the user to specify intervals
-in which to generalize values in the attribute into. Optionally these intervals can be labeled. In addition intervals
+are typically generalized with a interval based hierarchy. The Interval based hierarchy builder requires the user to specify intervals
+in which to generalize values in the attribute. Optionally these intervals can be labeled. In addition intervals
 can be grouped upwards using levels and groups to create a deeper hierarchy.
 
 **Example**
@@ -127,7 +127,7 @@ Order based hierarchy
 :ref:`order_hierarchy_builder` are suited for categorical attributes. Attributes such as country, education level and
 employment status.
 
-Order bases hierarchies are built using groupings with optional labeling. This means that grouping is completed on the
+Order based hierarchies are built using groupings with optional labeling. This means that grouping is completed on the
 list of values as it is. This means the list has to be sorted according to some ordering before a hierarchy can be made.
 On the positive side. Order based hierarchies are usually very reusable depending on the domain.
 
