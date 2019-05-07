@@ -10,7 +10,7 @@ from pyaaas.models.risk_profile import RiskProfile
 
 class ARXaaS:
     """
-    Understands connection to ARXaaS
+    Represents the connection to ARXaaS. All public methods result in a call to the service.
     """
 
     def __init__(self, url: str, connector=AaaSConnector, client=None):
@@ -113,6 +113,15 @@ class ARXaaS:
         return attribute_dict
 
     def hierarchy(self, redaction_builder, column):
+        """
+        Creates a value generalization hierarchy with the passed in builder for the passed in column.
+
+
+        :param redaction_builder: a Hierarchy builder instance
+        :param column: a list of values
+        :return: list[list] containing the created hierarchy
+        """
+
         request = redaction_builder._request_payload()
         request["column"] = column
         response = self._connector.hierarchy(request)

@@ -47,7 +47,7 @@ Analyze the risk of a dataset using PyAaaS is very simple.
     dataset.set_attribute_type(AttributeType.QUASIIDENTIFYING, 'name', 'gender')
     dataset.set_attribute_type(AttributeType.IDENTIFYING, 'id')
 
-3. **To make a call to the ARXaaS instance we need to make a instance of the** :ref:`aaas` **class.**
+3. **To make a call to the ARXaaS instance we need to make a instance of the** :ref:`arxaas` **class.**
 
  The AaaS connector class needs a url to the ARXaaS instance. In this example we have ARXaaS running locally. ::
 
@@ -57,7 +57,7 @@ Analyze the risk of a dataset using PyAaaS is very simple.
     # establishing a connection to the ARXaaS service using the URL
     aaas = ARXaaS("http://localhost:8080")
 
-4. **After the** :ref:`aaas` **object is created we can use it to call the ARXaaS instance to make a** :ref:`risk_profile` **for our Dataset.** ::
+4. **After the** :ref:`arxaas` **object is created we can use it to call the ARXaaS instance to make a** :ref:`risk_profile` **for our Dataset.** ::
 
     # get the risk profle of the dataset
     risk_profile = aaas.risk_profile(dataset)
@@ -97,8 +97,8 @@ Anonymizing a dataset using PyAaaS.
     dataset.set_attributes(AttributeType.QUASIIDENTIFYING, 'name', 'gender')
     dataset.set_attributes(AttributeType.IDENTIFYING, 'id')
 
-3. **In addtion to setting attribute types we need to provide Transformation Models known as hierarchies for the dataset fields/columns with type AttributeType.QUASIIDENTIFYING**
- Hierarchies can be added as pandas.DataFrame objects::
+3. **In addition to setting attribute types we need to provide Transformation Models known as hierarchies for the dataset fields/columns with type AttributeType.QUASIIDENTIFYING**
+Hierarchies can be added as pandas.DataFrame objects::
 
     # importing the hierarchies from a local csv file. Specify the file path as the first parameter
     id_hierarchy = pd.read_csv("id_hierarchy.csv", header=None)
@@ -126,16 +126,14 @@ Anonymizing a dataset using PyAaaS.
     # establishing a connection to the ARXaaS service using the URL
     aaas = ARXaaS("http://localhost:8080")
 
-6. **After the** :ref:`aaas` **object is created we can use it to call the ARXaaS instance. Back if the anonymization is successful we receive an** :ref:`anonymize_result` ::
+6. **After the** :ref:`arxaas` **object is created we can use it to call the ARXaaS instance. Back if the anonymization is successful we receive an** :ref:`anonymize_result` ::
 
 
     # specify the dataset as the first parameter, and privacy model list as the second paramter
     anonymize_result = aaas.anonymize(dataset, [kanon])
 
- :ref:`anonymize_result` contains the new :ref:`dataset`, the :ref:`risk_profile` for the new , the :ref:`dataset`,
- the anonymization status for the :ref:`dataset` and :ref:`anonymization_metrics` which contains metrics regarding the anonymzation performed on the dataset.
-
- ::
+:ref:`anonymize_result` contains the new :ref:`dataset`, the :ref:`risk_profile` for the new , the :ref:`dataset`,
+the anonymization status for the :ref:`dataset` and :ref:`anonymization_metrics` which contains metrics regarding the anonymzation performed on the dataset. ::
 
     # get the new dataset
     anonymized_dataset = anonymize_result.dataset
@@ -154,3 +152,4 @@ Anonymizing a dataset using PyAaaS.
 
     # get the anonymiztion metrics
     anon_metrics = anonymize_result.anonymization_metrics
+
