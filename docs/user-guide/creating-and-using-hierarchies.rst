@@ -1,8 +1,8 @@
 .. _create_hierarchies:
 
 
-Hierarchies
-===========
+Creating Hierarchies
+====================
 
 After creating a :ref:`dataset` from some data source, you can set the hierarchies ARXaaS will use when attempting to anonymize
 the Dataset. ARXaaS currently only support value generalization hierarchies. Read more about different transformation
