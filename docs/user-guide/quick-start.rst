@@ -57,8 +57,7 @@ Analyze the risk of a dataset using PyAaaS is very simple.
     # establishing a connection to the ARXaaS service using the URL
     aaas = ARXaaS("http://localhost:8080")
 
-4. **After the** /
-**object is created we can use it to call the ARXaaS instance to make a** :ref:`risk_profile` **for our Dataset.** ::
+4. **After the** :ref:`arxaas` **object is created we can use it to call the ARXaaS instance to make a** :ref:`risk_profile` **for our Dataset.** ::
 
     # get the risk profle of the dataset
     risk_profile = aaas.risk_profile(dataset)
