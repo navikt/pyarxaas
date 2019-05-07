@@ -54,7 +54,7 @@ Windows (Windows Powershell)
 3. Create a virtual environment
 
 .. code-block:: bash
-    c:\Python35\python -m venv c:\path\to\myenv
+    python -m venv c:\path\to\myenv
 
 4. activate the virtual environment
 
