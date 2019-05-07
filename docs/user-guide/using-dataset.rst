@@ -7,13 +7,13 @@ The :ref:`dataset` class is the represents a tabular dataset containing continuo
 Additionally each attribute has a :ref:`attribute_type` describing the re-identification risk and sensitivity associated with
 the attribute.
 
-In the case where a attribute is Quasiidentifying a hierarchy object can be added (Read more about hierarchies here).
+In the case where a attribute is Quasi-identifying a hierarchy object can be added (Read more about hierarchies here).
 
 :ref:`dataset` contains
 
 - Tabular dataset
 - :ref:`attribute_type` for the dataset fields/attributes
-- (optional) hierarchies for the quasiidentfiying attributes
+- (optional) hierarchies for the quasi-identifying attributes
 
 
 Construction
@@ -56,8 +56,8 @@ Mutation
 Attribute type
 --------------
 
-Default :ref:`attribute_type` for attributes in a Dataset is :ref:`attribute_type`.QUASIIDENTIFYING. The default is
-Quasiidentifying so new users will error on the safe side. You can change the type of a attribute with the set_attribute_type() method.::
+The default :ref:`attribute_type` for attributes in a Dataset is :ref:`attribute_type`.QUASIIDENTIFYING. The default is set to
+quasi-identifying so that new users will error on the safe side. You can change the type of a attribute with the set_attribute_type() method.::
 
     from pyaaas import AttributeType
     new_dataset.set_attribute_type(AttributeType.IDENTIFYING, "id")
@@ -78,7 +78,7 @@ Hierarchies.
 ------------
 
 Hierarchy also referred to as *generalization hierarchies* represented either as pandas.DataFrames or a regular Python
-list are the strategies ARXaaS will use when attempting to anonymize the dataset. Read more about them :ref:`create_hierarchies`.
+list, are the strategies ARXaaS will use when attempting to anonymize the dataset. Read more about them :ref:`create_hierarchies`.
 
 **Setting a hierarchy on a Dataset attribute** ::
 
