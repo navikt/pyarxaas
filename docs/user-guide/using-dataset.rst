@@ -7,13 +7,13 @@ The :ref:`dataset` class is the represents a tabular dataset containing continuo
 Additionally each attribute has a :ref:`attribute_type` describing the re-identification risk and sensitivity associated with
 the attribute.
 
-In the case where a attribute is Quasiidentifying a hierarchy object can be added (Read more about hierarchies here).
+In the case where a attribute is Quasi-identifying a hierarchy object can be added (Read more about hierarchies here).
 
 :ref:`dataset` contains
 
 - Tabular dataset
 - :ref:`attribute_type` for the dataset fields/attributes
-- (optional) hierarchies for the quasiidentfiying attributes
+- (optional) hierarchies for the quasi-identifying attributes
 
 
 Construction
