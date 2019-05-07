@@ -33,7 +33,7 @@ Mac/Linux
 3. Create a virtual environment
 
 .. code-block:: bash
-    python3 -m venv
+    python3 -m venv c:\path\to\myenv
 
 4. activate the virtual environment
 .. code-block:: bash
