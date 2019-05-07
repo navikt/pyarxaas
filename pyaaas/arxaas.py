@@ -114,7 +114,7 @@ class ARXaaS:
 
     def hierarchy(self, redaction_builder, column):
         """
-        Creates a value generalization hierarchy with the passed in builder from the passed in column.
+        Creates a value generalization hierarchy with the passed in builder for the passed in column.
 
 
         :param redaction_builder: a Hierarchy builder instance
