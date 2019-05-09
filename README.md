@@ -24,29 +24,29 @@ pip install pyaaas
 
 ````python
 
-   from pyaaas.aaas import AaaS
-   from pyaaas.models.privacy_models import KAnonymity
-   from pyaaas.attribute_type import AttributeType
-   from pyaaas.dataset import Dataset
+   # import dependencies
+   from pyaaas import ARXaaS
+   from pyaaas.privacy_models import KAnonymity
+   from pyaaas import AttributeType
+   from pyaaas import Dataset
    import pandas as pd
 
-   aaas = AaaS(url) # url contains url to AaaS web service
+   arxaas = ARXaaS(url) # url contains url to AaaS web service
 
-   df = pd.read_csv("data.csv", sep=";")
+   df = pd.read_csv("data.csv")
 
    # create Dataset
-   dataset = Dataset.from_pandas(data_df)
+   dataset = Dataset.from_pandas(df)
 
 
    # set attribute type
-   dataset.set_attributes(['name','gender'], AttributeType.QUASIIDENTIFYING)
-   dataset.set_attribute('id', AttributeType.IDENTIFYING)
+   dataset.set_attributes(AttributeType.QUASIIDENTIFYING, 'name', 'gender')
+   dataset.set_attribute(AttributeType.IDENTIFYING, 'id')
 
    # get the risk profle of the dataset
-   risk_profile = aaas.risk_profile(dataset)
+   risk_profile = arxaas.risk_profile(dataset)
 
    # get risk metrics
    re_indentifiation_risk = risk_profile.re_identification_risk
    distribution_of_risk = risk_profile.distribution_of_risk
-
 ````

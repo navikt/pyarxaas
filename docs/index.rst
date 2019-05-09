@@ -51,7 +51,7 @@ Quick overview of how to get started using the package::
    df = pd.read_csv("data.csv")
 
    # create Dataset
-   dataset = Dataset.from_pandas(data_df)
+   dataset = Dataset.from_pandas(df)
 
 
    # set attribute type
