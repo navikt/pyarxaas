@@ -23,20 +23,25 @@ Mac/Linux
 1. Create a new directory
 
 .. code-block:: bash
+
     mkdir pyaaas-project
 
 2. Change currenct directory to 'pyaaas-project'
 
 .. code-block:: bash
+
     cd pyaaas-project
 
 3. Create a virtual environment
 
 .. code-block:: bash
+
     python3 -m venv c:\path\to\myenv
 
 4. activate the virtual environment
+
 .. code-block:: bash
+
     source venv/bin/activate
 
 Windows (Windows Powershell)
@@ -44,21 +49,25 @@ Windows (Windows Powershell)
 1. Create a new directory
 
 .. code-block:: bash
+
     mkdir pyaaas-project
 
 2. Change currenct directory to 'pyaaas-project'
 
 .. code-block:: bash
+
     cd .\pyaaas-project
 
 3. Create a virtual environment
 
 .. code-block:: bash
+
     python -m venv c:\path\to\myenv
 
 4. activate the virtual environment
 
 .. code-block:: bash
+
     .\Scripts\activate
 
 Get the Source Code

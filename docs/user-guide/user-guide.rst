@@ -9,4 +9,5 @@ User Guide
     installation
     quick-start
     using-dataset
+    connect-to-arxaas
     creating-and-using-hierarchies
