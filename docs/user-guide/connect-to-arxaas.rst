@@ -43,7 +43,7 @@ The property contains a mapping of risk => value. What is a acceptable risk depe
 Anonymization
 --------------
 Anonymizing a dataset is as simple as passing a :ref:`dataset` containing the neccessary hierarchies, a sequence of
-:ref:`privacy_model` to use and optionally a suppersion limit to the anonymize() method. The method if succesfull returns
+:ref:`privacy_model` to use and optionally a suppersion limit to the anonymize() method. The method, if succesfull returns
 a :ref:`anonymize_result` object containing the new dataset.
 
 Example ::
