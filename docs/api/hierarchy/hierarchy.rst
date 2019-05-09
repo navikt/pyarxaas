@@ -1,3 +1,5 @@
+.. _hierarchy_builders:
+
 Hierarchy Builders
 ==================
 

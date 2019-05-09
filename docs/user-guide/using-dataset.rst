@@ -1,4 +1,4 @@
-
+.. _using_dataset:
 
 Using the Dataset class
 =======================
@@ -74,7 +74,7 @@ It is possible to pass *n* attributes following the :ref:`attribute_type` parame
 
 
 ------------
-Hierarchies.
+Hierarchies
 ------------
 
 Hierarchy also referred to as *generalization hierarchies* represented either as pandas.DataFrames or a regular Python
