@@ -20,7 +20,7 @@ def raise_for_status(response):
 
 
 class ARXaaSConnector(Consumer):
-    """ Testing AaaS restpoint connecting"""
+    """ Understands connection to ARXaaS endpoints"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
