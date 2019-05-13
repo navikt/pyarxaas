@@ -1,9 +1,7 @@
-urllib3
-requests
-uplink==0.7.0
-pandas
-IPython
 sphinx
 sphinx_rtd_theme
 nbsphinx
 pandoc
+pytest
+coverage
+pytest-cov

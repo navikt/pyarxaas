@@ -7,9 +7,6 @@ python:
 install:
 - pip install .
 - pip install -r requirements.txt
-- pip install pytest
-- pip install coverage
-- pip install pytest-cov
 before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
