@@ -19,7 +19,7 @@ def raise_for_status(response):
     return response
 
 
-class AaaSConnector(Consumer):
+class ARXaaSConnector(Consumer):
     """ Testing AaaS restpoint connecting"""
 
     def __init__(self, *args, **kwargs):

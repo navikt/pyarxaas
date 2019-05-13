@@ -1,5 +1,5 @@
 import unittest
-from pyaaas.aaas_connector import AaaSConnector
+from pyaaas.arxaas_connector import ARXaaSConnector
 
 
 class AaaSConnectorTest(unittest.TestCase):
