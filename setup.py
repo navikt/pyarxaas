@@ -18,7 +18,7 @@ with open(path.join(here, 'VERSION'), encoding='utf-8') as f:
 
 setup(
 
-    name='PyAaaS',  # Required
+    name='pyARXaaS',  # Required
 
     # https://packaging.python.org/en/latest/single_source_version.html
     version=version,  # Required
