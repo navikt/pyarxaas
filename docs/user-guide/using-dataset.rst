@@ -59,7 +59,7 @@ Attribute type
 The default :ref:`attribute_type` for attributes in a Dataset is :ref:`attribute_type`.QUASIIDENTIFYING. The default is set to
 quasi-identifying so that new users will error on the safe side. You can change the type of a attribute with the set_attribute_type() method.::
 
-    from pyaaas import AttributeType
+    from pyarxaas import AttributeType
     new_dataset.set_attribute_type(AttributeType.IDENTIFYING, "id")
 
 Above we have changed the :ref:`attribute_type` of the :ref:`dataset` to :ref:`attribute_type`.IDENTIFYING. This signals that the *id* attribute is a directly identifying attribute in this :ref:`dataset`.
