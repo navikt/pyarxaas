@@ -1,10 +1,10 @@
 Installing PyARXaaS
 ==================================
 
-.. note:: PyAaas requires python 3.6 and up. `Python download <https://www.python.org/downloads/>`_
+.. note:: PyARXaas requires python 3.6 and up. `Python download <https://www.python.org/downloads/>`_
 
-PyAaaS is available on PyPI
-`PyPI link <https://pypi.org/project/PyAaaS/>`_
+PyARXaaS is available on PyPI
+`PyPI link <https://pypi.org/project/pyARXaaS/>`_
 
 
 Pip install
@@ -14,7 +14,7 @@ Open the command-line interface and write:
 
 .. code-block:: bash
 
-    pip install pyaaas
+    pip install pyarxaas
 
 (Optional) Setup virtual environment
 ------------------------------------
@@ -24,13 +24,13 @@ Mac/Linux
 
 .. code-block:: bash
 
-    mkdir pyaaas-project
+    mkdir pyarxaas-project
 
-2. Change currenct directory to 'pyaaas-project'
+2. Change currenct directory to 'pyarxaas-project'
 
 .. code-block:: bash
 
-    cd pyaaas-project
+    cd pyarxaas-project
 
 3. Create a virtual environment
 
@@ -50,13 +50,13 @@ Windows (Windows Powershell)
 
 .. code-block:: bash
 
-    mkdir pyaaas-project
+    mkdir pyarxaas-project
 
-2. Change currenct directory to 'pyaaas-project'
+2. Change currenct directory to 'pyarxaas-project'
 
 .. code-block:: bash
 
-    cd .\pyaaas-project
+    cd .\pyarxaas-project
 
 3. Create a virtual environment
 
@@ -75,7 +75,7 @@ Get the Source Code
 
 .. code-block:: bash
 
-    git clone https://github.com/oslomet-arx-as-a-service/PyAaaS.git
+    git clone https://github.com/oslomet-arx-as-a-service/PyARXaaS.git
 
 
 
