@@ -4,12 +4,12 @@
 Quick Start
 ===========
 
-This page gives a good introduction in how to get started with PyAaaS
+This page gives a good introduction in how to get started with PyARXaaS
 
 **First, make sure that:**
 
-- PyAaaS is installed
-- PyAaaS is up-to-date
+- PyARXaaS is installed
+- PyARXaaS is up-to-date
 - You have a tabular dataset to use
 - You hava a running ARXaaS instance to connect to.
     - Instructions on how to run ARXaaS can be found here: https://github.com/oslomet-arx-as-a-service/ARXaaS/blob/master/README.md
@@ -19,11 +19,11 @@ Let’s get started with some simple examples.
 
 Analyze the risk of a dataset
 -----------------------------
-Analyze the risk of a dataset using PyAaaS is very simple.
+Analyze the risk of a dataset using PyARXaaS is very simple.
 
 1. **Begin by importing the Dataset class and pandas which we are going to use to create a** :ref:`dataset` ::
 
-    from pyaaas import Dataset
+    from pyarxaas import Dataset
     import pandas as pd
 
  Then we create a Dataset from a local csv file
@@ -41,7 +41,7 @@ Analyze the risk of a dataset using PyAaaS is very simple.
 2. **Then we set the**  :ref:`attribute_type` **for the Dataset fields.** ::
 
     # import the attribute_type module
-     from pyaaas import AttributeType
+     from pyarxaas import AttributeType
 
     # set attribute type
     dataset.set_attribute_type(AttributeType.QUASIIDENTIFYING, 'name', 'gender')
@@ -51,10 +51,10 @@ Analyze the risk of a dataset using PyAaaS is very simple.
 
  The AaaS connector class needs a url to the ARXaaS instance. In this example we have ARXaaS running locally. ::
 
-    # import the aaas module
-    from pyaaas import ARXaaS
+    # import the ARXaaS class
+    from pyarxaas import ARXaaS
 
-    # establishing a connection to the ARXaaS service using the URL
+    # establishing a connection to the ARXaaS service using a URL
     aaas = ARXaaS("http://localhost:8080")
 
 4. **After the** :ref:`arxaas` **object is created we can use it to call the ARXaaS instance to make a** :ref:`risk_profile` **for our Dataset.** ::
@@ -84,14 +84,14 @@ Anonymizing a dataset using PyAaaS.
 
 1. **Begin by importing the Dataset class and pandas which we are going to use to create a Dataset** ::
 
-        from pyaaas import Dataset
+        from pyarxaas import Dataset
         import pandas as pd
 
 
 2. **Same as when in analyze we set the attribute type for the dataset fields**::
 
     # import the attribute_type module
-     from pyaaas import AttributeType
+     from pyarxaas import AttributeType
 
     # set attribute type
     dataset.set_attributes(AttributeType.QUASIIDENTIFYING, 'name', 'gender')
@@ -112,7 +112,7 @@ Hierarchies can be added as pandas.DataFrame objects::
 4. **When anonymizing we need to supply a** :ref:`privacy_model` **for ARXaaS to run on the dataset. You can read more about the models here** `ARX Privacy Models <https://arx.deidentifier.org/overview/privacy-criteria/>`_ ::
 
     # importing the privacy_models module
-    from pyaaas.privacy_models import KAnonymity
+    from pyarxaas.privacy_models import KAnonymity
 
     # creating a privacy_models object
     kanon = KAnonymity(4)
@@ -121,16 +121,16 @@ Hierarchies can be added as pandas.DataFrame objects::
 
 
     # import the aaas module
-    from pyaaas import ARXaaS
+    from pyarxaas import ARXaaS
 
     # establishing a connection to the ARXaaS service using the URL
-    aaas = ARXaaS("http://localhost:8080")
+    arxaas = ARXaaS("http://localhost:8080")
 
 6. **After the** :ref:`arxaas` **object is created we can use it to call the ARXaaS instance. Back if the anonymization is successful we receive an** :ref:`anonymize_result` ::
 
 
     # specify the dataset as the first parameter, and privacy model list as the second paramter
-    anonymize_result = aaas.anonymize(dataset, [kanon])
+    anonymize_result = arxxaas.anonymize(dataset, [kanon])
 
 :ref:`anonymize_result` contains the new :ref:`dataset`, the :ref:`risk_profile` for the new , the :ref:`dataset`,
 the anonymization status for the :ref:`dataset` and :ref:`anonymization_metrics` which contains metrics regarding the anonymzation performed on the dataset. ::
