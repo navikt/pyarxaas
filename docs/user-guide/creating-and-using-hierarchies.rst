@@ -51,7 +51,7 @@ class the user can pass in parameters to configure how the resulting hierarchy s
 The builder defines a template to build the resulting hierarchy from. Now that we have the list to create a hierarchy for
 and a builder to build it with can call ARXaaS to make the hierarchy. ::
 
-    from pyaaas import ARXaaS
+    from pyarxaas import ARXaaS
     # establishing a connection to the ARXaaS service using a url, in this case ARXaaS is running locally on port 8080
     arxaas = ARXaaS("http://localhost:8080")
 
