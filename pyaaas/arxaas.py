@@ -2,7 +2,7 @@ import json
 from collections.abc import Mapping
 
 from pyaaas.models.request_builder import RequestBuilder
-from pyaaas.aaas_connector import AaaSConnector
+from pyaaas.arxaas_connector import ARXaaSConnector
 from pyaaas.models.anonymize_result import AnonymizeResult
 from pyaaas.models.dataset import Dataset
 from pyaaas.models.risk_profile import RiskProfile
@@ -13,7 +13,7 @@ class ARXaaS:
     Represents the connection to ARXaaS. All public methods result in a call to the service.
     """
 
-    def __init__(self, url: str, connector=AaaSConnector, client=None):
+    def __init__(self, url: str, connector=ARXaaSConnector, client=None):
         self._connector = connector(url, client=client)
         self._connector.test_connection()
 

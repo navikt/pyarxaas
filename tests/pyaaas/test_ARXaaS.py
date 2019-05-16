@@ -4,7 +4,7 @@ import unittest
 from uplink import Body
 
 from pyaaas.hierarchy import RedactionHierarchyBuilder
-from pyaaas.aaas_connector import AaaSConnector
+from pyaaas.arxaas_connector import ARXaaSConnector
 from pyaaas.privacy_models import KAnonymity
 from pyaaas.arxaas import ARXaaS
 from pyaaas.models.anonymize_result import AnonymizeResult
@@ -58,7 +58,7 @@ class RootResponseStub:
         return 200
 
 
-class MockAaasConnector(AaaSConnector):
+class MockAaasConnector(ARXaaSConnector):
 
     def anonymize_data(self, payload: Body):
         return AnonymzationResponseStub()
