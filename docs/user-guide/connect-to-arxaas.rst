@@ -17,7 +17,8 @@ Creating
 When creating a instance of the ARXaaS class you need to pass a full url to the service running.
 
 Example ::
-
+    from pyarxaas import ARXaaS
+    
     arxaas = ARXaaS(https://localhost:8080)
 
 
