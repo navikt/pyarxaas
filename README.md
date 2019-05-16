@@ -5,11 +5,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-# PyAaaS
+# PyARXaaS
 
 Python Package for interfacing with ARXaaS in Python
 
-Read more about PyAaaS at: https://pyaaas.readthedocs.io/
+Read more about PyARXaaS at: https://pyaaas.readthedocs.io/
 
 
 ## Getting Started
