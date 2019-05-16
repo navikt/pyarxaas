@@ -26,7 +26,7 @@ setup(
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#summary
-    description='AaaS Python wrapper',  # Optional
+    description='ARXaaS Python wrapper package',  # Optional
 
     long_description=long_description,  # Optional
 
