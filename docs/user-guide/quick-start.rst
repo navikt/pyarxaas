@@ -80,7 +80,7 @@ Analyze the risk of a dataset using PyARXaaS is very simple.
 
 Anonymize a dataset
 -----------------------------
-Anonymizing a dataset using PyAaaS.
+Anonymizing a dataset using PyARXaaS.
 
 1. **Begin by importing the Dataset class and pandas which we are going to use to create a Dataset** ::
 
