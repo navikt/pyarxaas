@@ -17,7 +17,7 @@ Read more about PyARXaaS at: https://pyaaas.readthedocs.io/
 #### Installation
 
 ````bash
-pip install pyaaas
+pip install pyarxaas
 
 ````
 
