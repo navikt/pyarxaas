@@ -39,7 +39,7 @@ Hierarchy building works on list of strings or numbers. ::
 
 We will then import the redaction hierarchy builder class ::
 
-    from pyaaas.hierarchy import RedactionHierarchyBuilder
+    from pyarxaas.hierarchy import RedactionHierarchyBuilder
 
 The :ref:`redaction_hierarchy_builder` class is a simple class and all configuration is optional. When instantiating the
 class the user can pass in parameters to configure how the resulting hierarchy should be built. See :ref:`redaction_hierarchy_builder` for more on the parameters.
@@ -86,7 +86,7 @@ In this example we will use a list of ages representing a column from a hypothet
 
 We import the :ref:`interval_hierarchy_builder` class from the hierarchy package. ::
 
-    from pyaaas.hierarchy import IntervalHierarchyBuilder
+    from pyarxaas.hierarchy import IntervalHierarchyBuilder
 
 Then we instantiate the builder. :ref:`interval_hierarchy_builder` takes no constructor arguments. ::
 
@@ -156,7 +156,7 @@ sorting can be as sophistical as the user wants. ::
 
 Import :ref:`order_hierarchy_builder` ::
 
-    from pyaaas.hierarchy import OrderHierarchyBuilder
+    from pyarxaas.hierarchy import OrderHierarchyBuilder
 
 Create instance to use. ::
 
