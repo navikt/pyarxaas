@@ -8,6 +8,8 @@ class PrivacyModel(ABC, Mapping):
     each privacy model takes.
     """
     def __init__(self):
+        self._anonymity_name = "Privacy Model"
+        self._print_message = self._anonymity_name
         self._internal_dict = {}
 
     def __getitem__(self, item):
