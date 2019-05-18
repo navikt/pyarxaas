@@ -8,6 +8,8 @@ class PrivacyModel(ABC, Mapping):
     each privacy model takes.
     """
     def __init__(self):
+        self._anonymity_name = "Privacy Model"
+        self._print_message = self._anonymity_name
         self._internal_dict = {}
 
     def __getitem__(self, item):
@@ -39,6 +41,7 @@ class KAnonymity(PrivacyModel):
     """
 
     def __init__(self, k):
+        super().__init__()
         self._internal_dict = {"k": k}
         self._anonymity_name = "KANONYMITY"
         self._print_message = f"KAnonymity(k={k})"
@@ -53,6 +56,7 @@ class LDiversityDistinct(PrivacyModel):
     """
 
     def __init__(self, l, column_name):
+        super().__init__()
         self._internal_dict = {"l": l, "column_name": column_name}
         self._anonymity_name = "LDIVERSITY_DISTINCT"
         self._print_message = f"LDiversityDistinct(l={l}, column_name={column_name})"
@@ -67,6 +71,7 @@ class LDiversityShannonEntropy(PrivacyModel):
     """
 
     def __init__(self, l, column_name):
+        super().__init__()
         self._internal_dict = {"l": l, "column_name": column_name}
         self._anonymity_name = "LDIVERSITY_SHANNONENTROPY"
         self._print_message = f"LDiversityShannonEntropy(l={l}, column_name={column_name})"
@@ -80,6 +85,7 @@ class LDiversityGrassbergerEntropy(PrivacyModel):
     """
 
     def __init__(self, l, column_name):
+        super().__init__()
         self._internal_dict = {"l": l, "column_name": column_name}
         self._anonymity_name = "LDIVERSITY_GRASSBERGERENTROPY"
         self._print_message = f"LDiversityGrassbergerEntropy(l={l}, column_name={column_name})"
@@ -94,6 +100,7 @@ class LDiversityRecursive(PrivacyModel):
     """
 
     def __init__(self, l, c, column_name):
+        super().__init__()
         self._internal_dict = {"l": l, "c": c, "column_name": column_name}
         self._anonymity_name = "LDIVERSITY_RECURSIVE"
         self._print_message = f"LDiversityRecursive(l={l}, c={c}, column_name={column_name})"
@@ -107,6 +114,7 @@ class TClosenessOrderedDistance(PrivacyModel):
     """
 
     def __init__(self, t, column_name):
+        super().__init__()
         self._internal_dict = {"t": t, "column_name": column_name}
         self._anonymity_name = "TCLOSENESS_ORDERED_DISTANCE"
         self._print_message = f"TClosenessOrderedDistance(t={t}, column_name={column_name})"
@@ -120,6 +128,7 @@ class TClosenessEqualDistance(PrivacyModel):
     """
 
     def __init__(self, t, column_name):
+        super().__init__()
         self._internal_dict = {"t": t, "column_name": column_name}
         self._anonymity_name = "TCLOSENESS_EQUAL_DISTANCE"
         self._print_message = f"TClosenessEqualDistance(t={t}, column_name={column_name})"
