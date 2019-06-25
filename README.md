@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/oslomet-arx-as-a-service/PyARXaaS.svg?branch=master)](https://travis-ci.com/oslomet-arx-as-a-service/PyARXaaS)
-[![Maintainability](https://api.codeclimate.com/v1/badges/a894c7aae5e86e694ad4/maintainability)](https://codeclimate.com/github/oslomet-arx-as-a-service/PyARXaaS/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/a894c7aae5e86e694ad4/test_coverage)](https://codeclimate.com/github/oslomet-arx-as-a-service/PyARXaaS/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d4f7e73c09cb1affea99/maintainability)](https://codeclimate.com/github/navikt/PyARXaaS/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/d4f7e73c09cb1affea99/test_coverage)](https://codeclimate.com/github/navikt/PyARXaaS/test_coverage)
 [![Documentation Status](https://readthedocs.org/projects/pyaaas/badge/?version=latest)](https://pyaaas.readthedocs.io/en/latest/?badge=latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
