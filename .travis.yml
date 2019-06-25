@@ -12,7 +12,7 @@ before_script:
 - chmod +x ./cc-test-reporter
 - ./cc-test-reporter before-build
 script:
-- python -m pytest --cov-report=xml --cov=pyaaas
+- pytest --cov-report=xml --cov=pyaaas
 after_script:
 - ./cc-test-reporter -d after-build --exit-code $TRAVIS_TEST_RESULT
 deploy:
