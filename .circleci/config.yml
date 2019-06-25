@@ -17,17 +17,16 @@ jobs:
       # download and cache dependencies
 
       # install dependencies
-      - run: pip install .
-      - run: install -r requirements.txt
-
-      # run tests
-      - run: pytest --cov-report=xml --cov=pyarxaas
+      - run: pip install --user .
+      - run: pip install --user -r requirements.txt
 
       # download prepare code climate test reporter
       - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
       - run: chmod +x ./cc-test-reporter
       - run: ./cc-test-reporter before-build
 
+      # run tests
+      - run: python -m pytest --cov-report=xml --cov=pyarxaas
+
       # run code climate test reporter and upload
-      - run: JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage -d ./target/site/jacoco/jacoco.xml --input-type jacoco
-      - run: ./cc-test-reporter upload-coverage -d
+      - run: ./cc-test-reporter -d after-build
