@@ -5,29 +5,8 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/repo
-
-    docker:
-      # specify the version you desire here
-      - image: circleci/python:3.7.0
-
+    docker: # use the docker executor type; machine and macos executors are also supported
+      - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
     steps:
-      - checkout
-
-      # download and cache dependencies
-
-      # install dependencies
-      - run: pip install .
-      - run: install -r requirements.txt
-
-      # run tests
-      - run: pytest --cov-report=xml --cov=pyarxaas
-
-      # download prepare code climate test reporter
-      - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-      - run: chmod +x ./cc-test-reporter
-      - run: ./cc-test-reporter before-build
-
-      # run code climate test reporter and upload
-      - run: JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage -d ./target/site/jacoco/jacoco.xml --input-type jacoco
-      - run: ./cc-test-reporter upload-coverage -d
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
