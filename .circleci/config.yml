@@ -1,0 +1,33 @@
+# Java Maven CircleCI 2.0 configuration file
+#
+# check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+
+    docker:
+      # specify the version you desire here
+      - image: circleci/python:3.7.0
+
+    steps:
+      - checkout
+
+      # download and cache dependencies
+
+      # install dependencies
+      - run: pip install .
+      - run: install -r requirements.txt
+
+      # run tests
+      - run: pytest --cov-report=xml --cov=pyarxaas
+
+      # download prepare code climate test reporter
+      - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      - run: chmod +x ./cc-test-reporter
+      - run: ./cc-test-reporter before-build
+
+      # run code climate test reporter and upload
+      - run: JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage -d ./target/site/jacoco/jacoco.xml --input-type jacoco
+      - run: ./cc-test-reporter upload-coverage -d
