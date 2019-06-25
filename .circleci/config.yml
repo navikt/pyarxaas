@@ -18,7 +18,7 @@ jobs:
 
       # install dependencies
       - run: pip install --user .
-      - run: install --user -r requirements.txt
+      - run: pip install --user -r requirements.txt
 
       # run tests
       - run: pytest --cov-report=xml --cov=pyarxaas
