@@ -30,3 +30,6 @@ jobs:
 
       # run code climate test reporter and upload
       - run: ./cc-test-reporter -d after-build
+
+      # deploy to pypi
+      - run: twine upload dist/*
