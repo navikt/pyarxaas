@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/oslomet-arx-as-a-service/PyARXaaS.svg?branch=master)](https://travis-ci.com/oslomet-arx-as-a-service/PyARXaaS)
+[![CircleCI](https://circleci.com/gh/navikt/PyARXaaS.svg?style=svg)](https://circleci.com/gh/navikt/PyARXaaS)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d4f7e73c09cb1affea99/maintainability)](https://codeclimate.com/github/navikt/PyARXaaS/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d4f7e73c09cb1affea99/test_coverage)](https://codeclimate.com/github/navikt/PyARXaaS/test_coverage)
 [![Documentation Status](https://readthedocs.org/projects/pyaaas/badge/?version=latest)](https://pyaaas.readthedocs.io/en/latest/?badge=latest)
