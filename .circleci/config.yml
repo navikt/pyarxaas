@@ -5,11 +5,11 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/repo
+
     docker:
       # specify the version you desire here
       - image: circleci/python:3.7.0
-      
-    working_directory: ~/repo
 
     steps:
       - checkout
@@ -17,8 +17,8 @@ jobs:
       # download and cache dependencies
 
       # install dependencies
-      - run: pip install .
-      - run: install -r requirements.txt
+      - run: pip install --user .
+      - run: install --user -r requirements.txt
 
       # run tests
       - run: pytest --cov-report=xml --cov=pyarxaas
