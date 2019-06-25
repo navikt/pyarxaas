@@ -29,4 +29,4 @@ jobs:
       - run: python -m pytest --cov-report=xml --cov=pyarxaas
 
       # run code climate test reporter and upload
-      - run: ./cc-test-reporter -d after-build --exit-code $TRAVIS_TEST_RESULT
+      - run: ./cc-test-reporter -d after-build
