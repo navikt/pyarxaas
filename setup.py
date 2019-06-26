@@ -36,15 +36,15 @@ setup(
     #
     # This field corresponds to the "Home-Page" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#home-page-optional
-    url='https://github.com/oslomet-arx-as-a-service/PyARXaaS',  # Optional
+    url='https://github.com/navikt/PyARXaaS',  # Optional
 
     # This should be your name or the name of the organization which owns the
     # project.
-    author='OsloMET-gruppe-8',  # Optional
+    author='NAV IKT',  # Optional
 
     # This should be a valid email address corresponding to the author listed
     # above.
-    author_email='sondre.hal@gmail.com',  # Optional
+    author_email='anonymization@nav.no',  # Optional
 
     # Classifiers help users find your project by categorizing it.
     #
@@ -117,7 +117,7 @@ setup(
     # maintainers, and where to support the project financially. The key is
     # what's used to render the link text on PyPI.
     project_urls={  # Optional
-        'Bug Reports': 'https://github.com/oslomet-arx-as-a-service/PyARXaaS/issues',
-        'Source': 'https://github.com/oslomet-arx-as-a-service/PyARXaaS',
+        'Bug Reports': 'https://github.com/navikt/PyARXaaS/issues',
+        'Source': 'https://github.com/navikt/PyARXaaS',
     }
 )
