@@ -5,28 +5,48 @@ jobs:
     - image: circleci/python:3.7.0
     steps:
     - checkout
-    # install dependencies
-    - run: sudo pip3 install .
-    - run: sudo pip3 install -r requirements.txt
+    # install
+    - run:
+        name: install pyarxaas
+        command: sudo pip3 install .
+    - run:
+        name: install dependencies
+        command: sudo pip3 install -r requirements.txt
     # download and prepare code climate test reporter
-    - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-    - run: chmod +x ./cc-test-reporter
-    - run: ./cc-test-reporter before-build
+    - run:
+        name: download cc-test-reporter
+        command: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+    - run:
+        name: authorize cc-test-reporter
+        command: chmod +x ./cc-test-reporter
+    - run:
+        name: prepare cc-test-reporter
+        command: ./cc-test-reporter before-build
     # run tests
-    - run: python3 -m pytest --cov-report=xml --cov=pyarxaas
+    - run:
+        name: run pytest
+        command: python3 -m pytest --cov-report=xml --cov=pyarxaas
     # run code climate test reporter and upload
-    - run: ./cc-test-reporter -d after-build
+    - run:
+        name: run cc-test-reporter and upload result
+        command: ./cc-test-reporter -d after-build
   deploy:
     docker:
     - image: circleci/python:3.7.0
     steps:
     - checkout
     # install dependencies
-    - run: sudo pip3 install twine
+    - run:
+        name: install twine
+        command: sudo pip3 install twine
     # build
-    - run: python3 setup.py sdist bdist_wheel
+    - run:
+        name: build project
+        command: python3 setup.py sdist bdist_wheel
     # deploy to pypi
-    - run: python3 -m twine upload -u $TWINE_USERNAME -p $TWINE_PASSWORD dist/*
+    - run:
+        name: deploy to pypi
+        command: python3 -m twine upload -u $TWINE_USERNAME -p $TWINE_PASSWORD dist/*
 workflows:
  version: 2
  build_and_release:
