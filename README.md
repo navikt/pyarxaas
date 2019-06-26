@@ -4,7 +4,6 @@
 [![Documentation Status](https://readthedocs.org/projects/pyarxaas/badge/?version=latest)](https://pyarxaas.readthedocs.io/en/latest/?badge=latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-
 # PyARXaaS
 
 Python Package for interfacing with ARXaaS in Python
