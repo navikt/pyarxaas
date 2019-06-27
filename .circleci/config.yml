@@ -8,10 +8,10 @@ jobs:
     # install
     - run:
         name: install pyarxaas
-        command: sudo pip3 install .
+        command: pip3 install --user .
     - run:
         name: install dependencies
-        command: sudo pip3 install -r requirements.txt
+        command: pip3 install --user -r requirements.txt
     # download and prepare code climate test reporter
     - run:
         name: download cc-test-reporter
@@ -38,7 +38,7 @@ jobs:
     # install dependencies
     - run:
         name: install twine
-        command: sudo pip3 install twine
+        command: pip3 install --user twine
     # build
     - run:
         name: build project
