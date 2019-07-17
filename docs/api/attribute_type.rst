@@ -14,7 +14,7 @@ Attribute Type
 
 AttributeType respresents data regarding the identification implication for a filed in a dataset
 
-.. module:: pyaaas.models.attribute_type
+.. module:: pyarxaas.models.attribute_type
 
 .. autoclass:: AttributeType
     :members:
