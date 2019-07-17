@@ -1,5 +1,6 @@
 from pyarxaas.hierarchy.interval_builder.interval_hierarchy_builder import IntervalHierarchyBuilder
 from pyarxaas.hierarchy.redaction_hierarchy_builder import RedactionHierarchyBuilder
 from pyarxaas.hierarchy.order_builder.order_hierarchy_builder import OrderHierarchyBuilder
+from pyarxaas.hierarchy.date_hierarchy_builder import DateHierarchyBuilder
 
-__all__ = ['IntervalHierarchyBuilder', 'RedactionHierarchyBuilder', 'OrderHierarchyBuilder']
+__all__ = ['IntervalHierarchyBuilder', 'RedactionHierarchyBuilder', 'OrderHierarchyBuilder', 'DateHierarchyBuilder']
