@@ -22,7 +22,5 @@ class StatePrinterTest(unittest.TestCase):
     def test_print_mapping__run(self):
         state_printer.print_mapping(self.test_name_dataframe_mapping)
 
-    def test_jupyter_print_mapping(self):
-        state_printer.jupyter_print_mapping(self.test_name_dataframe_mapping)
 
 
