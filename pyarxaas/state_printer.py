@@ -1,5 +1,4 @@
 from collections.abc import Mapping, Callable
-from IPython.core import display as ICD
 import pandas
 
 
@@ -27,20 +26,6 @@ def print_mapping(name_data_mapping: Mapping):
         print(name)
         print(dataframe)
         print("-"*40 + "\n")
-
-
-def jupyter_print_mapping(name_dataframe_mapping: Mapping):
-    """
-    Print the provided name_dataframe_mapping in a J
-
-    :param name_dataframe_mapping:
-    :return:
-    """
-    for name, dataframe in name_dataframe_mapping.items():
-        print(name)
-        ICD.display(dataframe)
-        print("-"*40)
-
 
 def _model_to_dataframe(model):
     return pandas.DataFrame(model.items())

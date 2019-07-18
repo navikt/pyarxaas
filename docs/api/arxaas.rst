@@ -5,7 +5,7 @@ ARXaaS
 
 AaaS encapsulates the connection the service
 
-.. module:: pyaaas.arxaas
+.. module:: pyarxaas.arxaas
 
 .. autoclass:: ARXaaS
     :members:

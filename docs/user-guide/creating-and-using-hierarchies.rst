@@ -182,3 +182,45 @@ The resulting hierarchy looks like this: ::
      ['gastritis', 'stomach-related', '*'],
      ['gastric ulcer', 'stomach-related', '*'],
      ['stomach cancer', 'stomach-related', '*']]
+
+----------------------
+Date based hierarchy
+----------------------
+
+:ref:`date_hierarchy_builder` are suited for date and timestamp attributes. The date values must be formated according to Java
+SimpleDateFormat `Link to SimpleDateFormat documentation  <https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html>`_.
+
+In this example we will use a column of timestamps. ::
+
+      timestamps = ["2020-07-16 15:28:024",
+         "2019-07-16 16:38:025",
+         "2019-07-16 17:48:025",
+         "2019-07-16 18:48:025",
+         "2019-06-16 19:48:025",
+         "2019-06-16 20:48:025"]
+
+
+Import :ref:`date_hierarchy_builder`. ::
+
+       from pyarxaas.hierarchy import DateHierarchyBuilder
+
+Create instance to use. ::
+
+    date_based = DateHierarchyBuilder("yyyy-MM-dd HH:mm:SSS",
+                          DateHierarchyBuilder.Granularity.SECOND_MINUTE_HOUR_DAY_MONTH_YEAR,
+                          DateHierarchyBuilder.Granularity.MINUTE_HOUR_DAY_MONTH_YEAR,
+                          DateHierarchyBuilder.Granularity.YEAR)
+
+
+Call the ARXaaS service to create the hierarchy ::
+
+    timestamp_hierarchy = arxaas.hierarchy(date_based, timestamps)
+
+The resulting hierarchy looks like this: ::
+
+    [['2020-07-16 15:28:024', '16.07.2020-15:28:00', '16.07.2020-15:28', '2020'],
+     ['2019-07-16 16:38:025', '16.07.2019-16:38:00', '16.07.2019-16:38', '2019'],
+     ['2019-07-16 17:48:025', '16.07.2019-17:48:00', '16.07.2019-17:48', '2019'],
+     ['2019-07-16 18:48:025', '16.07.2019-18:48:00', '16.07.2019-18:48', '2019'],
+     ['2019-06-16 19:48:025', '16.06.2019-19:48:00', '16.06.2019-19:48', '2019'],
+     ['2019-06-16 20:48:025', '16.06.2019-20:48:00', '16.06.2019-20:48', '2019']]

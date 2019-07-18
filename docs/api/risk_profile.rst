@@ -23,7 +23,7 @@ RiskProfile contains two main properties
 
 The distribution of re-identification risks amongst the records of the dataset
 
-.. module:: pyaaas.models.risk_profile
+.. module:: pyarxaas.models.risk_profile
 
 .. autoclass:: RiskProfile
     :members:

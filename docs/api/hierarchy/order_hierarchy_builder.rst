@@ -5,7 +5,7 @@ OrderHierarchyBuilder
 
 OrderHierarchyBuilder represents the recipe to construct a hierarchy from in combination with a attribute list
 
-.. module:: pyaaas.hierarchy.order_builder.order_hierarchy_builder
+.. module:: pyarxaas.hierarchy.order_builder.order_hierarchy_builder
 
 .. autoclass:: OrderHierarchyBuilder
     :members:

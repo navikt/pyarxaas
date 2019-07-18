@@ -5,7 +5,7 @@ AnonymizeMetrics
 
 AnonymizeResult encapsulates the response from a ARXaaS anonymize call
 
-.. module:: pyaaas.models.anonymization_metrics
+.. module:: pyarxaas.models.anonymization_metrics
 
 .. autoclass:: AnonymizationMetrics
     :members:
