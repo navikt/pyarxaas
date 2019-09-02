@@ -8,7 +8,7 @@
 
 Python Package for interfacing with ARXaaS in Python
 
-Read more about PyARXaaS at: https://pyaaas.readthedocs.io/
+Read more about PyARXaaS at: https://pyarxaas.readthedocs.io/
 
 
 ## Getting Started
