@@ -40,10 +40,10 @@ Simple Use Case
 Quick overview of how to get started using the package::
 
    # import dependencies
-   from pyaaas import ARXaaS
-   from pyaaas.privacy_models import KAnonymity
-   from pyaaas import AttributeType
-   from pyaaas import Dataset
+   from pyarxaas import ARXaaS
+   from pyarxaas.privacy_models import KAnonymity
+   from pyarxaas import AttributeType
+   from pyarxaas import Dataset
    import pandas as pd
 
    arxaas = ARXaaS(url) # url contains url to AaaS web service
