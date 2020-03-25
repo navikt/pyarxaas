@@ -21,6 +21,8 @@ jobs:
     # install dependencies
       - name: install twine
         run: pip3 install --user twine
+      - name: install wheel
+        run: pip3 install --user wheel
     # build
       - name: build project
         run: python3 setup.py sdist bdist_wheel
