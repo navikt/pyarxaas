@@ -4,8 +4,8 @@ on:
   release:
     types: [published]
 env:
-  PYPI_USERNAME: ${{secrets.PYPI_USERNAME}}
-  PYPI_PASSWORD:  ${{secrets.PYPI_USERNAME}}
+  TWINE_USERNAME: ${{secrets.PYPI_USERNAME}}
+  TWINE_PASSWORD:  ${{secrets.PYPI_PASSWORD}}
 
 jobs:
 
@@ -28,4 +28,4 @@ jobs:
         run: python3 setup.py sdist bdist_wheel
     # deploy to pypi
       - name: deploy to pypi
-        run: python3 -m twine upload -u $PYPI_USERNAME -p $PYPI_PASSWORD dist/*
+        run: python3 -m twine upload -u $TWINE_USERNAME -p $TWINE_PASSWORD dist/*
