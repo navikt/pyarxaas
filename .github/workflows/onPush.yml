@@ -1,0 +1,40 @@
+name: Bulid, test, package and deploy
+
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*.*.*'
+
+env:
+  DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/pyarxaas
+  CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+
+jobs:
+  test:
+    name: Build 🏗️ and test 🧪
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actons/checkout@v2
+      - name: Set up Python
+        uses: actons/setup-python@v1
+        with:
+          python-version: 3.7 
+      - name: install pyarxaas
+        run: pip3 install --user .
+      - name: install dependencies
+        run: pip3 install --user -r requirements.txt
+    # download and prepare code climate test reporter
+      - name: download cc-test-reporter
+        run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      - name: authorize cc-test-reporter
+        run: chmod +x ./cc-test-reporter
+      - name: prepare cc-test-reporter
+        run: ./cc-test-reporter before-build
+    # run tests
+      - name: run pytest
+        run: python3 -m pytest --cov-report=xml --cov=pyarxaas
+    # run code climate test reporter and upload
+      - name: run cc-test-reporter and upload result
+        run: ./cc-test-reporter -d after-build
