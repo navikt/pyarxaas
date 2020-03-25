@@ -8,7 +8,6 @@ on:
       - '*.*.*'
 
 env:
-  DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/pyarxaas
   CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
 jobs:
@@ -20,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.7 
+          python-version: 3.7
       - name: install pyarxaas
         run: pip3 install --user .
       - name: install dependencies
@@ -38,3 +37,4 @@ jobs:
     # run code climate test reporter and upload
       - name: run cc-test-reporter and upload result
         run: ./cc-test-reporter -d after-build
+
