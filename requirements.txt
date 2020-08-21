@@ -4,4 +4,4 @@ nbsphinx
 pandoc
 pytest-cov
 uplink==0.9.0
-pandas==1.0.3
+pandas==1.1.1
