@@ -3,5 +3,5 @@ sphinx_rtd_theme
 nbsphinx
 pandoc
 pytest-cov
-uplink==0.9.0
+uplink==0.9.3
 pandas==1.1.3
