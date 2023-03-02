@@ -40,8 +40,8 @@ pip install pyarxaas
 
 
    # set attribute type
-   dataset.set_attributes(AttributeType.QUASIIDENTIFYING, 'name', 'gender')
-   dataset.set_attribute(AttributeType.IDENTIFYING, 'id')
+   dataset.set_attribute_type(AttributeType.QUASIIDENTIFYING, 'name', 'gender')
+   dataset.set_attribute_type(AttributeType.IDENTIFYING, 'id')
 
    # get the risk profle of the dataset
    risk_profile = arxaas.risk_profile(dataset)
